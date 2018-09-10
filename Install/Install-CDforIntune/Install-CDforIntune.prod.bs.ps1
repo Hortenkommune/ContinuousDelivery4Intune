@@ -11,7 +11,7 @@ If (!($WaitFor -eq $null)) {
     Until ($proc -eq $null)
 }
 
-$cfg = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/versioncontrol/config.json"
+$cfg = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinousDelivery4Intune/master/versioncontrol/config.json"
 
 $cfg = $cfg | Where-Object { $_.Name -eq $BranchName }
 
@@ -19,7 +19,7 @@ If (!(Test-Path "C:\Windows\Scripts")) {
     New-Item "C:\Windows\Scripts" -ItemType Directory
 }
 
-$ScriptLocURI = "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/Install/CDforIntuneScript/Script.$($cfg.Name).ps1"
+$ScriptLocURI = "https://raw.githubusercontent.com/Hortenkommune/ContinousDelivery4Intune/master/Install/CDforIntuneScript/Script.$($cfg.Name).ps1"
 
 Invoke-WebRequest -Uri $ScriptLocURI -OutFile "C:\Windows\Scripts\Start-ContinuousDelivery.ps1"
 
