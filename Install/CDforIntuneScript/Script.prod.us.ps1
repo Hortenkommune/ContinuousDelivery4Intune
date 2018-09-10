@@ -96,7 +96,7 @@ catch {
     Write-Log -Value "Failed to upgrade chocolatey and all existing packages" -Severity 3 -Component "Chocolatey"
 }
 
-$ChocoConf = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/$BranchName/Choco/config.json" -UseBasicParsing
+$ChocoConf = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/configs/$BranchName/Choco/config.json" -UseBasicParsing
 
 ForEach ($ChockoPkg in $ChocoConf) {
     Write-Log -Value "Running $($ChockoPkg.Mode) on $($ChockoPkg.Name)" -Severity 1 -Component "Chocolatey"
@@ -109,7 +109,7 @@ ForEach ($ChockoPkg in $ChocoConf) {
 }
 
 
-$AdvInstallers = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/$BranchName/Custom%20Execution/config.json" -UseBasicParsing
+$AdvInstallers = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/configs/$BranchName/Custom%20Execution/config.json" -UseBasicParsing
 
 foreach ($AdvInst in $AdvInstallers) {
 
@@ -160,7 +160,7 @@ foreach ($AdvInst in $AdvInstallers) {
 }
 
 
-$PSs = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/$BranchName/PowerShell/config.json" -UseBasicParsing
+$PSs = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/configs/$BranchName/PowerShell/config.json" -UseBasicParsing
 
 foreach ($PS in $PSs) {
     $runDetectionRule = Invoke-Expression -Command $PS.Detection
@@ -176,7 +176,7 @@ foreach ($PS in $PSs) {
 }
 
 
-$SCConf = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/$BranchName/Shortcuts/config.json" -UseBasicParsing
+$SCConf = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/configs/$BranchName/Shortcuts/config.json" -UseBasicParsing
 
 ForEach ($SC in $SCConf) {
     If ($SC.Mode -eq "Uninstall") {
@@ -249,7 +249,7 @@ ForEach ($SC in $SCConf) {
 }
 
 
-$regfiles = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/$BranchName/Regedit/config.json" -UseBasicParsing
+$regfiles = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/configs/$BranchName/Regedit/config.json" -UseBasicParsing
 
 ForEach ($regfile in $regfiles) {
     Write-Log -Value "Starting detection of Regedit settings; $($regfile.URL)" -Severity 1 -Component "Regedit"
