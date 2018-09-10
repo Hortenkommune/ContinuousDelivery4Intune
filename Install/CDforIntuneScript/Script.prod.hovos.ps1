@@ -1,5 +1,5 @@
 $BranchName = "prod.hovos"
-$Version = "1.0.0"
+$Version = "0.0.1"
 
 
 function Write-Log {
@@ -22,7 +22,7 @@ function Write-Log {
 }
 
 
-$cfg = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/versioncontrol/config.json" -UseBasicParsing
+$cfg = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/versioncontrol/config.json" -UseBasicParsing
 $cfg = $cfg | Where-Object { $_.Name -eq $BranchName }
 
 if ($cfg.Version -eq $Version) {
@@ -31,7 +31,7 @@ if ($cfg.Version -eq $Version) {
 else {
     Write-Log -Value "Newer version found, upgrading" -Severity 1 -Component "Update"
 
-    $ScriptLocURI = "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/Install/Install-CDforIntune/Install-CDforIntune.ps1"
+    $ScriptLocURI = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/Install/Install-CDforIntune/Install-CDforIntune.ps1"
     Invoke-WebRequest -Uri $ScriptLocURI -OutFile "$env:TEMP\Install-CDforIntune.ps1"
 
     Start-Process "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$env:TEMP\Install-CDforIntune.ps1`" -BranchName $BranchName -WaitFor $PID -CleanUp $true" -WindowStyle Hidden
@@ -96,7 +96,7 @@ catch {
     Write-Log -Value "Failed to upgrade chocolatey and all existing packages" -Severity 3 -Component "Chocolatey"
 }
 
-$ChocoConf = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/Choco/config.json" -UseBasicParsing
+$ChocoConf = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/$BranchName/Choco/config.json" -UseBasicParsing
 
 ForEach ($ChockoPkg in $ChocoConf) {
     Write-Log -Value "Running $($ChockoPkg.Mode) on $($ChockoPkg.Name)" -Severity 1 -Component "Chocolatey"
@@ -109,7 +109,7 @@ ForEach ($ChockoPkg in $ChocoConf) {
 }
 
 
-$AdvInstallers = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/Custom%20Execution/config.json" -UseBasicParsing
+$AdvInstallers = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/$BranchName/Custom%20Execution/config.json" -UseBasicParsing
 
 foreach ($AdvInst in $AdvInstallers) {
 
@@ -160,7 +160,7 @@ foreach ($AdvInst in $AdvInstallers) {
 }
 
 
-$PSs = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/PowerShell/config.json" -UseBasicParsing
+$PSs = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/$BranchName/PowerShell/config.json" -UseBasicParsing
 
 foreach ($PS in $PSs) {
     $runDetectionRule = Invoke-Expression -Command $PS.Detection
@@ -176,7 +176,7 @@ foreach ($PS in $PSs) {
 }
 
 
-$SCConf = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/Shortcuts/config.json" -UseBasicParsing
+$SCConf = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/$BranchName/Shortcuts/config.json" -UseBasicParsing
 
 ForEach ($SC in $SCConf) {
     If ($SC.Mode -eq "Uninstall") {
@@ -187,6 +187,7 @@ ForEach ($SC in $SCConf) {
     }
     Elseif ($SC.Mode -eq "Install") {
         Write-Log -Value "Starting detection of $($SC.Name)" -Severity 1 -Component "SC"
+        $LocalShortcutPath = ($env:PUBLIC + "\Desktop\$($SC.Name).$($SC.Type)")
         If ($SC.Type -eq "lnk") {
             $verPath = $SC.WorkingDir + "\" + $SC.Path
             $Detection = Test-Path $verPath
@@ -207,27 +208,40 @@ ForEach ($SC in $SCConf) {
             Write-Log -Value "Can not detect $($SC.Name) endpoint; skipping" -Severity 2 -Component "SC"
         }
         else {
-            If (Test-Path ($env:PUBLIC + "\Desktop\$($SC.Name).$($SC.Type)")) {
+            If (Test-Path $LocalShortcutPath) {
                 Write-Log -Value "$($SC.Name) already exists; skipping" -Severity 1 -Component "SC"
             }
             else {
                 Write-Log -Value "$($SC.Name) is not detected; starting installation" -Severity 1 -Component "SC"
                 $ShellObj = New-Object -ComObject ("WScript.Shell")
-                $Shortcut = $ShellObj.CreateShortcut($env:PUBLIC + "\Desktop\$($SC.Name).$($SC.Type)")
+                $Shortcut = $ShellObj.CreateShortcut($LocalShortcutPath)
                 $Shortcut.TargetPath = "$($SC.Path)"
-                If ($SC.WorkingDir) {
-                    $Shortcut.WorkingDirectory = "$($SC.WorkingDir)";
+                if ($Detection -eq "url-file") {
+                    $Shortcut.Save()
+                    If ($SC.IconFileandType) {
+                        $IconSplit = $SC.IconFileandType.Split(",").Trim()
+                        $IconFile = "IconFile=" + $IconSplit[0]
+                        $IconIndex = "IconIndex=" + $IconSplit[1]
+                        Add-Content $LocalShortcutPath "HotKey=0"
+                        Add-Content $LocalShortcutPath "$IconFile"
+                        Add-Content $LocalShortcutPath "$IconIndex"
+                    }
                 }
-                If ($SC.Arguments) {
-                    $Shortcut.Arguments = "$($SC.Arguments)";
+                else {
+                    If ($SC.WorkingDir) {
+                        $Shortcut.WorkingDirectory = "$($SC.WorkingDir)";
+                    }
+                    If ($SC.Arguments) {
+                        $Shortcut.Arguments = "$($SC.Arguments)";
+                    }
+                    If ($SC.IconFileandType) {
+                        $Shortcut.IconLocation = "$($SC.IconFileandType)";
+                    }
+                    If ($SC.Description) {
+                        $Shortcut.Description = "$($SC.Description)";
+                    }
+                    $Shortcut.Save()
                 }
-                If ($SC.IconFileandType) {
-                    $Shortcut.IconLocation = "$($SC.IconFileandType)";
-                }
-                If ($SC.Description) {
-                    $Shortcut.Description = "$($SC.Description)";
-                }
-                $Shortcut.Save()
                 Write-Log -Value "$($SC.Name) is installed" -Severity 1 -Component "SC"
             }
         }
@@ -235,7 +249,7 @@ ForEach ($SC in $SCConf) {
 }
 
 
-$regfiles = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/Regedit/config.json" -UseBasicParsing
+$regfiles = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/$BranchName/Regedit/config.json" -UseBasicParsing
 
 ForEach ($regfile in $regfiles) {
     Write-Log -Value "Starting detection of Regedit settings; $($regfile.URL)" -Severity 1 -Component "Regedit"

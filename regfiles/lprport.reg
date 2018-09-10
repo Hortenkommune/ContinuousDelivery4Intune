@@ -1,0 +1,12 @@
+﻿Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Print\Monitors\LPR Port\Ports\10.85.207.8:hk-elev]
+"Server Name"="10.85.207.8"
+"Printer Name"="hk-elev"
+"OldSunCompatibility"=dword:00000000
+"HpUxCompatibility"=dword:00000000
+"EnableBannerPage"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Print\Monitors\LPR Port\Ports\10.85.207.8:hk-elev\Timeouts]
+"CommandTimeout"=dword:00000078
+"DataTimeout"=dword:0000012c

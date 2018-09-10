@@ -1,4 +1,4 @@
-$ChocoPkgs = @(
+﻿$ChocoPkgs = @(
     @{
         Name = "googlechrome"
         Mode = "install"
@@ -13,10 +13,6 @@ $ChocoPkgs = @(
     },
     @{
         Name = "sccmtoolkit"
-        Mode = "install"
-    },
-    @{
-        Name = "microsoft-teams.install"
         Mode = "install"
     }
 )
