@@ -1,3 +1,3 @@
 # ContinuousDelivery4Intune
 
-Productionbased Intune API
+Intune API used in production

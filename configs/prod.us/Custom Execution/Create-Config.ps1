@@ -5,15 +5,15 @@
         FilesToDwnload = @(
             @{
                 FileName = "Install-HKELEVv1.ps1"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/scripts/Install-HKELEVv1.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-HKELEVv1.ps1"
             },
             @{
                 FileName = "cnlb0m.zip"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/bin/cnlb0m.zip"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/bin/cnlb0m.zip"
             },
             @{
                 FileName = "lprport.reg"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/regfiles/lprport.reg"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/lprport.reg"
             }
         )
         Execution      = @(
@@ -34,11 +34,11 @@
         FilesToDwnload = @(
             @{
                 FileName = "Install-TS20DAFix.ps1"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/scripts/Install-TS20DAFix.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-TS20DAFix.ps1"
             },
             @{
                 FileName = "iaioi2ce.zip"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/bin/iaioi2ce.zip"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/bin/iaioi2ce.zip"
             }
         )
         Execution      = @(
