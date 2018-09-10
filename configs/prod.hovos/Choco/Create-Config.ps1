@@ -1,4 +1,4 @@
-$ChocoPkgs = @(
+﻿$ChocoPkgs = @(
     @{
         Name = "googlechrome"
         Mode = "install"

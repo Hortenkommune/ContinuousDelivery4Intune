@@ -1,4 +1,4 @@
-$Shortcuts = @(
+﻿$Shortcuts = @(
     @{
         Name            = "Google Earth"
         Type            = "lnk"
@@ -11,10 +11,10 @@ $Shortcuts = @(
     },
     @{
         Name            = "Office 365"
-        Type            = "lnk"
-        Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-        Arguments       = "https://portal.office.com"
-        WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
+        Type            = "url"
+        Path            = "https://portal.office.com"
+        Arguments       = ""
+        WorkingDir      = ""
         IconFileandType = "C:\Program Files (x86)\Microsoft Office\root\Office16\protocolhandler.exe, 0"
         Description     = "Office 365"
         Mode            = "Install"
@@ -44,6 +44,16 @@ $Shortcuts = @(
         WorkingDir      = "C:\Program Files (x86)\Microsoft Office\root\Office16\"
         IconFileandType = "C:\Program Files (x86)\Microsoft Office\root\Office16\powerpnt.exe, 0"
         Description     = "PowerPoint 2016"
+        Mode            = "Install"
+    },
+    @{
+        Name            = "Printkode"
+        Type            = "lnk"
+        Path            = "C:\Program Files\internet explorer\iexplore.exe"
+        Arguments       = "http://10.82.24.82/kode"
+        WorkingDir      = "C:\Program Files\internet explorer\"
+        IconFileandType = "C:\Windows\System32\imageres.dll, 46"
+        Description     = "Printkode"
         Mode            = "Install"
     },
     @{
