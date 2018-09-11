@@ -1,4 +1,4 @@
-$Driver = Get-WindowsDriver -Online -All | Where-Object {$_.OriginalFileName -like "*valleyview2system.inf"} | Select-Object -ExpandProperty Driver
+﻿$Driver = Get-WindowsDriver -Online -All | Where-Object {$_.OriginalFileName -like "*valleyview2system.inf"} | Select-Object -ExpandProperty Driver
 
 Expand-Archive -Path "C:\Windows\Temp\iaioi2ce.zip" -DestinationPath "C:\Windows\Temp\iaioi2ce"
 $PnPUtil = "pnputil.exe"
