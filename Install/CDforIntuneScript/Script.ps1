@@ -210,7 +210,7 @@ ForEach ($SC in $SCConf) {
                 $ShellObj = New-Object -ComObject ("WScript.Shell")
                 $Shortcut = $ShellObj.CreateShortcut($LocalShortcutPath)
                 $Shortcut.TargetPath = "$($SC.Path)"
-                if ($Detection -eq "url-file") {
+                if ($SC.Type -eq "url") {
                     $Shortcut.Save()
                     If ($SC.IconFileandType) {
                         $IconSplit = $SC.IconFileandType.Split(",").Trim()
