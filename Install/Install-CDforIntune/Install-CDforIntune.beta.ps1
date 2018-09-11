@@ -1,4 +1,4 @@
-Param(
+﻿Param(
     $BranchName = "beta",
     $WaitFor = $null,
     $CleanUp = $false

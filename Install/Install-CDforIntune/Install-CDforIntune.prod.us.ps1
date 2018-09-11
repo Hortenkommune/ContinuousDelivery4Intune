@@ -1,4 +1,4 @@
-Param(
+﻿Param(
     $BranchName = "prod.us",
     $WaitFor = $null,
     $CleanUp = $false
