@@ -1,5 +1,5 @@
 ﻿$BranchName = "prod.bs"
-$Version = "0.0.1"
+$Version = "0.0.2"
 
 
 function Write-Log {
@@ -188,30 +188,24 @@ ForEach ($SC in $SCConf) {
     Elseif ($SC.Mode -eq "Install") {
         Write-Log -Value "Starting detection of $($SC.Name)" -Severity 1 -Component "SC"
         $LocalShortcutPath = ($env:PUBLIC + "\Desktop\$($SC.Name).$($SC.Type)")
-        If ($SC.Type -eq "lnk") {
-            $verPath = $SC.WorkingDir + "\" + $SC.Path
-            $Detection = Test-Path $verPath
-            If (!($Detection)) {
-                $verPath = $SC.Path
+        If (!(Test-Path $LocalShortcutPath)) {
+            If ($SC.Type -eq "lnk") {
+                $verPath = $SC.WorkingDir + "\" + $SC.Path
                 $Detection = Test-Path $verPath
                 If (!($Detection)) {
-                    $verPath = $SC.Path -split ' +(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)'
-                    $verPath = $verPath[0] -replace '"', ''
+                    $verPath = $SC.Path
                     $Detection = Test-Path $verPath
+                    If (!($Detection)) {
+                        $verPath = $SC.Path -split ' +(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)'
+                        $verPath = $verPath[0] -replace '"', ''
+                        $Detection = Test-Path $verPath
+                    }
                 }
             }
-        }
-        Else {
-            $Detection = "url-file"
-        }
-        If (!($Detection)) {
-            Write-Log -Value "Can not detect $($SC.Name) endpoint; skipping" -Severity 2 -Component "SC"
-        }
-        else {
-            If (Test-Path $LocalShortcutPath) {
-                Write-Log -Value "$($SC.Name) already exists; skipping" -Severity 1 -Component "SC"
+            Else {
+                $Detection = "url-file"
             }
-            else {
+            If ($Detection) {
                 Write-Log -Value "$($SC.Name) is not detected; starting installation" -Severity 1 -Component "SC"
                 $ShellObj = New-Object -ComObject ("WScript.Shell")
                 $Shortcut = $ShellObj.CreateShortcut($LocalShortcutPath)
@@ -244,6 +238,12 @@ ForEach ($SC in $SCConf) {
                 }
                 Write-Log -Value "$($SC.Name) is installed" -Severity 1 -Component "SC"
             }
+            else {
+                Write-Log -Value "Can not detect $($SC.Name) endpoint; skipping" -Severity 2 -Component "SC"
+            }
+        }
+        else {
+            Write-Log -Value "$($SC.Name) already exists; skipping" -Severity 1 -Component "SC"    
         }
     }
 }
