@@ -65,7 +65,7 @@
         Execution      = @(
             @{
                 Execute   = "powershell.exe"
-                Arguments = "-ExecutionPolicy Bypass -File 'C:\Windows\Temp\Remove-Teams.ps1'"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Remove-Teams.ps1"
             }
         )
         Detection      = @(
