@@ -10,3 +10,9 @@ ForEach ($Folder in $Folders) {
         Remove-Item -Path "$($Folder.FullName)\Local\Microsoft\TeamsMeetingAddin" -Recurse -Force
     }
 }
+
+if (!(Test-Path "C:\Windows\ico")) {
+    New-Item -Path "C:\Windows\ico" -ItemType Directory
+}
+
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/ico/teams.ico" -OutFile "C:\Windows\ico\teams.ico"
