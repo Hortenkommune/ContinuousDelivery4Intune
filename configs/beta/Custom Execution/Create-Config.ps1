@@ -70,7 +70,7 @@
         )
         Detection      = @(
             @{
-                Rule = "[bool]Test-Path 'C:\Windows\ico\teams.ico'"
+                Rule = "[bool](Test-Path 'C:\Windows\ico\teams.ico')"
             }
         )
     }
