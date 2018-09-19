@@ -70,7 +70,7 @@
         )
         Detection      = @(
             @{
-                Rule = "[bool]true')"
+                Rule = "[bool](`$False)"
             }
         )
     }
