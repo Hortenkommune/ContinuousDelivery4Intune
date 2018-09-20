@@ -68,7 +68,7 @@
                 Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Remove-Teams.ps1"
             }
         )
-        #This should be change 20.10.18
+        #This should be changed 20.10.18
         Detection      = @(
             @{
                 Rule = "[bool](`$False)"
