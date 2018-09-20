@@ -52,6 +52,28 @@
                 Rule = "[bool](!(Get-WmiObject -Query `"select * from win32_computersystem where model like '20DA%'`")) -or (Get-WmiObject -Query `"select * from win32_PnPSignedDriver where DeviceName like 'I2C Controller'`")"
             }
         )
+    },
+    @{
+        Name           = "Remove Teams and add ICO-file"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Remove-Teams.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Remove-Teams.ps1"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Remove-Teams.ps1"
+            }
+        )
+        #This should be changed 20.10.18
+        Detection      = @(
+            @{
+                Rule = "[bool](`$False)"
+            }
+        )
     }
 )
 $CustomExec | ConvertTo-Json -Depth 4 -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
