@@ -10,6 +10,10 @@
     @{
         Name = "sccmtoolkit"
         Mode = "install"
+    },
+    @{
+        Name = "dotnet3.5"
+        Mode = "install"
     }
 )
 $ChocoPkgs | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
