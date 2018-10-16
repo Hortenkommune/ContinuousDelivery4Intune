@@ -11,7 +11,7 @@ Expand-Archive -Path $ZipFile -DestinationPath $InstallPath -Force
  
 Start-Process -FilePath "pnputil.exe" -ArgumentList "/Add-Driver `"$InstallDriverPath`"" -Wait
 Add-PrinterDriver -Name $PrinterDriver
-Start-Process -FilePath "regedit.exe" -ArgumentList "/s `"$RegFile`"" -Wait
+Start-Process -FilePath "regedit.exe" -ArgumentList "/s $RegFile" -Wait
  
 Restart-Service -Name "Spooler" -Force
 Add-Printer -Name $PrinterName -PortName $PrinterPortName -DriverName $PrinterDriver
