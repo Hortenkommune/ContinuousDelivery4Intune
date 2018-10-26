@@ -57,16 +57,6 @@
         Mode            = "Install"
     },
     @{
-        Name            = "Printkode"
-        Type            = "lnk"
-        Path            = "C:\Program Files\internet explorer\iexplore.exe"
-        Arguments       = "http://10.82.24.82/kode"
-        WorkingDir      = "C:\Program Files\internet explorer\"
-        IconFileandType = "C:\Windows\System32\imageres.dll, 46"
-        Description     = "Printkode"
-        Mode            = "Install"
-    },
-    @{
         Name            = "Veiledninger"
         Type            = "lnk"
         Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
