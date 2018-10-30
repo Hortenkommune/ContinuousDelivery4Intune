@@ -1,15 +1,15 @@
 ﻿$Versions = @(
     @{
         Name    = "prod.bs"
-        Version = "1.0.0"
+        Version = "1.0.2"
     },
     @{
         Name    = "prod.us"
-        Version = "1.0.0"
+        Version = "1.0.2"
     },
     @{
         Name    = "prod.hovos"
-        Version = "1.0.0"
+        Version = "1.0.2"
     },
     @{
         Name    = "beta"
