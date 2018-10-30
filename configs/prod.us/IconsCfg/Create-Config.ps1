@@ -1,12 +1,12 @@
 ﻿$Icons = @(
     @{
         URI  = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/ico/teams.ico"
-        Path = "C:\Windows\ico\Teams.ico"
+        Name = "Teams.ico"
         Mode = "Install"
     },
     @{
         URI  = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/ico/Office_portal.ico"
-        Path = "C:\Windows\ico\Office_portal.ico"
+        Name = "Office_portal.ico"
         Mode = "Install"
     }
 )

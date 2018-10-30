@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.1"
+$Version = "1.0.2"
 
 
 function Write-Log {
@@ -127,24 +127,29 @@ ForEach ($ChockoPkg in $ChocoConf) {
 
 $Icons = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/configs/$BranchName/IconsCfg/config.json" -UseBasicParsing
 foreach ($ico in $Icons) {
-    Write-Log -Value "Checking existance of $($ico.URI)" -Severity 1 -Component "IconsCfg"
-    $exist = Test-Path $ico.Path
+    $IconPath = "C:\Windows\ICO\" + $ico.Name
+    $IconFolderExist = Test-Path "C:\Windows\ICO"
+    If (!$IconFolderExist) {
+        New-Item -Path "C:\Windows\ICO" -ItemType Directory -Force
+    }
+    Write-Log -Value "Checking existance of $($ico.Name)" -Severity 1 -Component "IconsCfg"
+    $exist = Test-Path $IconPath
     if ($ico.Mode -eq "Install") {
         if (!$exist) {
-            Write-Log -Value "$($ico.URI) does not exist; Installing" -Severity 1 -Component "IconsCfg"
-            Invoke-WebRequest -Uri $ico.URI -OutFile $ico.Path
+            Write-Log -Value "$($ico.Name) does not exist; Installing" -Severity 1 -Component "IconsCfg"
+            Invoke-WebRequest -Uri $ico.URI -OutFile $IconPath
         }
         else {
-            Write-Log -Value "$($ico.URI) is already installed" -Severity 1 -Component "IconsCfg"
+            Write-Log -Value "$($ico.Name) is already installed" -Severity 1 -Component "IconsCfg"
         }
     }
     else {
         if ($exist) {
-            Write-Log -Value "$($ico.URI) does exist; Uninstalling" -Severity 1 -Component "IconsCfg"
-            Remove-Item $ico.Path -Force
+            Write-Log -Value "$($ico.Name) does exist; Uninstalling" -Severity 1 -Component "IconsCfg"
+            Remove-Item $IconPath -Force
         }
         else {
-            Write-Log -Value "$($ico.URI) is already uninstalled" -Severity 1 -Component "IconsCfg"
+            Write-Log -Value "$($ico.Name) is already uninstalled" -Severity 1 -Component "IconsCfg"
         }
     }
 }
