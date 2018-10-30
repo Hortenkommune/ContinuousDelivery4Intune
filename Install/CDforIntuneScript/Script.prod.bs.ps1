@@ -1,5 +1,5 @@
 ﻿$BranchName = "prod.bs"
-$Version = "1.0.1"
+$Version = "1.0.0"
 
 
 function Write-Log {
@@ -38,11 +38,21 @@ else {
     break
 }
 
-$ServicesToStart = 'W32Time'
+$ServicesToStart = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/configs/$BranchName/Services/config.json" -UseBasicParsing
 foreach ($svc in $ServicesToStart) {
-    $gSvc = Get-Service $svc
-    if ($gSvc.Status -ne "Running") {
-        Start-Service $svc
+    $gSvc = Get-Service $svc.Name
+    Write-Log -Value "Checking if service $($svc.Name) is set to $($svc.Mode)" -Severity 1 -Component "Services"
+    if ($svc.Mode -eq "Run") {
+        if ($gSvc.Status -ne "Running") {
+            Write-Log -Value "Service $($svc.Name) is not running; starting" -Severity 2 -Component "Services"
+            Start-Service $svc.Name
+        }
+    }
+    else {
+        if ($gSvc.Status -eq "Running") {
+            Write-Log -Value "Service $($svc.Name) is running; stopping" -Severity 2 -Component "Services"
+            Stop-Service $svc.Name
+        }
     }
 }
 
@@ -115,6 +125,29 @@ ForEach ($ChockoPkg in $ChocoConf) {
     }
 }
 
+$Icons = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/configs/$BranchName/IconsCfg/config.json" -UseBasicParsing
+foreach ($ico in $Icons) {
+    Write-Log -Value "Checking existance of $($ico.URI)" -Severity 1 -Component "IconsCfg"
+    $exist = Test-Path $ico.Path
+    if ($ico.Mode -eq "Install") {
+        if (!$exist) {
+            Write-Log -Value "$($ico.URI) does not exist; Installing" -Severity 1 -Component "IconsCfg"
+            Invoke-WebRequest -Uri $ico.URI -OutFile $ico.Path
+        }
+        else {
+            Write-Log -Value "$($ico.URI) is already installed" -Severity 1 -Component "IconsCfg"
+        }
+    }
+    else {
+        if ($exist) {
+            Write-Log -Value "$($ico.URI) does exist; Uninstalling" -Severity 1 -Component "IconsCfg"
+            Remove-Item $ico.Path -Force
+        }
+        else {
+            Write-Log -Value "$($ico.URI) is already uninstalled" -Severity 1 -Component "IconsCfg"
+        }
+    }
+}
 
 $AdvInstallers = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/configs/$BranchName/Custom%20Execution/config.json" -UseBasicParsing
 
