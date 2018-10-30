@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.0"
+$Version = "1.0.1"
 
 
 function Write-Log {
@@ -38,6 +38,13 @@ else {
     break
 }
 
+$ServicesToStart = 'W32Time'
+foreach ($svc in $ServicesToStart) {
+    $gSvc = Get-Service $svc
+    if ($gSvc.Status -ne "Running") {
+        Start-Service $svc
+    }
+}
 
 $SerialNumber = Get-WmiObject -Class Win32_bios | Select-Object -ExpandProperty SerialNumber
 $Manufacturer = Get-WmiObject -Class Win32_ComputerSystem | Select-Object -ExpandProperty Manufacturer
