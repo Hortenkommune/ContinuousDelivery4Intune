@@ -15,7 +15,7 @@
         Path            = "https://portal.office.com"
         Arguments       = ""
         WorkingDir      = ""
-        IconFileandType = "C:\Program Files (x86)\Microsoft Office\root\Office16\protocolhandler.exe, 0"
+        IconFileandType = "C:\Windows\ICO\Office_portal.ico"
         Description     = "Office 365"
         Mode            = "Install"
     },

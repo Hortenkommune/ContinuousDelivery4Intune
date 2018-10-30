@@ -15,7 +15,7 @@
         Path            = "$env:WinDir\explorer.exe"
         Arguments       = "microsoft-edge:`"https://portal.office.com`""
         WorkingDir      = ""
-        IconFileandType = "C:\Program Files (x86)\Microsoft Office\root\Office16\protocolhandler.exe, 0"
+        IconFileandType = "C:\Windows\ICO\Office_portal.ico"
         Description     = "Office 365"
         Mode            = "Install"
     },
@@ -25,7 +25,7 @@
         Path            = "$env:WinDir\explorer.exe"
         Arguments       = "microsoft-edge:`"https://teams.microsoft.com`""
         WorkingDir      = ""
-        IconFileandType = "C:\Windows\ico\teams.ico"
+        IconFileandType = "C:\Windows\ICO\Teams.ico"
         Description     = "Microsoft Teams"
         Mode            = "Install"
     },
