@@ -1,34 +1,5 @@
 ﻿$CustomExec = @(
     @{
-        Name           = "Deploy printer"
-        wrkDir         = "C:\Windows\Temp"
-        FilesToDwnload = @(
-            @{
-                FileName = "Install-HKELEVv1.ps1"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-HKELEVv1.ps1"
-            },
-            @{
-                FileName = "cnlb0m.zip"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/bin/cnlb0m.zip"
-            },
-            @{
-                FileName = "lprport.reg"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/lprport.reg"
-            }
-        )
-        Execution      = @(
-            @{
-                Execute   = "powershell.exe"
-                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-HKELEVv1.ps1"
-            }
-        )
-        Detection      = @(
-            @{
-                Rule = "[bool](Get-WmiObject -Query `"select * from win32_printer where name like '%HK-ELEVv1%'`")"
-            }
-        )
-    },
-    @{
         Name           = "Fix 20DA Touchscreen"
         wrkDir         = "C:\Windows\Temp"
         FilesToDwnload = @(
