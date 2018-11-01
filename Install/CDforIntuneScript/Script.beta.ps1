@@ -38,6 +38,15 @@ else {
     break
 }
 
+#Checking if Eksamens-mode should be turned on
+$Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
+If ($Username -like "*eksamen*") {
+    Write-Log -Value "Restricted user `"$Username`" detected; Enabling resrticted mode" -Severity 1 -Component "Eksamen"
+}
+else {
+    Write-Log -Value "User `"$Username`" is not a restricted user; Continuing launch" -Severity 1 -Component "Eksamen"
+}
+
 $ServicesToStart = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/configs/$BranchName/Services/config.json" -UseBasicParsing
 foreach ($svc in $ServicesToStart) {
     $gSvc = Get-Service $svc.Name
