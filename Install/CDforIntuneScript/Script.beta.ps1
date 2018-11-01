@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.2.2"
+$Version = "1.0.2.3"
 
 
 function Write-Log {
@@ -40,7 +40,7 @@ else {
 
 #Checking if Eksamens-mode should be turned on
 $Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
-If ($Username -like "*eksamen*") {
+If ($Username -like "*teelbor*") {
     Write-Log -Value "Restricted user `"$Username`" detected; Enabling restricted mode" -Severity 1 -Component "Eksamen"
     $Username = $Username -split "\\"
     $objUser = New-Object System.Security.Principal.NTAccount("$($Username[0])","$($Username[1])")
