@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.2.3"
+$Version = "1.0.2.4"
 
 
 function Write-Log {
@@ -55,6 +55,7 @@ If ($Username -like "*teelbor*") {
     Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/EksamenRegSettings.reg" -OutFile $TempHKCUFile
 
     $regfile = Get-Content $TempHKCUFile
+    $newregfile = $regfile -replace "HKEY_CURRENT_USER", $hive
 
     Set-Content -Path $TempHKCUFile -Value $newregfile
     $Arguments = "/s $TempHKCUFile"
