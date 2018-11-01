@@ -334,8 +334,3 @@ ForEach ($regfile in $regfiles) {
         Write-Log -Value "Regedit settings is detected, aborting install; $($regfile.URL)" -Severity 1 -Component "Regedit"
     }
 }
-
-
-
-
-
