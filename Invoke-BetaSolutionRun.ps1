@@ -2,14 +2,18 @@
 $CreateCfgFiles += Get-Item "$PSScriptRoot\versioncontrol\Create-Config.ps1"
 $Script = Get-Content "$PSScriptRoot\Install\CDforIntuneScript\Script.ps1"
 
+$ProcIDs = $null
+
 ForEach ($file in $CreateCfgFiles) {
-    Start-Process "powershell.exe" -ArgumentList "-Executionpolicy Bypass -File `"$($file.FullName)`""
+    $Proc = Start-Process "powershell.exe" -ArgumentList "-Executionpolicy Bypass -File `"$($file.FullName)`"" -PassThru
+    $ProcIDs += $Proc.Id
 }
 
-Start-Sleep -Seconds 10
+ForEach ($Proc in $ProcIDs) {
+    Wait-Process $Proc
+}
 
 $BetaScript = Get-Content "$PSScriptRoot\versioncontrol\config.json" | ConvertFrom-Json
-#$BetaScript = Get-Content "C:\Users\jonfor\Documents\GitHub\ContinuousDelivery4Intune\versioncontrol\config.json" | ConvertFrom-Json
 $BetaScript = $BetaScript | Where-Object { $_.Name -eq "beta" }
 
 $newScript = $Script.Replace("`$BranchName = `"`"", "`$BranchName = `"$($BetaScript.Name)`"")
