@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.2"
+$Version = "1.0.2.4"
 
 
 function Write-Log {
@@ -36,6 +36,35 @@ else {
 
     Start-Process "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$env:TEMP\Install-CDforIntune.ps1`" -BranchName $BranchName -WaitFor $PID -CleanUp $true" -WindowStyle Hidden
     break
+}
+
+#Checking if Eksamens-mode should be turned on
+$Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
+If ($Username -like "*teelbor*") {
+    Write-Log -Value "Restricted user `"$Username`" detected; Enabling restricted mode" -Severity 1 -Component "Eksamen"
+    $Username = $Username -split "\\"
+    $objUser = New-Object System.Security.Principal.NTAccount("$($Username[0])","$($Username[1])")
+    $strSID = $objUser.Translate([System.Security.Principal.SecurityIdentifier])
+    $SID = $strSID.Value
+
+    $hive = Get-ChildItem -Path REGISTRY::HKEY_USERS | Select-Object -ExpandProperty Name | Where-Object { $_ -like "*$SID" }
+    Write-Log -Value "Writing restricted settings to hive: $hive" -Severity 1 -Component "Eksamen"
+
+    $TempHKCUFile = $env:TEMP + "\TempHKCU.reg"
+    Remove-Item $TempHKCUFile -Force -ErrorAction Ignore
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/EksamenRegSettings.reg" -OutFile $TempHKCUFile
+
+    $regfile = Get-Content $TempHKCUFile
+    $newregfile = $regfile -replace "HKEY_CURRENT_USER", $hive
+
+    Set-Content -Path $TempHKCUFile -Value $newregfile
+    $Arguments = "/s $TempHKCUFile"
+
+    Start-Process "regedit.exe" -ArgumentList $Arguments -Wait
+    Write-Log -Value "Device is in restricted mode" -Severity 1 -Component "Eksamen"
+}
+else {
+    Write-Log -Value "User `"$Username`" is not a restricted user; Continuing launch" -Severity 1 -Component "Eksamen"
 }
 
 $ServicesToStart = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/configs/$BranchName/Services/config.json" -UseBasicParsing
@@ -334,8 +363,3 @@ ForEach ($regfile in $regfiles) {
         Write-Log -Value "Regedit settings is detected, aborting install; $($regfile.URL)" -Severity 1 -Component "Regedit"
     }
 }
-
-
-
-
-

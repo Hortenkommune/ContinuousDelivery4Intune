@@ -13,7 +13,7 @@
     },
     @{
         Name    = "beta"
-        Version = "1.0.2"
+        Version = "1.0.2.4"
     }
 )
 $Versions | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
