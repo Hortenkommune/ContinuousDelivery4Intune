@@ -20,8 +20,8 @@ Windows Registry Editor Version 5.00
 "DCSettingIndex"=dword:00000001
 
 [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Power\PowerSettings\7bc4a2f9-d8fc-4469-b07b-33eb785aaca0]
-"ACSettingIndex"=dword:00003600
-"DCSettingIndex"=dword:00001800
+"ACSettingIndex"=dword:00000E10
+"DCSettingIndex"=dword:00000708
 
 [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Power\PowerSettings\abfc2519-3608-4c2a-94ea-171b0ed546ab]
 "ACSettingIndex"=dword:00000001
@@ -32,8 +32,8 @@ Windows Registry Editor Version 5.00
 "DCSettingIndex"=dword:00000001
 
 [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Power\PowerSettings\3C0BC021-C8A8-4E07-A973-6B14CBCB2B7E]
-"ACSettingIndex"=dword:00001200
-"DCSettingIndex"=dword:00000600
+"ACSettingIndex"=dword:000004B0
+"DCSettingIndex"=dword:00000258
 
 [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Power\PowerSettings\E69653CA-CF7F-4F05-AA73-CB833FA90AD4]
-"DCSettingIndex"=dword:0000050
+"DCSettingIndex"=dword:0000032
