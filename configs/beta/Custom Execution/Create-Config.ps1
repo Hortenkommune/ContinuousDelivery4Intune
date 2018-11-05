@@ -52,6 +52,27 @@
                 Rule = "[bool](!(Get-WmiObject -Query `"select * from win32_computersystem where model like '20DA%'`")) -or (Get-WmiObject -Query `"select * from win32_PnPSignedDriver where DeviceName like 'I2C Controller'`")"
             }
         )
+    },
+    @{
+        Name           = "Enable Wake Timers"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Run-PwrcfgWakeTimers.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Run-PwrcfgWakeTimers.ps1"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Run-PwrcfgWakeTimer.ps1"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = $False
+            }
+        )
     }
 )
 $CustomExec | ConvertTo-Json -Depth 4 -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
