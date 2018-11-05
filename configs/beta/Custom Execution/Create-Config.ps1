@@ -68,6 +68,12 @@
                 Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Run-PwrcfgWakeTimers.ps1"
             }
         )
+        Detection      = @(
+            @{
+                Rule = "[bool](`$False)"
+            }
+        )
     }
 )
+
 $CustomExec | ConvertTo-Json -Depth 4 -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
