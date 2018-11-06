@@ -70,7 +70,7 @@
         )
         Detection      = @(
             @{
-                Rule = "[bool](`$False)"
+                Rule = "[bool]((powercfg /query SCHEME_CURRENT 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d) -like `"*Current AC Power Setting Index: 0x00000001*`" -and `"*Current DC Power Setting Index: 0x00000001*`")"
             }
         )
     }
