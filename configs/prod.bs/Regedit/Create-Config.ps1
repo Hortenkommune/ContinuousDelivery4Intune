@@ -51,7 +51,7 @@
     },
     @{
         URL       = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/Telemetry.reg"
-        detection = "[bool]((Get-ItemPropertyValue -Path `"HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection`" -Name AllowDeviceNameInTelemetry) -eq 1)"
+        detection = "[bool]((Get-ItemPropertyValue -Path `"HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection`" -Name AllowDeviceNameInTelemetry) -eq 1)"
         Type      = "HKLM"
     }
 )
