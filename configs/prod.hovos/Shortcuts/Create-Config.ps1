@@ -11,12 +11,22 @@
     },
     @{
         Name            = "Office 365"
-        Type            = "url"
-        Path            = "https://portal.office.com"
-        Arguments       = ""
+        Type            = "lnk"
+        Path            = "$env:WinDir\explorer.exe"
+        Arguments       = "microsoft-edge:`"https://portal.office.com`""
         WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\Office_portal.ico"
         Description     = "Office 365"
+        Mode            = "Install"
+    },
+    @{
+        Name            = "Microsoft Teams"
+        Type            = "lnk"
+        Path            = "$env:WinDir\explorer.exe"
+        Arguments       = "microsoft-edge:`"https://teams.microsoft.com`""
+        WorkingDir      = ""
+        IconFileandType = "C:\Windows\ICO\Teams.ico"
+        Description     = "Microsoft Teams"
         Mode            = "Install"
     },
     @{
