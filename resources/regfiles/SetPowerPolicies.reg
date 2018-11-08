@@ -1,5 +1,8 @@
 Windows Registry Editor Version 5.00
 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings]
+"ActivePowerScheme"="381b4222-f694-41f0-9685-ff5bb260df2e"
+
 [HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Power\PowerSettings\7648EFA3-DD9C-4E3E-B566-50F929386280]
 "ACSettingIndex"=dword:00000001
 "DCSettingIndex"=dword:00000001
