@@ -53,6 +53,11 @@
         URL       = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/Telemetry.reg"
         detection = "[bool]((Get-ItemPropertyValue -Path `"HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection`" -Name AllowDeviceNameInTelemetry) -eq 1)"
         Type      = "HKLM"
+    },
+    @{
+        URL       = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/SetPowerPolicies.reg"
+        detection = "[bool]((Get-ItemPropertyValue -Path `"HKLM:\Software\Policies\Microsoft\Power\PowerSettings\E69653CA-CF7F-4F05-AA73-CB833FA90AD4`" -Name DCSettingIndex) -eq 1)"
+        Type      = "HKLM"
     }
 )
 $regfiles | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
