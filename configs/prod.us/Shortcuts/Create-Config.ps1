@@ -12,7 +12,7 @@
     @{
         Name            = "Office 365"
         Type            = "lnk"
-        Path            = "$env:WinDir\explorer.exe"
+        Path            = "C:\Windows\explorer.exe"
         Arguments       = "microsoft-edge:`"https://portal.office.com`""
         WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\Office_portal.ico"
@@ -22,7 +22,7 @@
     @{
         Name            = "Microsoft Teams"
         Type            = "lnk"
-        Path            = "$env:WinDir\explorer.exe"
+        Path            = "C:\Windows\explorer.exe"
         Arguments       = "microsoft-edge:`"https://teams.microsoft.com`""
         WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\Teams.ico"
