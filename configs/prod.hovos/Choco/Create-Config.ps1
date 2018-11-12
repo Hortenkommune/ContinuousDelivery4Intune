@@ -4,10 +4,6 @@
         Mode = "install"
     },
     @{
-        Name = "audacity"
-        Mode = "install"
-    },
-    @{
         Name = "sccmtoolkit"
         Mode = "install"
     },
