@@ -12,6 +12,10 @@
         Version = "1.0.3"
     },
     @{
+        Name    = "prod.bhg"
+        Version = "1.0.3"
+    }
+    @{
         Name    = "beta"
         Version = "1.0.3"
     }
