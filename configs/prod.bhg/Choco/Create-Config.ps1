@@ -12,6 +12,10 @@
         Mode = "Install"
     }
     @{
+        Name = "spotify"
+        Mode = "install"
+    },
+    @{
         Name = "sccmtoolkit"
         Mode = "install"
     },
