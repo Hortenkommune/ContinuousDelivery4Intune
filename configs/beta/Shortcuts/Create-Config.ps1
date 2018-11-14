@@ -5,7 +5,7 @@
         Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
         Arguments       = "https://earth.google.com/web"
         WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
-        IconFileandType = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe, 0"
+        IconFileandType = "C:\Windows\ICO\google_earth.ico"
         Description     = "Google Earth Cloud"
         Mode            = "Install"
     },
