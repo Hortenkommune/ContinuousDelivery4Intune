@@ -10,10 +10,6 @@
     @{
         Name = "vlc"
         Mode = "Install"
-    }
-    @{
-        Name = "spotify"
-        Mode = "install"
     },
     @{
         Name = "sccmtoolkit"
