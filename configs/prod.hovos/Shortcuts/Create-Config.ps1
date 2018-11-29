@@ -70,7 +70,7 @@
         Name            = "Microsoft Onedrive"
         Type            = "lnk"
         Path            = "C:\Windows\explorer.exe"
-        Arguments       = "microsoft-edge:`"https://hortenkommune365-my.sharepoint.com/personal/`""
+        Arguments       = "microsoft-edge:`"https://hortenkommune365-my.sharepoint.com/`""
         WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\Onedrive.ico"
         Description     = "Microsoft Onedrive"
