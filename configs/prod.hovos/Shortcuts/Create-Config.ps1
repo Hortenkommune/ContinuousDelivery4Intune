@@ -65,6 +65,16 @@
         IconFileandType = "C:\Windows\System32\imageres.dll, 76"
         Description     = "Diverse veiledinger"
         Mode            = "Install"
+    },
+    @{
+        Name            = "Microsoft Teams"
+        Type            = "lnk"
+        Path            = "C:\Windows\explorer.exe"
+        Arguments       = "microsoft-edge:`"https://hortenkommune365-my.sharepoint.com/personal/`""
+        WorkingDir      = ""
+        IconFileandType = "C:\Windows\ICO\Onedrive.ico"
+        Description     = "Microsoft Onedrive"
+        Mode            = "Install"
     }
 )
 $Shortcuts | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
