@@ -67,7 +67,7 @@
         Mode            = "Install"
     },
     @{
-        Name            = "Microsoft Teams"
+        Name            = "Microsoft Onedrive"
         Type            = "lnk"
         Path            = "C:\Windows\explorer.exe"
         Arguments       = "microsoft-edge:`"https://hortenkommune365-my.sharepoint.com/personal/`""
