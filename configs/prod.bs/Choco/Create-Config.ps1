@@ -4,10 +4,6 @@
         Mode = "install"
     },
     @{
-        Name = "gimp"
-        Mode = "install"
-    },
-    @{
         Name = "audacity"
         Mode = "install"
     },
