@@ -1,18 +1,14 @@
 ﻿$ChocoPkgs = @(
     @{
+        Name = "sccmtoolkit"
+        Mode = "install"
+    },
+    @{
         Name = "googlechrome"
         Mode = "install"
     },
     @{
         Name = "audacity"
-        Mode = "install"
-    },
-    @{
-        Name = "sccmtoolkit"
-        Mode = "install"
-    },
-    @{
-        Name = "dotnet3.5"
         Mode = "install"
     }
 )
