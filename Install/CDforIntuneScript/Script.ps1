@@ -126,7 +126,7 @@ $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
 if (!(Test-Path -Path $ChocoBin)) {
     Write-Log -Value "$ChocoBin not detected; starting installation of chocolatey" -Severity 2 -Component "Chocolatey"
     try {
-        Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+        Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('http://10.85.207.9/install.ps1'))
     }
     catch {
         Write-Log -Value "Failed to install chocolatey" -Severity 3 -Component "Chocolatey"
@@ -135,6 +135,8 @@ if (!(Test-Path -Path $ChocoBin)) {
 
 Write-Log -Value "Upgrading chocolatey and all existing packages" -Severity 1 -Component "Chocolatey"
 try {
+    Invoke-Expression "cmd /c $ChocoBin source add --name=hrtcloudchoco --source=http://10.85.207.9/chocolatey --priority=0"
+    Invoke-Expression "cmd /c $ChocoBin source add --name=chocolatey --priority=1"
     Invoke-Expression "cmd /c $ChocoBin upgrade all -y" -ErrorAction Stop
 }
 catch {
