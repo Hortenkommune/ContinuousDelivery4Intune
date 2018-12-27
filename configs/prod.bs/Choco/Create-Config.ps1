@@ -8,7 +8,15 @@
         Mode = "install"
     },
     @{
+        Name = "gimp"
+        Mode = "install"
+    },
+    @{
         Name = "audacity"
+        Mode = "install"
+    },
+    @{
+        Name = "dotnet3.5"
         Mode = "install"
     }
 )
