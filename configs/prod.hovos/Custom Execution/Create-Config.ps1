@@ -36,7 +36,7 @@
         Execution      = @(
             @{
                 Execute   = "powershell.exe"
-                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-HOVOSPrinters.ps1.ps1"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-HOVOSPrinters.ps1"
             }
         )
         Detection      = @(
