@@ -54,6 +54,31 @@
         )
     },
     @{
+        Name           = "Upgrade Graphics Driver on Acer BR118-RN"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Install-HD505Graphics.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-HD505Graphics.ps1"
+            },
+            @{
+                FileName = "vga6286.zip"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/bin/vga6286.zip"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-HD505Graphics.ps1"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = "[bool](!(Get-WmiObject -Query `"select * from win32_computersystem where model like 'TravelMate Spin B118-RN'`")) -or (Get-WmiObject -Query `"select * from win32_PnPSignedDriver where DeviceName like 'Intel(R) HD Graphics'`") | where {`$_.driverversion -ge '24.20.100.6286'}"
+            }
+        )
+    },
+    @{
         Name           = "Enable Wake Timers"
         wrkDir         = "C:\Windows\Temp"
         FilesToDwnload = @(
