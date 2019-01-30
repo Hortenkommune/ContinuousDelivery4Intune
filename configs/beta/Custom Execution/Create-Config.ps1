@@ -63,7 +63,7 @@
             },
             @{
                 FileName = "vga6286.zip"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/bin/vga6286.zip"
+                URL      = "http://horten.kommune.no:83/filer/VGA6286.zip"
             }
         )
         Execution      = @(
