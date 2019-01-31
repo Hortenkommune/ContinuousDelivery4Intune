@@ -75,6 +75,16 @@
         IconFileandType = "C:\Windows\System32\imageres.dll, 76"
         Description     = "Diverse veiledinger"
         Mode            = "Install"
+    },
+    @{
+        Name            = "Digitale Ressurser"
+        Type            = "lnk"
+        Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+        Arguments       = "https://digres.hortenskolen.no"
+        WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
+        IconFileandType = "C:\Windows\ICO\digres.ico"
+        Description     = "Digitale Ressurser"
+        Mode            = "Install"
     }
 )
 $Shortcuts | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
