@@ -116,7 +116,7 @@
         )
         Detection      = @(
             @{
-                Rule = "[bool](Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username | Where-Object { $_ -like `"*eksamen*`" })"
+                Rule = "[bool](!(Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username | Where-Object { $_ -like `"*eksamen*`" }))"
             }
         )
     }
