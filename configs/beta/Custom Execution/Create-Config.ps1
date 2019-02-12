@@ -119,6 +119,27 @@
                 Rule = "[bool](Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username | Where-Object { $_ -like `"*eksamen*`" })"
             }
         )
+    },
+    @{
+        Name           = "Remove eksamen printers"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Install-EksamenPrinters.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-EksamenPrinters.ps1"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-EksamenPrinters.ps1"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = "[bool](!(Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username | Where-Object { $_ -like `"*eksamen*`" }))"
+            }
+        )
     }
 
 )
