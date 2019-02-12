@@ -1,5 +1,6 @@
-﻿$Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
-$Username = $Username.Replace("SKOLE\", "")
+﻿# $Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
+# $Username = $Username.Replace("SKOLE\", "")
+$username = "fanuelsen"
 
 $Printers = @(
     @{
@@ -92,5 +93,13 @@ if ($oreronningen -contains $username) {
             Add-PrinterPort -PrinterHostAddress $p.IP -Name $p.name -ErrorAction SilentlyContinue
             Add-Printer -Name $p.name -PortName $p.Name -Location $p.Location -DriverName "Canon Generic Plus UFR II" 
         }
+    }
+}
+
+if ($Username -notlike '*eksamen*') {
+    $Printer = $Printers
+    foreach ($p in $Printer) {
+        Remove-Printer -Name $p.name
+        Remove-PrinterPort -Name $p.name 
     }
 }
