@@ -1,6 +1,6 @@
-﻿# $Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
-# $Username = $Username.Replace("SKOLE\", "")
-$username = "fanuelsen"
+﻿$Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
+$Username = $Username.Replace("SKOLE\", "")
+
 
 $Printers = @(
     @{
