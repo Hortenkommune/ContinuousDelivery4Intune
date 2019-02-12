@@ -116,7 +116,7 @@
         )
         Detection      = @(
             @{
-                Rule = "[bool](Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username | Where-Object { $_ -like `"*eksamen*`" } ) -or ((Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username | Where-Object { $_ -notlike `"*eksamen*`" } ) -and ((Get-Printer | Where-Object { @('2FL02588', '2FL07038', 'QLC31644', 'XVC08019', 'XVF14345', 'QNW11407') -contains $_.Name })))"
+                Rule = "[bool](!(Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username | Where-Object { $_ -like `"*eksamen*`" } ) -or ((Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username | Where-Object { $_ -notlike `"*eksamen*`" } ) -and ((Get-Printer | Where-Object { @('2FL02588', '2FL07038', 'QLC31644', 'XVC08019', 'XVF14345', 'QNW11407') -contains $_.Name }))))"
             }
         )
     }
