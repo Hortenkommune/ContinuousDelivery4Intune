@@ -1,5 +1,5 @@
 ﻿$Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
-$Username = $Username.Replace("AZUREAD\", "")
+$Username = $Username.Replace("SKOLE\", "")
 
 $Printers = @(
     @{
