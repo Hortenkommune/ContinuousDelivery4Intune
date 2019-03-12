@@ -12,6 +12,10 @@ $Printers = @(
     @{
         Name = "Rom 121 HOVOS"
         IP   = "10.85.200.49"
+    }, 
+    @{
+        Name = "Rom 203 HOVOS"
+        IP   = "10.85.200.41"
     }
 )
 

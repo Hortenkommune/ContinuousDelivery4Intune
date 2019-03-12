@@ -41,7 +41,7 @@
         )
         Detection      = @(
             @{
-                Rule = "[bool](Get-WmiObject -Query `"select * from win32_printer where name like '%HOVOS%'`")"
+                Rule = "[bool](Get-WmiObject -Query `"select * from win32_printer where name like '%Rom 203 HOVOS%'`")"
             }
         )
     }
