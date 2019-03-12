@@ -5,18 +5,8 @@
         Type = "HKLM"
     },
     @{
-        URL = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/DisableFileSyncNGSC.reg"
-        detection = "[bool]((Get-ItemPropertyValue -Path `"HKLM:\Software\Policies\Microsoft\Windows\OneDrive`" -Name DisableFileSyncNGSC) -eq 0)"
-        Type = "HKLM"
-    },
-    @{
         URL = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/SilentAccountConfig.reg"
         detection = "[bool]((Get-ItemPropertyValue -Path `"HKLM:\Software\Policies\Microsoft\OneDrive`" -Name SilentAccountConfig) -eq 1)"
-        Type = "HKLM"
-    },
-    @{
-        URL = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/FilesOnDemand.reg"
-        detection = "[bool]((Get-ItemPropertyValue -Path `"HKLM:\Software\Policies\Microsoft\OneDrive`" -Name FilesOnDemandEnabled) -eq 1)"
         Type = "HKLM"
     },
     @{
