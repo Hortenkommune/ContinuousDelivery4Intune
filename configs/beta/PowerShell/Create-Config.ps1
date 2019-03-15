@@ -11,8 +11,8 @@
     },
     @{
         Name      = "Remove desktop.ini from OneDrive"
-        Command   = "`$Username = (Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username); `$Username = `$Username -replace `"SKOLE\`",`"`"; Remove-Item `"C:\`$Username\OneDrive - Horten kommune\desktop.ini`" -Force"
-        Detection = "`$Username = (Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username); `$Username = `$Username -replace `"SKOLE\`",`"`";[bool](!(Test-Path `"C:\`$Username\OneDrive - Horten kommune\desktop.ini`"))"
+        Command   = "`$Username = (Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username); `$Username = `$Username -replace `"SKOLE\\`",`"`"; Remove-Item `"C:\`$Username\OneDrive - Horten kommune\desktop.ini`" -Force"
+        Detection = "`$Username = (Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username); `$Username = `$Username -replace `"SKOLE\\`",`"`";[bool](!(Test-Path `"C:\`$Username\OneDrive - Horten kommune\desktop.ini`"))"
     }
 )
 $PowerShell | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
