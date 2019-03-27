@@ -35,6 +35,11 @@
         Type      = "HKCU"
     },
     @{
+        URL = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/RemoveTeamsRun.reg"
+        detection = "[bool](`$False)"
+        Type = "HKCU"
+    },
+    @{
         URL       = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/TrustedSites.reg"
         detection = "[bool](Test-Path -Path `"REGISTRY::HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\Domains\kommune.no\adfs.horten`")"
         Type      = "HKCU"
