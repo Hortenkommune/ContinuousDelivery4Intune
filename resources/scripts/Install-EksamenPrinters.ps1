@@ -69,8 +69,7 @@ if ($holtan -contains $username) {
     $Printer = $Printers | Where-Object {$_.school -eq 'holtan'}
     foreach ($p in $Printer) {
         if (Get-Printer -Name $p.name -ErrorAction SilentlyContinue) {
-            Remove-Printer -Name $p.name 
-            Remove-PrinterPort -Name $p.name 
+            Set-Printer -Name $p.name -DriverName "Canon Generic Plus PCL6"
             Write-Host "$($p.name) Exist, Skipping"
         }
         else {
@@ -84,8 +83,7 @@ if ($borre -contains $username) {
     $Printer = $Printers | Where-Object {$_.school -eq 'borre'} 
     foreach ($p in $Printer) {
         if (Get-Printer -Name $p.name -ErrorAction SilentlyContinue) {
-            Remove-Printer -Name $p.name 
-            Remove-PrinterPort -Name $p.name 
+            Set-Printer -Name $p.name -DriverName "Canon Generic Plus PCL6"
             Write-Host "$($p.name) Exist, Skipping"
         }
         else {
@@ -99,8 +97,7 @@ if ($oreronningen -contains $username) {
     $Printer = $Printers | Where-Object {$_.school -eq 'oreronningen'} 
     foreach ($p in $Printer) {
         if (Get-Printer -Name $p.name -ErrorAction SilentlyContinue) {
-            Remove-Printer -Name $p.name 
-            Remove-PrinterPort -Name $p.name 
+            Set-Printer -Name $p.name -DriverName "Canon Generic Plus PCL6"
             Write-Host "$($p.name) Exist, Skipping"
         }
         else {
