@@ -75,7 +75,7 @@ if ($holtan -contains $username) {
         }
         else {
             Add-PrinterPort -PrinterHostAddress $p.IP -Name $p.name -ErrorAction SilentlyContinue
-            Add-Printer -Name $p.name -PortName $p.Name -Location $p.Location -DriverName "Canon Generic Plus UFR II" 
+            Add-Printer -Name $p.name -PortName $p.Name -Location $p.Location -DriverName "Canon Generic Plus PCL6" 
         }
     }
 }
@@ -90,7 +90,7 @@ if ($borre -contains $username) {
         }
         else {
             Add-PrinterPort -PrinterHostAddress $p.IP -Name $p.name -ErrorAction SilentlyContinue
-            Add-Printer -Name $p.name -PortName $p.Name -Location $p.Location -DriverName "Canon Generic Plus UFR II" 
+            Add-Printer -Name $p.name -PortName $p.Name -Location $p.Location -DriverName "Canon Generic Plus PCL6" 
         }
     }
 }
@@ -105,7 +105,7 @@ if ($oreronningen -contains $username) {
         }
         else {
             Add-PrinterPort -PrinterHostAddress $p.IP -Name $p.name -ErrorAction SilentlyContinue
-            Add-Printer -Name $p.name -PortName $p.Name -Location $p.Location -DriverName "Canon Generic Plus UFR II" 
+            Add-Printer -Name $p.name -PortName $p.Name -Location $p.Location -DriverName "Canon Generic Plus PCL6" 
         }
     }
 }
