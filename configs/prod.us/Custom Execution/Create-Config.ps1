@@ -106,6 +106,10 @@
             @{
                 FileName = "Install-EksamenPrinters.ps1"
                 URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-EksamenPrinters.ps1"
+            },
+            @{
+                FileName = "pcl6.zip"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/bin/pcl6.zip"
             }
         )
         Execution      = @(

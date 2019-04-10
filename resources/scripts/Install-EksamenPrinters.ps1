@@ -1,6 +1,14 @@
 ﻿$Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
 $Username = $Username.Replace("SKOLE\", "")
+$InstallPath = $env:PROGRAMFILES + "\HK-ELEV"
+$PrinterDriverInf = "Cnp60MA64.INF"
+$InstallDriverPath = $InstallPath + "\" + $PrinterDriverInf
+$ZipFile = $env:windir + "\Temp\cnlb0m.zip"
+$PrinterDriver = "Canon Generic Plus PCL6"
 
+Expand-Archive -Path $ZipFile -DestinationPath $InstallPath -Force
+Start-Process -FilePath "pnputil.exe" -ArgumentList "/Add-Driver `"$InstallDriverPath`"" -Wait
+Add-PrinterDriver -Name $PrinterDriver
 
 $Printers = @(
     @{
@@ -61,6 +69,8 @@ if ($holtan -contains $username) {
     $Printer = $Printers | Where-Object {$_.school -eq 'holtan'}
     foreach ($p in $Printer) {
         if (Get-Printer -Name $p.name -ErrorAction SilentlyContinue) {
+            Remove-Printer -Name $p.name 
+            Remove-PrinterPort -Name $p.name 
             Write-Host "$($p.name) Exist, Skipping"
         }
         else {
@@ -74,6 +84,8 @@ if ($borre -contains $username) {
     $Printer = $Printers | Where-Object {$_.school -eq 'borre'} 
     foreach ($p in $Printer) {
         if (Get-Printer -Name $p.name -ErrorAction SilentlyContinue) {
+            Remove-Printer -Name $p.name 
+            Remove-PrinterPort -Name $p.name 
             Write-Host "$($p.name) Exist, Skipping"
         }
         else {
@@ -87,6 +99,8 @@ if ($oreronningen -contains $username) {
     $Printer = $Printers | Where-Object {$_.school -eq 'oreronningen'} 
     foreach ($p in $Printer) {
         if (Get-Printer -Name $p.name -ErrorAction SilentlyContinue) {
+            Remove-Printer -Name $p.name 
+            Remove-PrinterPort -Name $p.name 
             Write-Host "$($p.name) Exist, Skipping"
         }
         else {
