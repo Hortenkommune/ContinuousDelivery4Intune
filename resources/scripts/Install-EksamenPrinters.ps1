@@ -107,10 +107,10 @@ if ($oreronningen -contains $username) {
     }
 }
 
-if ($Username -notlike '*eksamen*') {
-    $Printer = $Printers
-    foreach ($p in $Printer) {
-        Remove-Printer -Name $p.name
-        Remove-PrinterPort -Name $p.name 
-    }
-}
+#if ($Username -notlike '*eksamen*') {
+#    $Printer = $Printers
+#    foreach ($p in $Printer) {
+#        Remove-Printer -Name $p.name
+#        Remove-PrinterPort -Name $p.name 
+#    }
+#}
