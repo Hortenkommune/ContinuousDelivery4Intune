@@ -3,7 +3,7 @@ $Username = $Username.Replace("SKOLE\", "")
 $InstallPath = $env:PROGRAMFILES + "\HK-ELEV"
 $PrinterDriverInf = "Cnp60MA64.INF"
 $InstallDriverPath = $InstallPath + "\" + $PrinterDriverInf
-$ZipFile = $env:windir + "\Temp\cnlb0m.zip"
+$ZipFile = $env:windir + "\Temp\pcl6.zip"
 $PrinterDriver = "Canon Generic Plus PCL6"
 
 Expand-Archive -Path $ZipFile -DestinationPath $InstallPath -Force
