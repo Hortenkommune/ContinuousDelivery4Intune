@@ -100,16 +100,33 @@
         )
     },
     @{
+        Name           = "Remove Eksamens Printers"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Remove-Printers.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Remove-Printers.ps1"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Remove-Printers.ps1"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = "(!(Get-Printer | Where-Object { @('2FL02588', '2FL07038', 'QLC31644', 'XVC08019', 'XVF14345', 'QNW11407') -contains `$_.Name }))"
+            }
+        )
+    },
+    @{
         Name           = "Set up eksamen printers"
         wrkDir         = "C:\Windows\Temp"
         FilesToDwnload = @(
             @{
                 FileName = "Install-EksamenPrinters.ps1"
                 URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-EksamenPrinters.ps1"
-            },
-            @{
-                FileName = "pcl6.zip"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/bin/pcl6.zip"
             }
         )
         Execution      = @(
@@ -120,10 +137,7 @@
         )
         Detection      = @(
             @{
-                Rule = "[bool](!((Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username) -like `"*eksamen*`"))"
-            },
-            @{
-                Rule = "(!(Get-Printer | Where-Object { @('2FL02588', '2FL07038', 'QLC31644', 'XVC08019', 'XVF14345', 'QNW11407') -contains `$_.Name }))"
+                Rule = "[bool]((!((Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username) -like `"*eksamen*`")) -or (!(Get-Printer | Where-Object { @('\\\\10.85.207.8\\2FL02588', '\\\\10.85.207.8\\2FL07038', '\\\\10.85.207.8\\QLC31644', '\\\\10.85.207.8\\XVC08019', '\\\\10.85.207.8\\XVF14345', '\\\\10.85.207.8\\QNW11407') -contains `$_.Name })))"
             }
         )
     }

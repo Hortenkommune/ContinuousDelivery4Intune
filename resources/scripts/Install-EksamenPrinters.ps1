@@ -1,5 +1,6 @@
 $Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
 $Username = $Username.Replace("SKOLE\", "")
+$InstalledPrinters = Get-Printer
 
 $Printers = @(
     @{
@@ -51,43 +52,35 @@ $oreronningen = @()
 }
  
 if ($holtan -contains $username) {
-    $Printer = $Printers | Where-Object {$_.school -eq 'holtan'}
+    $Printer = $Printers | Where-Object { $_.school -eq 'holtan' }
     foreach ($p in $Printer) {
-        if ($Printers.Name -contains $Printer.Name) {
-            Write-Host "$($p.name) Exist, Skipping"
-        }
-        else {
-            Invoke-Command -Scriptblock {RUNDLL32 PRINTUI.DLL,PrintUIEntry /ga /n\\$($P.Server+"\"+$P.Name) /q}
+        if (!($InstalledPrinters.Name -contains $p.Name)) {
+            Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /ga /n\\$($P.Server+"\"+$P.Name) /q }
         }
     }
 }
 
-if ($borre -contains $username) {
-    $Printer = $Printers | Where-Object {$_.school -eq 'borre'} 
+elseif ($borre -contains $username) {
+    $Printer = $Printers | Where-Object { $_.school -eq 'borre' } 
     foreach ($p in $Printer) {
-        if ($Printers.Name -contains $Printer.Name) {
-            Write-Host "$($p.name) Exist, Skipping"
-        }
-        else {
-            Invoke-Command -Scriptblock {RUNDLL32 PRINTUI.DLL,PrintUIEntry /ga /n\\$($P.Server+"\"+$P.Name) /q}
+        if (!($InstalledPrinters.Name -contains $p.Name)) {
+            Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /ga /n\\$($P.Server+"\"+$P.Name) /q }
         }
     }
 }
 
-if ($oreronningen -contains $username) {
-    $Printer = $Printers | Where-Object {$_.school -eq 'oreronningen'} 
+elseif ($oreronningen -contains $username) {
+    $Printer = $Printers | Where-Object { $_.school -eq 'oreronningen' } 
     foreach ($p in $Printer) {
-        if ($Printers.Name -contains $Printer.Name) {
-            Write-Host "$($p.name) Exist, Skipping"
-        }
-        else {
-            Invoke-Command -Scriptblock {RUNDLL32 PRINTUI.DLL,PrintUIEntry /ga /n\\$($P.Server+"\"+$P.Name) /q}
+        if (!($InstalledPrinters.Name -contains $p.Name)) {
+            Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /ga /n\\$($P.Server+"\"+$P.Name) /q }
         }
     }
 }
-if ($Username -notlike '*eksamen*') {
+
+else {
     $Printer = $Printers
     foreach ($p in $Printer) {
-        Invoke-Command -Scriptblock {RUNDLL32 PRINTUI.DLL,PrintUIEntry /gd /n\\$($P.Server+"\"+$P.Name) /q}
+        Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /gd /n\\$($P.Server+"\"+$P.Name) /q }
     }
 }
