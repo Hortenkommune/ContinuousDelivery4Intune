@@ -84,3 +84,5 @@ else {
         Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /gd /n\\$($P.Server+"\"+$P.Name) /q }
     }
 }
+
+Restart-Service Spooler
