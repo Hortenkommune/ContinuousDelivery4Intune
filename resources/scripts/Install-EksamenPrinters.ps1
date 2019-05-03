@@ -1,5 +1,3 @@
-Start-Sleep -Seconds 30
-
 $Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
 $Username = $Username.Replace("SKOLE\", "")
 $InstalledPrinters = Get-Printer
