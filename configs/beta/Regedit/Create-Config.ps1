@@ -15,6 +15,11 @@
         Type = "HKLM"
     },
     @{
+        URL       = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/LanmanWorkstation.reg"
+        detection = "[bool]((Get-ItemPropertyValue -Path `"HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters`" -Name AllowInsecureGuestAuth) -eq 1)"
+        Type      = "HKLM"
+    },
+    @{
         URL = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/ShownFileFmtPrompt.reg"
         detection = "[bool]((Get-ItemPropertyValue -Path REGISTRY::HKEY_USERS\.DEFAULT\Software\Microsoft\Office\16.0\Common\General -Name ShownFileFmtPrompt) -eq 1)"
         Type = "HKCU"
