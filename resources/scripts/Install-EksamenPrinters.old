@@ -69,7 +69,7 @@ if ($holtan -contains $username) {
     $Printer = $Printers | Where-Object {$_.school -eq 'holtan'}
     foreach ($p in $Printer) {
         if (Get-Printer -Name $p.name -ErrorAction SilentlyContinue) {
-            Set-Printer -Name $p.name -DriverName "Canon Generic Plus PCL6"
+            #Set-Printer -Name $p.name -DriverName "Canon Generic Plus PCL6"
             Write-Host "$($p.name) Exist, Skipping"
         }
         else {
