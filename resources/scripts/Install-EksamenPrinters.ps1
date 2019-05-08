@@ -63,8 +63,8 @@ if ($holtan -contains $username) {
 elseif ($borre -contains $username) {
     $Printer = $Printers | Where-Object { $_.school -eq 'borre' } 
     foreach ($p in $Printer) {
-        if (!($InstalledPrinters.Name -contains $p.Name)) {
-            Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /ga /n\\$($P.Server+"\"+$P.Name) /y /q }
+        if (!($InstalledPrinters.Name -contains $p.Name)) {ß
+            Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /ga /n\\$($P.Server+"\"+$P.Name) /q }
         }
     }
 }
@@ -73,7 +73,7 @@ elseif ($oreronningen -contains $username) {
     $Printer = $Printers | Where-Object { $_.school -eq 'oreronningen' } 
     foreach ($p in $Printer) {
         if (!($InstalledPrinters.Name -contains $p.Name)) {
-            Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /ga /n\\$($P.Server+"\"+$P.Name) /y /q }
+            Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /ga /n\\$($P.Server+"\"+$P.Name) /q }
         }
     }
 }
