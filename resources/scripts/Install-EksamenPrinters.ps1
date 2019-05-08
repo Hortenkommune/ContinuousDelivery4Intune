@@ -81,7 +81,7 @@ elseif ($oreronningen -contains $username) {
 else {
     $Printer = $Printers
     foreach ($p in $Printer) {
-        Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /gd /n\\$($P.Server+"\"+$P.Name) /y /q }
+        Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /gd /n\\$($P.Server+"\"+$P.Name) /q }
     }
 }
 
