@@ -7,7 +7,7 @@ $PrinterDriver = "Canon Generic PCL6 Driver"
 $Printers = @(
     @{
         Name = "Rom 204 HOVOS"
-        IP   = "10.85.200.54"
+        IP   = "10.85.200.19"
     }, 
     @{
         Name = "Rom 121 HOVOS"
@@ -15,7 +15,7 @@ $Printers = @(
     }, 
     @{
         Name = "Rom 203 HOVOS"
-        IP   = "10.85.200.41"
+        IP   = "10.85.200.37"
     }
 )
 
