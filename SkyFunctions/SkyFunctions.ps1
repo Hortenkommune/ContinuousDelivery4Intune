@@ -75,4 +75,4 @@
     }
 )
 
-$SkyFunctions | ConvertTo-Json | Out-File $PSScriptRoot\config.json
+$SkyFunctions | ConvertTo-Json | Out-File $PSScriptRoot\config.json -Encoding default
