@@ -1,5 +1,5 @@
 ﻿$BranchName = "prod.hovos"
-$Version = "1.0.4"
+$Version = "1.0.5"
 
 
 function Write-Log {
@@ -263,7 +263,9 @@ ForEach ($SC in $SCConf) {
     Elseif ($SC.Mode -eq "Install") {
         Write-Log -Value "Starting detection of $($SC.Name)" -Severity 1 -Component "SC"
         $LocalShortcutPath = ($env:PUBLIC + "\Desktop\$($SC.Name).$($SC.Type)")
-        If (!(Test-Path $LocalShortcutPath)) {
+        $ShellObj = New-Object -ComObject ("WScript.Shell")
+        $Shortcut = $ShellObj.CreateShortcut($LocalShortcutPath)
+        If (($Shortcut.Arguments -ne $SC.Arguments) -or ($Shortcut.WorkingDirectory -ne $SC.WorkingDir) -or ($Shortcut.Description -ne $SC.Description) -or ($Shortcut.TargetPath -ne $SC.Path)) {
             If ($SC.Type -eq "lnk") {
                 $verPath = $SC.WorkingDir + "\" + $SC.Path
                 $Detection = Test-Path $verPath
@@ -281,9 +283,7 @@ ForEach ($SC in $SCConf) {
                 $Detection = "url-file"
             }
             If ($Detection) {
-                Write-Log -Value "$($SC.Name) is not detected; starting installation" -Severity 1 -Component "SC"
-                $ShellObj = New-Object -ComObject ("WScript.Shell")
-                $Shortcut = $ShellObj.CreateShortcut($LocalShortcutPath)
+                Write-Log -Value "$($SC.Name) is not as configured; starting installation" -Severity 1 -Component "SC"
                 $Shortcut.TargetPath = "$($SC.Path)"
                 if ($SC.Type -eq "url") {
                     $Shortcut.Save()
