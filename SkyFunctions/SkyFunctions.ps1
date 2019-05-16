@@ -73,7 +73,7 @@
                 }
             }
             Install-SC -Name "Word" -Type "lnk" -Path "C:\Program Files (x86)\Microsoft Office\root\Office16\winword.exe" -WorkingDir "C:\Program Files (x86)\Microsoft Office\root\Office16\" -Description "test"
-        }.Ast.ToString()
+        }.ToString()
     }
 )
 
