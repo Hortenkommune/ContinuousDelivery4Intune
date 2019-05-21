@@ -70,6 +70,8 @@ $Printers = @(
 #INITIATE INTIAL CLEAN UP CREW
 foreach ($Printer in $Printers) {
     Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /gd /n\\$($Printer.Server+"\"+$Printer.Name) /q }
+    Remove-Printer $Printer.Name
+    Remove-PrinterPort $Printer.Name
 }
 
 #INITIATE PRINTINSTALLS
