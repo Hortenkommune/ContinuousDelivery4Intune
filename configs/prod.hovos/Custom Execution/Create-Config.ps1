@@ -21,6 +21,27 @@
         )
     },
     @{
+        Name           = "CleanUp HOVOS Printers"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Remove-PrintersHOVOS.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Remove-PrintersHOVOS.ps1"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Remove-PrintersHOVOS.ps1"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = "(!(Get-Printer | Where-Object { @('Rom 204 HOVOS', 'Rom 203 HOVOS', 'Rom 121 HOVOS', 'Rom 120 HOVOS') -contains `$_.Name }))"
+            }
+        )
+    },
+    @{
         Name           = "Deploy printers"
         wrkDir         = "C:\Windows\Temp"
         FilesToDwnload = @(
