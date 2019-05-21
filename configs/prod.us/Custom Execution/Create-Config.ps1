@@ -100,27 +100,6 @@
         )
     },
     @{
-        Name           = "Remove Eksamens Printers"
-        wrkDir         = "C:\Windows\Temp"
-        FilesToDwnload = @(
-            @{
-                FileName = "Remove-Printers.ps1"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Remove-Printers.ps1"
-            }
-        )
-        Execution      = @(
-            @{
-                Execute   = "powershell.exe"
-                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Remove-Printers.ps1"
-            }
-        )
-        Detection      = @(
-            @{
-                Rule = "(!(Get-Printer | Where-Object { @('2FL02588', '2FL07038', 'QLC31644', 'XVC08019', 'XVF14345', 'QNW11407') -contains `$_.Name }))"
-            }
-        )
-    },
-    @{
         Name           = "Set up eksamen printers"
         wrkDir         = "C:\Windows\Temp"
         FilesToDwnload = @(

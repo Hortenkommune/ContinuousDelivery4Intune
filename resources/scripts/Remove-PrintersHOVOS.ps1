@@ -3,7 +3,7 @@ $PrintersToRm = @('Rom 204 HOVOS', 'Rom 203 HOVOS', 'Rom 121 HOVOS', 'Rom 120 HO
 
 Foreach ($Printer in $PrintersToRm) {
     If ($Printers.Name -contains $Printer.Name) {
-        Remove-Printer -Name $Printer.Name
-        Remove-PrinterPort -Name $Printer.Name
+        Remove-Printer -Name $Printer
+        Remove-PrinterPort -Name $Printer
     }
 }
