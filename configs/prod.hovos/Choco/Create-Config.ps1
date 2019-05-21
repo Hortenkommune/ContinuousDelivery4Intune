@@ -1,9 +1,5 @@
 ﻿$ChocoPkgs = @(
     @{
-        Name = "googlechrome"
-        Mode = "install"
-    },
-    @{
         Name = "sccmtoolkit"
         Mode = "install"
     },
