@@ -1,7 +1,6 @@
 ﻿$SkyFunctions = @(
     @{
         Name     = 'Install-SC'
-        Config   = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/configs/beta/Shortcuts/config.json"
         Function = {
             function Install-SC {
                 Param(
