@@ -10,7 +10,7 @@ function New-SkyFunction {
         Execute = $Execute.ToString()
         Function = $Function.ToString()
     }
-    $SkyFunction | ConvertTo-Json | Out-File "$FunctionPath\$Name.json" -Encoding default
+    $SkyFunction | ConvertTo-Json -Compress | Out-File "$FunctionPath\$Name.json" -Encoding default
 }
 
 New-SkyFunction -Name "Install-SC" -Function {
