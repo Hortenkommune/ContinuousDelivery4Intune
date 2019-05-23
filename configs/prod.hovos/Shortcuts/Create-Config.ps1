@@ -20,6 +20,16 @@
         Mode            = "Install"
     },
     @{
+        Name            = "Microsoft Teams Nettleser"
+        Type            = "lnk"
+        Path            = "C:\Windows\explorer.exe"
+        Arguments       = "microsoft-edge:`"https://teams.microsoft.com`""
+        WorkingDir      = ""
+        IconFileandType = "C:\Windows\ICO\Teams.ico"
+        Description     = "Microsoft Teams Nettleser"
+        Mode            = "Install"
+    },
+    @{
         Name            = "Microsoft Teams"
         Type            = "lnk"
         Path            = "C:\Windows\explorer.exe"
@@ -27,7 +37,7 @@
         WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\Teams.ico"
         Description     = "Microsoft Teams"
-        Mode            = "Install"
+        Mode            = "Uninstall"
     },
     @{
         Name            = "Word"
