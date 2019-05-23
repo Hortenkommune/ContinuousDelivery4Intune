@@ -6,6 +6,9 @@ $runbook = @{
             Config = @(
                 @{
                     cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/SkyFunctions/configs/Shortcuts/O365/config.json"
+                },
+                @{
+                    cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/SkyFunctions/configs/Shortcuts/SchoolLinks/config.json"
                 }
             )
         }
