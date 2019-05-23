@@ -21,7 +21,8 @@ New-SkyFunction -Name "Install-SC" -Function {
             $Path,
             $WorkingDir,
             $Arguments,
-            $Description
+            $Description,
+            $IconFileandType = $null
         )
         Write-Log -Value "Starting detection of $($Name)" -Severity 1 -Component "SC"
         $LocalShortcutPath = ($env:PUBLIC + "\Desktop\$($Name).$($Type)")
