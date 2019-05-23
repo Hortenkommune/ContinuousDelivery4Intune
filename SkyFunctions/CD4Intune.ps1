@@ -6,7 +6,7 @@ foreach ($action in $runbook.Actions) {
     $funcexecSB = [scriptblock]::Create($function.Execute)
     $exec = $null
     foreach ($cfg in $action.Config) {
-        [string]$exec += "Invoke-Command -ScriptBlock { $funcexecSB } -ArgumentList $($cfg.cfguri)"
+        [string]$exec += "Invoke-Command -ScriptBlock { $funcexecSB } -ArgumentList $($cfg.cfguri)`n"
     }
     $execSB = [scriptblock]::Create($exec)
     $runSB = [scriptblock]::Create(
@@ -15,5 +15,5 @@ $($function.Function)
 $($execSB)
 "@
     )
-    #Invoke-Command -ScriptBlock $runSB
+    Invoke-Command -ScriptBlock $runSB
 }
