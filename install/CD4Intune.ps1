@@ -1,7 +1,7 @@
 #INITIAL CONFIGURATION
 $runbookname = "beta"
 $scriptversion = "v2sfbeta"
-$runbooksuri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/SkyFunctions/runbooks/runbooks.json"
+$runbooksuri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/runbooks/runbooks.json"
 
 $runbooks = Invoke-RestMethod -Uri $runbooksuri -UseBasicParsing
 $rbtoRun = $runbooks | Where-Object { $_.Name -eq $runbookname }
@@ -16,7 +16,7 @@ function Write-Log {
         [string]$Component = "CD4Intune",
         [string]$FileName = "CD4Intune.log"
     )
-    $LogFilePath = "C:\Windows\Logs" + "\" + $FileName
+    $LogFilePath = "C:\Windows\Logs\" + $FileName
     $Time = -join @((Get-Date -Format "HH:mm:ss.fff"), "+", (Get-WmiObject -Class Win32_TimeZone | Select-Object -ExpandProperty Bias))
     $Date = (Get-Date -Format "MM-dd-yyyy")
     $LogText = "<![LOG[$($Value)]LOG]!><time=""$($Time)"" date=""$($Date)"" component=""$($Component)"" context=""SYSTEM"" type=""$($Severity)"" thread=""$($PID)"" file="""">"
