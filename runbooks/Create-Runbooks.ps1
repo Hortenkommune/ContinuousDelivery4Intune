@@ -5,7 +5,8 @@ $config = @{
 
 $runbooks = @(
     @{
-        Name = "beta"
+        Name    = "beta"
+        Scriptversion = "v2sfbeta"
         Actions = @(
             @{
                 Function = "Install-SC"
