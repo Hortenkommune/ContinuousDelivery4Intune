@@ -6,11 +6,11 @@ $config = @{
 $runbooks = @(
     @{
         Name = "beta"
-        URI = ""
         Actions = @(
             @{
                 Function = "Install-SC"
-                Config = @(
+                URI      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/SkyFunctions/Functions/Install-SC.json"
+                Config   = @(
                     @{
                         cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/SkyFunctions/configs/Shortcuts/O365/config.json"
                     },
@@ -25,7 +25,7 @@ $runbooks = @(
 
 $rbs = @()
 foreach ($runbook in $runbooks) {
-    $runbook | ConvertTo-Json -Depth 4 -Compress | Out-File $PSScriptRoot\$($runbook.Name).json
+    $runbook | ConvertTo-Json -Depth 4 -Compress | Out-File $PSScriptRoot\$($runbook.Name).json -Encoding default
     $rbs += New-Object psobject -Property @{
         Name = $runbook.Name
         URI = ($config.runbooksUri + "/" + $runbook.Name + ".json")
