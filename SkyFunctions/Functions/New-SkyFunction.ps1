@@ -1,7 +1,10 @@
 function New-SkyFunction {
     Param(
+        [Parameter(Mandatory=$true)]
         [string]$Name,
+        [Parameter(Mandatory=$true)]
         [scriptblock]$Execute,
+        [Parameter(Mandatory=$true)]
         [scriptblock]$Function,
         [string]$FunctionPath = ".\SkyFunctions\Functions\"
     )

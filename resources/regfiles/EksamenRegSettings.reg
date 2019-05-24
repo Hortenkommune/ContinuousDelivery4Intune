@@ -1,8 +1,0 @@
-﻿Windows Registry Editor Version 5.00
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings]
-"ProxyEnable"=dword:00000001
-"ProxyServer"="10.85.207.7:3130"
-
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Internet Explorer\Control Panel]
-"Proxy"=dword:00000001
