@@ -30,7 +30,9 @@ function Write-Log {
 #NATIVE LOGGING FUNCTION ENDs
 
 #UPDATE CHECK
-if ($scriptversion -ne )
+if ($scriptversion -ne $runbook.Scriptversion) {
+    #doUpgrade()
+}
 #UPDATE CHECK END
 
 #ACTION

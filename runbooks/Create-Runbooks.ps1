@@ -5,18 +5,111 @@ $config = @{
 
 $runbooks = @(
     @{
-        Name    = "beta"
+        Name          = "beta"
         Scriptversion = "v2sfbeta"
-        Actions = @(
+        Actions       = @(
             @{
                 Function = "Install-SC"
                 URI      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/SkyFunctions/Functions/Install-SC.json"
                 Config   = @(
                     @{
-                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/SkyFunctions/configs/Shortcuts/O365/config.json"
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/O365/config.json"
                     },
                     @{
-                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/SkyFunctions/configs/Shortcuts/SchoolLinks/config.json"
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/all/config.json"
+                    },
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/usandbs/config.json"
+                    },
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/geogebra/config.json"
+                    }
+                )
+            }
+        )
+    },
+    @{
+        Name          = "prod.bs"
+        Scriptversion = "v2sfbeta"
+        Actions       = @(
+            @{
+                Function = "Install-SC"
+                URI      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/SkyFunctions/Functions/Install-SC.json"
+                Config   = @(
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/O365/config.json"
+                    },
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/all/config.json"
+                    },
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/usandbs/config.json"
+                    }
+                )
+            }
+        )
+    },
+    @{
+        Name          = "prod.us"
+        Scriptversion = "v2sfbeta"
+        Actions       = @(
+            @{
+                Function = "Install-SC"
+                URI      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/SkyFunctions/Functions/Install-SC.json"
+                Config   = @(
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/O365/config.json"
+                    },
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/all/config.json"
+                    },
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/usandbs/config.json"
+                    },
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/geogebra/config.json"
+                    }
+                )
+            }
+        )
+    },
+    @{
+        Name          = "prod.bakk"
+        Scriptversion = "v2sfbeta"
+        Actions       = @(
+            @{
+                Function = "Install-SC"
+                URI      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/SkyFunctions/Functions/Install-SC.json"
+                Config   = @(
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/O365/config.json"
+                    },
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/all/config.json"
+                    },
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/bakkandhov/config.json"
+                    }
+                )
+            }
+        )
+    }, 
+    @{
+        Name          = "prod.hovos"
+        Scriptversion = "v2sfbeta"
+        Actions       = @(
+            @{
+                Function = "Install-SC"
+                URI      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/SkyFunctions/Functions/Install-SC.json"
+                Config   = @(
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/O365/config.json"
+                    },
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/all/config.json"
+                    },
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/bakkandhov/config.json"
                     }
                 )
             }
