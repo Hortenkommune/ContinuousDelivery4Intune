@@ -10,7 +10,7 @@ $runbooks = @(
         Actions       = @(
             @{
                 Function = "Install-SC"
-                URI      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/Functions/Install-SC.json"
+                URI      = $config.functionsUri + "/Install-SC.json"
                 Config   = @(
                     @{
                         cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/O365/config.json"
@@ -34,7 +34,7 @@ $runbooks = @(
         Actions       = @(
             @{
                 Function = "Install-SC"
-                URI      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/Functions/Install-SC.json"
+                URI      = $config.functionsUri + "/Install-SC.json"
                 Config   = @(
                     @{
                         cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/O365/config.json"
@@ -55,7 +55,7 @@ $runbooks = @(
         Actions       = @(
             @{
                 Function = "Install-SC"
-                URI      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/Functions/Install-SC.json"
+                URI      = $config.functionsUri + "/Install-SC.json"
                 Config   = @(
                     @{
                         cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/O365/config.json"
@@ -79,7 +79,7 @@ $runbooks = @(
         Actions       = @(
             @{
                 Function = "Install-SC"
-                URI      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/Functions/Install-SC.json"
+                URI      = $config.functionsUri + "/Install-SC.json"
                 Config   = @(
                     @{
                         cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/O365/config.json"
@@ -100,7 +100,7 @@ $runbooks = @(
         Actions       = @(
             @{
                 Function = "Install-SC"
-                URI      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/Functions/Install-SC.json"
+                URI      = $config.functionsUri + "/Install-SC.json"
                 Config   = @(
                     @{
                         cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/O365/config.json"

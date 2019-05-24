@@ -37,7 +37,7 @@ if ($scriptversion -ne $runbook.Scriptversion) {
 
 #ACTION
 foreach ($action in $runbook.Actions) {
-    $function = Invoke-RestMethod -Uri "$FunctionPath/$($action.Function).json" -UseBasicParsing
+    $function = Invoke-RestMethod -Uri $action.URI -UseBasicParsing
     $funcexecSB = [scriptblock]::Create($function.Execute)
     $exec = $null
     foreach ($cfg in $action.Config) {
