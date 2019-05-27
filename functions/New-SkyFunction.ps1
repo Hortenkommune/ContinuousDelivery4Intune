@@ -16,6 +16,73 @@ function New-SkyFunction {
     $SkyFunction | ConvertTo-Json -Compress | Out-File "$FunctionPath\$Name.json" -Encoding default
 }
 
+New-SkyFunction -Name "Install-Chocolatey" -Function {
+    function Install-Chocolatey {
+        Param(
+            $Server
+        )
+        $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
+        if (!(Test-Path -Path $ChocoBin)) {
+            Write-Log -Value "$ChocoBin not detected; starting installation of chocolatey" -Severity 2 -Component "Install-Chocolatey"
+            try {
+                Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('http://' + $Server + '/install.ps1'))
+            }
+            catch {
+                Write-Log -Value "Failed to install chocolatey" -Severity 3 -Component "Install-Chocolatey"
+            }
+        }
+        else {
+            Write-Log -Value "$ChocoBin detected; chocolatey is already installed" -Severity 1 -Component "Install-Chocolatey"
+        }
+    }
+} -Execute {
+    Param(
+        $cfguri = $null
+    )
+    if ($cfguri -ne $null) {
+        $cfg = Invoke-RestMethod $cfguri -UseBasicParsing
+        Install-Chocolatey -Server $cfg.Server
+    }
+}
+
+New-SkyFunction -Name "Register-ChocoSource" -Function {
+    function Register-ChocoSource {
+        param (
+            $Name,
+            $Server
+        )
+        $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
+        if (Test-Path -Path $ChocoBin) {
+            $sources = Invoke-Expression "cmd /c $ChocoBin source"
+            $regged = $false
+            foreach ($s in $sources) {
+                if ($s -like "$Name - http://$Server/chocolatey*") {
+                    $regged = $true
+                }
+            }
+            if ($regged -eq $false) {
+                Write-Log -Value "$Name not registered as chocosource; registering" -Severity 1 -Component "Register-ChocoSource"
+                Invoke-Expression "cmd /c $ChocoBin source add --name=$Name --source=http://$Server/chocolatey --priority=0"
+                Invoke-Expression "cmd /c $ChocoBin source add --name=chocolatey --priority=1"
+            }
+            else {
+                Write-Log -Value "$Name already registered as chocosource; skipping" -Severity 1 -Component "Register-ChocoSource"
+            }
+        }
+        else {
+            Write-Log -Value "$ChocoBin not detected; chocolatey is not installed!!!! aborting" -Severity 3 -Component "Register-ChocoSource"
+        }
+    }
+} -Execute {
+    Param(
+        $cfguri = $null
+    )
+    if ($cfguri -ne $null) {
+        $cfg = Invoke-RestMethod $cfguri -UseBasicParsing
+        Register-ChocoSource -Name $cfg.Name -Server $cfg.Server
+    }
+}
+
 New-SkyFunction -Name "Install-SC" -Function {
     function Install-SC {
         Param(
@@ -96,72 +163,5 @@ New-SkyFunction -Name "Install-SC" -Function {
         foreach ($i in $cfg) {
             Install-SC -Name $i.Name -Type $i.Type -Path $i.Path -WorkingDir $i.WorkingDir -Arguments $i.Arguments -Description $i.Description -IconFileandType $i.IconFileandType
         }
-    }
-}
-
-New-SkyFunction -Name "Install-Chocolatey" -Function {
-    function Install-Chocolatey {
-        Param(
-            $Server
-        )
-        $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
-        if (!(Test-Path -Path $ChocoBin)) {
-            Write-Log -Value "$ChocoBin not detected; starting installation of chocolatey" -Severity 2 -Component "Install-Chocolatey"
-            try {
-                Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('http://' + $Server + '/install.ps1'))
-            }
-            catch {
-                Write-Log -Value "Failed to install chocolatey" -Severity 3 -Component "Install-Chocolatey"
-            }
-        }
-        else {
-            Write-Log -Value "$ChocoBin detected; chocolatey is already installed" -Severity 1 -Component "Install-Chocolatey"
-        }
-    }
-} -Execute {
-    Param(
-        $cfguri = $null
-    )
-    if ($cfguri -ne $null) {
-        $cfg = Invoke-RestMethod $cfguri -UseBasicParsing
-        Install-Chocolatey -Server $cfg.Server
-    }
-}
-
-New-SkyFunction -Name "Register-ChocoSource" -Function {
-    function Register-ChocoSource {
-        param (
-            $Name,
-            $Server
-        )
-        $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
-        if (Test-Path -Path $ChocoBin) {
-            $sources = Invoke-Expression "cmd /c $ChocoBin source"
-            $regged = $false
-            foreach ($s in $sources) {
-                if ($s -like "$Name - http://$Server/chocolatey*") {
-                    $regged = $true
-                }
-            }
-            if ($regged -eq $false) {
-                Write-Log -Value "$Name not registered as chocosource; registering" -Severity 1 -Component "Register-ChocoSource"
-                Invoke-Expression "cmd /c $ChocoBin source add --name=$Name --source=http://$Server/chocolatey --priority=0"
-                Invoke-Expression "cmd /c $ChocoBin source add --name=chocolatey --priority=1"
-            }
-            else {
-                Write-Log -Value "$Name already registered as chocosource; skipping" -Severity 1 -Component "Register-ChocoSource"
-            }
-        }
-        else {
-            Write-Log -Value "$ChocoBin not detected; chocolatey is not installed!!!! aborting" -Severity 3 -Component "Register-ChocoSource"
-        }
-    }
-} -Execute {
-    Param(
-        $cfguri = $null
-    )
-    if ($cfguri -ne $null) {
-        $cfg = Invoke-RestMethod $cfguri -UseBasicParsing
-        Register-ChocoSource -Name $cfg.Name -Server $cfg.Server
     }
 }
