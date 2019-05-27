@@ -27,6 +27,21 @@ $runbooks = @(
                 )
             },
             @{
+                Function = "Invoke-Chocolatey"
+                URI      = $config.functionsUri + "/Invoke-Chocolatey.json"
+                Config   = @(
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Chocolatey/chrome/config.json"
+                    }, 
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Chocolatey/usandbs/config.json"
+                    },
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Chocolatey/system/config.json"
+                    }
+                )
+            },
+            @{
                 Function = "Install-SC"
                 URI      = $config.functionsUri + "/Install-SC.json"
                 Config   = @(

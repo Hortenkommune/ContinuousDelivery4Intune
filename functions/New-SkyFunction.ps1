@@ -32,7 +32,8 @@ New-SkyFunction -Name "Install-Chocolatey" -Function {
             }
         }
         else {
-            Write-Log -Value "$ChocoBin detected; chocolatey is already installed" -Severity 1 -Component "Install-Chocolatey"
+            Write-Log -Value "$ChocoBin detected; chocolatey is already installed; running upgrade only" -Severity 1 -Component "Install-Chocolatey"
+            Invoke-Expression "cmd /c $ChocoBin upgrade all -y" -ErrorAction Stop
         }
     }
 } -Execute {
@@ -80,6 +81,33 @@ New-SkyFunction -Name "Register-ChocoSource" -Function {
     if ($cfguri -ne $null) {
         $cfg = Invoke-RestMethod $cfguri -UseBasicParsing
         Register-ChocoSource -Name $cfg.Name -Server $cfg.Server
+    }
+}
+
+New-SkyFunction -Name "Invoke-Chocolatey" -Function {
+    function Invoke-Chocolatey {
+        param (
+            $Application,
+            $Mode
+        )
+        $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
+        Write-Log -Value "Running $Mode on $Application" -Severity 1 -Component "Invoke-Chocolatey"
+        try {
+            Invoke-Expression "cmd /c $ChocoBin $Mode $Application -y" -ErrorAction Stop
+        }
+        catch {
+            Write-Log -Value "Failed to run $Mode on $Application" -Severity 3 -Component "Invoke-Chocolatey"
+        }
+    }
+} -Execute {
+    param(
+        $cfguri = $null
+    )
+    if ($cfguri -ne $null) {
+        $cfg = Invoke-RestMethod $cfguri -UseBasicParsing
+        foreach ($i in $cfg) {
+            Invoke-Chocolatey -Application $i.Application -Mode $i.Mode
+        }
     }
 }
 
