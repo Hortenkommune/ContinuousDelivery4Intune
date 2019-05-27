@@ -1,7 +1,7 @@
 ﻿$Choco = @(
     @{
-        Name = "googlechrome"
-        Mode = "install"
+        Application = "googlechrome"
+        Mode        = "install"
     }
 )
 

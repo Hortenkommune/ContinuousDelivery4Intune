@@ -1,11 +1,11 @@
 ﻿$Choco = @(
     @{
-        Name = "gimp"
-        Mode = "install"
+        Application = "gimp"
+        Mode        = "install"
     },
     @{
-        Name = "audacity"
-        Mode = "install"
+        Application = "audacity"
+        Mode        = "install"
     }
 )
 

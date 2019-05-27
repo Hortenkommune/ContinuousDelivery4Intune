@@ -1,1 +1,1 @@
-[{"Name":"gimp","Mode":"install"},{"Name":"audacity","Mode":"install"}]
+[{"Application":"gimp","Mode":"install"},{"Application":"audacity","Mode":"install"}]
