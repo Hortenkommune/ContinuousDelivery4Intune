@@ -9,6 +9,24 @@ $runbooks = @(
         Scriptversion = "v2sfbeta"
         Actions       = @(
             @{
+                Function = "Install-Chocolatey"
+                URI      = $config.functionsUri + "/Install-Chocolatey.json"
+                Config   = @(
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/settings.json"
+                    }
+                )
+            },
+            @{
+                Function = "Register-ChocoSource"
+                URI      = $config.functionsUri + "/Register-ChocoSource.json"
+                Config   = @(
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/settings.json"
+                    }
+                )
+            },
+            @{
                 Function = "Install-SC"
                 URI      = $config.functionsUri + "/Install-SC.json"
                 Config   = @(
