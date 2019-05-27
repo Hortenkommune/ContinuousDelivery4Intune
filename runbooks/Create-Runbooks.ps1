@@ -13,7 +13,7 @@ $runbooks = @(
                 URI      = $config.functionsUri + "/Install-Chocolatey.json"
                 Config   = @(
                     @{
-                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/settings.json"
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Chocolatey/settings.json"
                     }
                 )
             },
@@ -22,7 +22,7 @@ $runbooks = @(
                 URI      = $config.functionsUri + "/Register-ChocoSource.json"
                 Config   = @(
                     @{
-                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/settings.json"
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Chocolatey/settings.json"
                     }
                 )
             },
