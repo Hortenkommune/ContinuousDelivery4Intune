@@ -1,5 +1,5 @@
 function New-SkyFunction {
-    Param(
+    param(
         [Parameter(Mandatory=$true)]
         [string]$Name,
         [Parameter(Mandatory=$true)]
@@ -18,7 +18,7 @@ function New-SkyFunction {
 
 New-SkyFunction -Name "Install-Chocolatey" -Function {
     function Install-Chocolatey {
-        Param(
+        param(
             $Server
         )
         $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
@@ -37,7 +37,7 @@ New-SkyFunction -Name "Install-Chocolatey" -Function {
         }
     }
 } -Execute {
-    Param(
+    param(
         $cfguri = $null
     )
     if ($cfguri -ne $null) {
@@ -75,7 +75,7 @@ New-SkyFunction -Name "Register-ChocoSource" -Function {
         }
     }
 } -Execute {
-    Param(
+    param(
         $cfguri = $null
     )
     if ($cfguri -ne $null) {
@@ -113,7 +113,7 @@ New-SkyFunction -Name "Invoke-Chocolatey" -Function {
 
 New-SkyFunction -Name "Install-SC" -Function {
     function Install-SC {
-        Param(
+        param(
             $Name,
             $Type,
             $Path,
@@ -193,3 +193,37 @@ New-SkyFunction -Name "Install-SC" -Function {
         }
     }
 }
+
+New-SkyFunction -Name "Resolve-Service" -Function {
+    function Resolve-Service {
+        param (
+            $Name,
+            $DesiredState
+        )
+    }
+    $gSvc = Get-Service $Name
+    Write-Log -Value "Checking if service $Name is set to $DesiredState" -Severity 1 -Component "Services"
+    if ($DesiredState -eq "Run") {
+        if ($gSvc.Status -ne "Running") {
+            Write-Log -Value "Service $Name is not running; starting" -Severity 2 -Component "Services"
+            Start-Service $svc.Name
+        }
+    }
+    else {
+        if ($gSvc.Status -eq "Running") {
+            Write-Log -Value "Service $Name is running; stopping" -Severity 2 -Component "Services"
+            Stop-Service $svc.Name
+        }
+    }
+} -Execute {
+    param(
+        $cfguri = $null
+    )
+    if ($cfguri -ne $null) {
+        $cfg = Invoke-RestMethod $cfguri -UseBasicParsing
+        foreach ($i in $cfg) {
+            Resolve-Service -Name $i.Name -DesiredState $i.DesiredState
+        }
+    }
+}
+

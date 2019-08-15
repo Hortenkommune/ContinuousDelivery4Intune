@@ -58,6 +58,15 @@ $runbooks = @(
                         cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/geogebra/config.json"
                     }
                 )
+            },
+            @{
+                Function = "Resolve-Service"
+                URI      = $config.functionsUri + "/Resolve-Service.json"
+                Config   = @(
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Services/all/config.json"
+                    }
+                )
             }
         )
     },
