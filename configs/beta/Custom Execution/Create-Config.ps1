@@ -162,7 +162,7 @@
         )
         Detection      = @(
             @{
-                Rule = "`$False"
+                Rule = "(!Get-Printer -Name `"HortenElevPrint`")"
             }
         )
     }
