@@ -140,6 +140,31 @@
                 Rule = "if((Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username) -like `"*eksamen*`"){`$Install = `$true}elseif(Get-Printer | Where-Object {@('\\10.85.207.8\2FL02588','\\10.85.207.8\2FL07038','\\10.85.207.8\QLC31644','\\10.85.207.8\XVC08019','\\10.85.207.8\XVF14345','\\10.85.207.8\QNW11407') -contains `$_.Name }) {`$Install = `$true};[bool](!(`$Install -eq `$true))"
             }
         )
+    },
+    @{
+        Name           = "Install uniFlow printer"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Install-UniflowPrinter.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-UniflowPrinter.ps1"
+            },
+            @{
+                FileName = "uniflow_pclxl.zip"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/bin/uniflow_pclxl.zip"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-UniflowPrinter.ps1"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = ""
+            }
+        )
     }
 )
 
