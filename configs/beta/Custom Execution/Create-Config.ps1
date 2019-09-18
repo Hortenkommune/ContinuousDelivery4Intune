@@ -162,7 +162,7 @@
         )
         Detection      = @(
             @{
-                Rule = ""
+                Rule = "`$False"
             }
         )
     }
