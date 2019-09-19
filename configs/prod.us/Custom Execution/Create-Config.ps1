@@ -1,34 +1,5 @@
 ﻿$CustomExec = @(
     @{
-        Name           = "Deploy printer"
-        wrkDir         = "C:\Windows\Temp"
-        FilesToDwnload = @(
-            @{
-                FileName = "Install-HKELEVv1.ps1"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-HKELEVv1.ps1"
-            },
-            @{
-                FileName = "cnlb0m.zip"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/bin/cnlb0m.zip"
-            },
-            @{
-                FileName = "lprport.reg"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/lprport.reg"
-            }
-        )
-        Execution      = @(
-            @{
-                Execute   = "powershell.exe"
-                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-HKELEVv1.ps1"
-            }
-        )
-        Detection      = @(
-            @{
-                Rule = "[bool](Get-WmiObject -Query `"select * from win32_printer where name like '%HK-ELEVv1%'`")"
-            }
-        )
-    },
-    @{
         Name           = "Fix 20DA Touchscreen"
         wrkDir         = "C:\Windows\Temp"
         FilesToDwnload = @(
@@ -100,26 +71,29 @@
         )
     },
     @{
-        Name           = "Set up eksamen printers"
+        Name           = "Install uniFlow printer"
         wrkDir         = "C:\Windows\Temp"
         FilesToDwnload = @(
             @{
-                FileName = "Install-EksamenPrinters.ps1"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-EksamenPrinters.ps1"
+                FileName = "Install-UniflowPrinter.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-UniflowPrinter.ps1"
+            },
+            @{
+                FileName = "uniflow_pclxl.zip"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/bin/uniflow_pclxl.zip"
             }
         )
         Execution      = @(
             @{
                 Execute   = "powershell.exe"
-                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-EksamenPrinters.ps1"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-UniflowPrinter.ps1"
             }
         )
         Detection      = @(
             @{
-                Rule = "[bool](!((Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username) -like `"*eksamen*`"))"
+                Rule = "[bool](Get-Printer -Name `"HortenPrintElev`")"
             }
         )
     }
-    
 )
 $CustomExec | ConvertTo-Json -Depth 4 -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
