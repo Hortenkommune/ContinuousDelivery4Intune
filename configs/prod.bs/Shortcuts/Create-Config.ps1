@@ -74,7 +74,7 @@
         WorkingDir      = "C:\Program Files\internet explorer\"
         IconFileandType = "C:\Windows\System32\imageres.dll, 46"
         Description     = "Printkode"
-        Mode            = "Install"
+        Mode            = "Uninstall"
     },
     @{
         Name            = "Veiledninger"
