@@ -23,6 +23,11 @@
         Name      = "Remove HK-ELEVv1"
         Command   = "Remove-Printer -Name HK-ELEVv1" 
         Detection = "[bool](!(Get-Printer -Name HK-ELEVv1))"
+    },
+    @{
+        Name      = "Remove old eksamensprinters"
+        Command   = "@('2FL02588', '2FL07038', 'QLC31644', 'XVC08019', 'XVF14345', 'QNW11407') | ForEach-Object { if (Get-Printer -Name `$_) { Remove-Printer -Name `$_ } }" 
+        Detection = "[bool](!(Get-Printer | Where-Object { @('2FL02588', '2FL07038', 'QLC31644', 'XVC08019', 'XVF14345', 'QNW11407') -contains `$_.Name }))"
     }
 )
 $PowerShell | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
