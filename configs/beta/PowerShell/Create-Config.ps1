@@ -23,6 +23,11 @@
         Name      = "Remove old printers"
         Command   = "@('2FL02588', '2FL07038', 'QLC31644', 'XVC08019', 'XVF14345', 'QNW11407', 'HK-ELEVv1') | ForEach-Object { if (Get-Printer -Name `$_) { Remove-Printer -Name `$_ } }" 
         Detection = "[bool](!(Get-Printer | Where-Object { @('2FL02588', '2FL07038', 'QLC31644', 'XVC08019', 'XVF14345', 'QNW11407', 'HK-ELEVv1') -contains `$_.Name }))"
+    },
+    @{
+        Name      = "Intune Sync"
+        Command   = "Start-ScheduledTask -TaskName 'PushLaunch'" 
+        Detection = "`$false"
     }
 )
 $PowerShell | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
