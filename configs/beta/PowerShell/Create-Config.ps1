@@ -26,7 +26,7 @@
     },
     @{
         Name      = "Intune Sync"
-        Command   = "Start-ScheduledTask -TaskName 'PushLaunch'" 
+        Command   = "Get-ScheduledTask | ? {`$_.TaskName -eq ‘PushLaunch’} | Start-ScheduledTask" 
         Detection = "`$false"
     }
 )
