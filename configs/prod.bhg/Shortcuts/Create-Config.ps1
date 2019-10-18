@@ -25,6 +25,26 @@
         IconFileandType = "C:\Program Files (x86)\Microsoft Office\root\Office16\powerpnt.exe, 0"
         Description     = "PowerPoint 2016"
         Mode            = "Install"
+    },
+    @{
+        Name            = "NRK Super"
+        Type            = "lnk"
+        Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+        Arguments       = "https://nrksuper.no/"
+        WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
+        IconFileandType = ""
+        Description     = "NRK Super TV"
+        Mode            = "Install"
+    },
+    @{
+        Name            = "YouTube"
+        Type            = "lnk"
+        Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+        Arguments       = "https://www.youtube.com/"
+        WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
+        IconFileandType = ""
+        Description     = "YouTube"
+        Mode            = "Install"
     }
 )
 $Shortcuts | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
