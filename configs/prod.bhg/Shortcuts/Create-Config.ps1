@@ -32,7 +32,7 @@
         Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
         Arguments       = "https://nrksuper.no/"
         WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
-        IconFileandType = ""
+        IconFileandType = "C:\Windows\ICO\nrk_super.ico"
         Description     = "NRK Super TV"
         Mode            = "Install"
     },
@@ -42,7 +42,7 @@
         Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
         Arguments       = "https://www.youtube.com/"
         WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
-        IconFileandType = ""
+        IconFileandType = "C:\Windows\ICO\youtube.ico"
         Description     = "YouTube"
         Mode            = "Install"
     }
