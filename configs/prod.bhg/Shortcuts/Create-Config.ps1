@@ -45,6 +45,16 @@
         IconFileandType = ""
         Description     = "YouTube"
         Mode            = "Install"
+    },
+    @{
+        Name            = "YouTube for voksne"
+        Type            = "lnk"
+        Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+        Arguments       = "https://www.youtube.com/"
+        WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
+        IconFileandType = ""
+        Description     = "YouTube"
+        Mode            = "Install"
     }
 )
 $Shortcuts | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
