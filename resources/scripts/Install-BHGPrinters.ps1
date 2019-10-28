@@ -1,4 +1,4 @@
-$InstallPath = $env:PROGRAMFILES + "\HK-BHG"
+﻿$InstallPath = $env:PROGRAMFILES + "\HK-BHG"
 $PrinterDriverInf = "CNLB0MA64.INF"
 $InstallDriverPath = $InstallPath + "\" + $PrinterDriverInf
 $ZipFile = $env:windir + "\temp\gpb0.zip"
