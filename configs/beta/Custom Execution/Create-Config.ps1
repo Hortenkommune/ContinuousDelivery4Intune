@@ -91,7 +91,7 @@
         )
         Detection      = @(
             @{
-                Rule = "[bool](Get-Printer -Name `"HortenPrintElev`")"
+                Rule = "[bool]((Get-Printer -Name `"HortenPrintElev`") -and (Test-Path `"HKLM:\SOFTWARE\WOW6432Node\Nt-ware\MOMUD\AltUserIdent`"))"
             }
         )
     }
