@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.5"
+$Version = "1.0.6"
 
 
 function Write-Log {
@@ -135,8 +135,9 @@ if (!(Test-Path -Path $ChocoBin)) {
 
 Write-Log -Value "Upgrading chocolatey and all existing packages" -Severity 1 -Component "Chocolatey"
 try {
-    Invoke-Expression "cmd /c $ChocoBin source add --name=hrtcloudchoco --source=http://10.85.207.9/chocolatey --priority=0"
-    Invoke-Expression "cmd /c $ChocoBin source add --name=chocolatey --priority=1"
+    Invoke-Expression "cmd /c $ChocoBin source remove -n=hrtcloudchoco"
+    Invoke-Expression "cmd /c $ChocoBin source add --name=nexus --source=http://10.82.24.21:10000/repository/chocolatey-group/ --priority=0"
+    Invoke-Expression "cmd /c $ChocoBin source add --name=chocolatey --source=https://chocolatey.org/api/v2/ --priority=1"
     Invoke-Expression "cmd /c $ChocoBin upgrade all -y" -ErrorAction Stop
 }
 catch {
