@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.7"
+$Version = "1.0.8"
 
 
 function Write-Log {
@@ -104,22 +104,22 @@ If (!($CurrentName -eq $NewName)) {
 }
 
 
-Write-Log -Value "Reactivating Windows 10" -Severity 1 -Component "slmgr"
-
-try {
-    $ClientKey = "NW6C2-QMPVW-D7KKK-3GKT6-VCFB2"
-    $kmshost = "10.85.16.21"
-
-    $KMSservice = Get-WMIObject -query "select * from SoftwareLicensingService"
-    $KMSservice.InstallProductKey($ClientKey)
-    $KMSservice.SetKeyManagementServiceMachine($kmshost)
-    $KMSservice.RefreshLicenseStatus()
-
-    Write-Log -Value "Windows 10 has been reactivated" -Severity 1 -Component "slmgr"
-}
-catch {
-    Write-Log -Value "Windows 10 failed to reactivate" -Severity 3 -Component "slmgr"
-}
+#Write-Log -Value "Reactivating Windows 10" -Severity 1 -Component "slmgr"
+#
+#try {
+#    $ClientKey = "NW6C2-QMPVW-D7KKK-3GKT6-VCFB2"
+#    $kmshost = "10.85.16.21"
+#
+#    $KMSservice = Get-WMIObject -query "select * from SoftwareLicensingService"
+#    $KMSservice.InstallProductKey($ClientKey)
+#    $KMSservice.SetKeyManagementServiceMachine($kmshost)
+#    $KMSservice.RefreshLicenseStatus()
+#
+#    Write-Log -Value "Windows 10 has been reactivated" -Severity 1 -Component "slmgr"
+#}
+#catch {
+#    Write-Log -Value "Windows 10 failed to reactivate" -Severity 3 -Component "slmgr"
+#}
 
 $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
 
