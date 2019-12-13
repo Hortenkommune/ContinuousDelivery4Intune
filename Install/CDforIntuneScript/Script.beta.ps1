@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.8"
+$Version = "1.0.9"
 
 
 function Write-Log {
@@ -104,22 +104,29 @@ If (!($CurrentName -eq $NewName)) {
 }
 
 
-#Write-Log -Value "Reactivating Windows 10" -Severity 1 -Component "slmgr"
-#
-#try {
-#    $ClientKey = "NW6C2-QMPVW-D7KKK-3GKT6-VCFB2"
-#    $kmshost = "10.85.16.21"
-#
-#    $KMSservice = Get-WMIObject -query "select * from SoftwareLicensingService"
-#    $KMSservice.InstallProductKey($ClientKey)
-#    $KMSservice.SetKeyManagementServiceMachine($kmshost)
-#    $KMSservice.RefreshLicenseStatus()
-#
-#    Write-Log -Value "Windows 10 has been reactivated" -Severity 1 -Component "slmgr"
-#}
-#catch {
-#    Write-Log -Value "Windows 10 failed to reactivate" -Severity 3 -Component "slmgr"
-#}
+Write-Log -Value "Ensuring Windows 10 retail actiivation" -Severity 1 -Component "slmgr"
+
+$SLP = Get-WmiObject -Class "SoftwareLicensingProduct" -Filter "KeyManagementServiceMachine = '10.85.16.21'"
+if ($SLP) {
+    Write-Log -Value "Need to convert to Windows 10 retail activation; initiating" -Severity 1 -Component "slmgr"
+    try {
+        Write-Log -Value "Fetching OEM key" -Severity 1 -Component "slmgr"
+        $SLS = Get-WmiObject -Class "SoftwareLicensingService"
+        $ProductKey = $SLS.OA3xOriginalProductKey
+        Write-Log -Value "OEM key fetched; uninstalling KMS key" -Severity 1 -Component "slmgr"
+        $SLP.UninstallProductKey()
+        $SLS.ClearProductKeyFromRegistry()
+        Write-Log -Value "KMS key uninstalled; installing fetched OEM key" -Severity 1 -Component "slmgr"
+        Start-Process "changepk.exe" -ArgumentList "/ProductKey $($SLS.OA3xOriginalProductKey)"
+        Write-Log -Value "Converted to Windows 10 retail activation" -Severity 1 -Component "slmgr"
+    }
+    catch {
+        Write-Log -Value "Failed to convert to Windows 10 retail activation" -Severity 3 -Component "slmgr"
+    }
+}
+else {
+    Write-Log -Value "No action needed; skipping" -Severity 1 -Component "slmgr"
+}
 
 $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
 
