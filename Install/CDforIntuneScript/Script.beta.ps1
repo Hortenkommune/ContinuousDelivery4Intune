@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.9"
+$Version = "1.0.10"
 
 
 function Write-Log {
@@ -104,9 +104,9 @@ If (!($CurrentName -eq $NewName)) {
 }
 
 
-Write-Log -Value "Ensuring Windows 10 retail actiivation" -Severity 1 -Component "slmgr"
+Write-Log -Value "Ensuring Windows 10 retail activation" -Severity 1 -Component "slmgr"
 
-$SLP = Get-WmiObject -Class "SoftwareLicensingProduct" -Filter "KeyManagementServiceMachine = '10.85.16.21'"
+$SLP = Get-WmiObject -Class "SoftwareLicensingProduct" -Filter "KeyManagementServiceMachine = '10.85.16.21' OR DiscoveredKeyManagementServiceMachineIpAddress = '10.85.16.21'"
 if ($SLP) {
     Write-Log -Value "Need to convert to Windows 10 retail activation; initiating" -Severity 1 -Component "slmgr"
     try {
