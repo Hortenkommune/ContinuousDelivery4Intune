@@ -1,5 +1,5 @@
 ﻿$BranchName = "tekno"
-$Version = "1.0.5"
+$Version = "1.0.11"
 
 
 function Write-Log {
@@ -103,22 +103,27 @@ If (!($CurrentName -eq $NewName)) {
     Rename-Computer -ComputerName $CurrentName -NewName $NewName
 }
 
+Write-Log -Value "Ensuring Windows 10 retail activation" -Severity 1 -Component "slmgr"
 
-Write-Log -Value "Reactivating Windows 10" -Severity 1 -Component "slmgr"
-
-try {
-    $ClientKey = "NW6C2-QMPVW-D7KKK-3GKT6-VCFB2"
-    $kmshost = "10.85.16.21"
-
-    $KMSservice = Get-WMIObject -query "select * from SoftwareLicensingService"
-    $KMSservice.InstallProductKey($ClientKey)
-    $KMSservice.SetKeyManagementServiceMachine($kmshost)
-    $KMSservice.RefreshLicenseStatus()
-
-    Write-Log -Value "Windows 10 has been reactivated" -Severity 1 -Component "slmgr"
+$SLP = Get-WmiObject -Class "SoftwareLicensingProduct" -Filter "KeyManagementServiceMachine = '10.85.16.21' OR DiscoveredKeyManagementServiceMachineIpAddress = '10.85.16.21'"
+if ($SLP) {
+    Write-Log -Value "Need to convert to Windows 10 retail activation; initiating" -Severity 1 -Component "slmgr"
+    try {
+        Write-Log -Value "Fetching OEM key" -Severity 1 -Component "slmgr"
+        $SLS = Get-WmiObject -Class "SoftwareLicensingService"
+        Write-Log -Value "OEM key fetched; uninstalling KMS key" -Severity 1 -Component "slmgr"
+        $SLP.UninstallProductKey()
+        $SLS.ClearProductKeyFromRegistry()
+        Write-Log -Value "KMS key uninstalled; installing fetched OEM key" -Severity 1 -Component "slmgr"
+        Start-Process "changepk.exe" -ArgumentList "/ProductKey $($SLS.OA3xOriginalProductKey)"
+        Write-Log -Value "Converted to Windows 10 retail activation" -Severity 1 -Component "slmgr"
+    }
+    catch {
+        Write-Log -Value "Failed to convert to Windows 10 retail activation" -Severity 3 -Component "slmgr"
+    }
 }
-catch {
-    Write-Log -Value "Windows 10 failed to reactivate" -Severity 3 -Component "slmgr"
+else {
+    Write-Log -Value "No action needed; skipping" -Severity 1 -Component "slmgr"
 }
 
 $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
@@ -126,7 +131,7 @@ $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
 if (!(Test-Path -Path $ChocoBin)) {
     Write-Log -Value "$ChocoBin not detected; starting installation of chocolatey" -Severity 2 -Component "Chocolatey"
     try {
-        Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('http://10.85.207.9/install.ps1'))
+        Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
     }
     catch {
         Write-Log -Value "Failed to install chocolatey" -Severity 3 -Component "Chocolatey"
@@ -135,8 +140,9 @@ if (!(Test-Path -Path $ChocoBin)) {
 
 Write-Log -Value "Upgrading chocolatey and all existing packages" -Severity 1 -Component "Chocolatey"
 try {
-    Invoke-Expression "cmd /c $ChocoBin source add --name=hrtcloudchoco --source=http://10.85.207.9/chocolatey --priority=0"
-    Invoke-Expression "cmd /c $ChocoBin source add --name=chocolatey --priority=1"
+    Invoke-Expression "cmd /c $ChocoBin source remove -n=hrtcloudchoco"
+    Invoke-Expression "cmd /c $ChocoBin source add --name=nexus --source=http://10.82.24.21:10000/repository/chocolatey-group/ --priority=0"
+    Invoke-Expression "cmd /c $ChocoBin source add --name=chocolatey --source=https://chocolatey.org/api/v2/ --priority=1"
     Invoke-Expression "cmd /c $ChocoBin upgrade all -y" -ErrorAction Stop
 }
 catch {

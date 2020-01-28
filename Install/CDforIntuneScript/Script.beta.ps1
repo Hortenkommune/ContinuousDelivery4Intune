@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.10"
+$Version = "1.0.11"
 
 
 function Write-Log {
@@ -103,7 +103,6 @@ If (!($CurrentName -eq $NewName)) {
     Rename-Computer -ComputerName $CurrentName -NewName $NewName
 }
 
-
 Write-Log -Value "Ensuring Windows 10 retail activation" -Severity 1 -Component "slmgr"
 
 $SLP = Get-WmiObject -Class "SoftwareLicensingProduct" -Filter "KeyManagementServiceMachine = '10.85.16.21' OR DiscoveredKeyManagementServiceMachineIpAddress = '10.85.16.21'"
@@ -112,7 +111,6 @@ if ($SLP) {
     try {
         Write-Log -Value "Fetching OEM key" -Severity 1 -Component "slmgr"
         $SLS = Get-WmiObject -Class "SoftwareLicensingService"
-        $ProductKey = $SLS.OA3xOriginalProductKey
         Write-Log -Value "OEM key fetched; uninstalling KMS key" -Severity 1 -Component "slmgr"
         $SLP.UninstallProductKey()
         $SLS.ClearProductKeyFromRegistry()
