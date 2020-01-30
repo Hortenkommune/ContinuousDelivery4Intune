@@ -28,6 +28,12 @@
         Name      = "Intune Sync"
         Command   = "Get-ScheduledTask | ? {`$_.TaskName -eq ‘PushLaunch’} | Start-ScheduledTask" 
         Detection = "`$false"
+    },
+    @{
+        Name      = "Remove Internet Exploder"
+        Command   = "Disable-WindowsOptionalFeature -FeatureName Internet-Explorer-Optional-amd64 -Online -NoRestart" 
+        Detection = "[bool](!((Get-WindowsOptionalFeature -Online | Where-Object {`$_.FeatureName -eq 'Internet-Explorer-Optional-amd64'}).State -eq 'Disabled'))"
     }
+
 )
 $PowerShell | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
