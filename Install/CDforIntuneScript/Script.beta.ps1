@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.11"
+$Version = "1.0.12"
 
 
 function Write-Log {
@@ -105,25 +105,43 @@ If (!($CurrentName -eq $NewName)) {
 
 Write-Log -Value "Ensuring Windows 10 retail activation" -Severity 1 -Component "slmgr"
 
-$SLP = Get-WmiObject -Class "SoftwareLicensingProduct" -Filter "KeyManagementServiceMachine = '10.85.16.21' OR DiscoveredKeyManagementServiceMachineIpAddress = '10.85.16.21'"
-if ($SLP) {
-    Write-Log -Value "Need to convert to Windows 10 retail activation; initiating" -Severity 1 -Component "slmgr"
+$20DA = [bool](Get-WmiObject -Query "select * from win32_computersystem where model like '20DA%'")
+if ($20DA -eq $true) {
+    Write-Log -Value "Reactivating Windows 10 on 20DA" -Severity 1 -Component "slmgr"
     try {
-        Write-Log -Value "Fetching OEM key" -Severity 1 -Component "slmgr"
+        $ClientKey = "NW6C2-QMPVW-D7KKK-3GKT6-VCFB2"
+        $KMSHost = "10.82.17.21"
         $SLS = Get-WmiObject -Class "SoftwareLicensingService"
-        Write-Log -Value "OEM key fetched; uninstalling KMS key" -Severity 1 -Component "slmgr"
-        $SLP.UninstallProductKey()
-        $SLS.ClearProductKeyFromRegistry()
-        Write-Log -Value "KMS key uninstalled; installing fetched OEM key" -Severity 1 -Component "slmgr"
-        Start-Process "changepk.exe" -ArgumentList "/ProductKey $($SLS.OA3xOriginalProductKey)"
-        Write-Log -Value "Converted to Windows 10 retail activation" -Severity 1 -Component "slmgr"
+        $SLS.InstallProductKey($ClientKey)
+        $SLS.SetKeyManagementServiceMachine($KMSHost)
+        $SLS.RefreshLicenseStatus()
+        Write-Log -Value "Windows 10 has been reactivated" -Severity 1 -Component "slmgr"
     }
     catch {
-        Write-Log -Value "Failed to convert to Windows 10 retail activation" -Severity 3 -Component "slmgr"
+        Write-Log -Value "Windows 10 failed to reactivate" -Severity 3 -Component "slmgr"
     }
 }
 else {
-    Write-Log -Value "No action needed; skipping" -Severity 1 -Component "slmgr"
+    $SLP = Get-WmiObject -Class "SoftwareLicensingProduct" -Filter "KeyManagementServiceMachine = '10.85.16.21' OR DiscoveredKeyManagementServiceMachineIpAddress = '10.85.16.21'"
+    if ($SLP) {
+        Write-Log -Value "Need to convert to Windows 10 retail activation; initiating" -Severity 1 -Component "slmgr"
+        try {
+            Write-Log -Value "Fetching OEM key" -Severity 1 -Component "slmgr"
+            $SLS = Get-WmiObject -Class "SoftwareLicensingService"
+            Write-Log -Value "OEM key fetched; uninstalling KMS key" -Severity 1 -Component "slmgr"
+            $SLP.UninstallProductKey()
+            $SLS.ClearProductKeyFromRegistry()
+            Write-Log -Value "KMS key uninstalled; installing fetched OEM key" -Severity 1 -Component "slmgr"
+            Start-Process "changepk.exe" -ArgumentList "/ProductKey $($SLS.OA3xOriginalProductKey)"
+            Write-Log -Value "Converted to Windows 10 retail activation" -Severity 1 -Component "slmgr"
+        }
+        catch {
+            Write-Log -Value "Failed to convert to Windows 10 retail activation" -Severity 3 -Component "slmgr"
+        }
+    }
+    else {
+        Write-Log -Value "No action needed; skipping" -Severity 1 -Component "slmgr"
+    }
 }
 
 $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
