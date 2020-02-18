@@ -2,9 +2,9 @@
     @{
         Name            = "Google Earth"
         Type            = "lnk"
-        Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-        Arguments       = "https://earth.google.com/web"
-        WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
+        Path            = "C:\Windows\explorer.exe"
+        Arguments       = "microsoft-edge:`"https://earth.google.com/web`""
+        WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\google_earth.ico"
         Description     = "Google Earth Cloud"
         Mode            = "Install"
@@ -27,7 +27,7 @@
         WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\Teams.ico"
         Description     = "Microsoft Teams Nettleser"
-        Mode            = "Install"
+        Mode            = "Uninstall"
     },
     @{
         Name            = "Microsoft Teams"
@@ -45,7 +45,7 @@
         Path            = "C:\Program Files (x86)\Microsoft Office\root\Office16\winword.exe"
         WorkingDir      = "C:\Program Files (x86)\Microsoft Office\root\Office16\"
         IconFileandType = "C:\Program Files (x86)\Microsoft Office\root\Office16\winword.exe, 0"
-        Description     = "Word 2016"
+        Description     = "Word"
         Mode            = "Install"
     },
     @{
@@ -54,7 +54,7 @@
         Path            = "C:\Program Files (x86)\Microsoft Office\root\Office16\excel.exe"
         WorkingDir      = "C:\Program Files (x86)\Microsoft Office\root\Office16\"
         IconFileandType = "C:\Program Files (x86)\Microsoft Office\root\Office16\excel.exe, 0"
-        Description     = "Excel 2016"
+        Description     = "Excel"
         Mode            = "Install"
     },
     @{
@@ -63,15 +63,15 @@
         Path            = "C:\Program Files (x86)\Microsoft Office\root\Office16\powerpnt.exe"
         WorkingDir      = "C:\Program Files (x86)\Microsoft Office\root\Office16\"
         IconFileandType = "C:\Program Files (x86)\Microsoft Office\root\Office16\powerpnt.exe, 0"
-        Description     = "PowerPoint 2016"
+        Description     = "PowerPoint"
         Mode            = "Install"
     },
     @{
         Name            = "Printkode"
         Type            = "lnk"
-        Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-        Arguments       = "https://hortenprint.intern.i-sone.no/mom/Auth/UsernamePasswordLogin"
-        WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
+        Path            = "C:\Windows\explorer.exe"
+        Arguments       = "microsoft-edge:`"https://hortenprint.intern.i-sone.no/mom/Auth/UsernamePasswordLogin`""
+        WorkingDir      = ""
         IconFileandType = "C:\Windows\System32\imageres.dll, 46"
         Description     = "Printkode"
         Mode            = "Install"
@@ -79,9 +79,9 @@
     @{
         Name            = "Veiledninger"
         Type            = "lnk"
-        Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-        Arguments       = "https://info.hortenskolen.no"
-        WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
+        Path            = "C:\Windows\explorer.exe"
+        Arguments       = "microsoft-edge:`"https://info.hortenskolen.no`""
+        WorkingDir      = ""
         IconFileandType = "C:\Windows\System32\imageres.dll, 76"
         Description     = "Diverse veiledinger"
         Mode            = "Install"
@@ -89,9 +89,9 @@
     @{
         Name            = "Digitale Ressurser"
         Type            = "lnk"
-        Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-        Arguments       = "https://digres.hortenskolen.no"
-        WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
+        Path            = "C:\Windows\explorer.exe"
+        Arguments       = "microsoft-edge:`"https://digres.hortenskolen.no`""
+        WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\digres.ico"
         Description     = "Digitale Ressurser"
         Mode            = "Install"
@@ -99,9 +99,9 @@
     @{
         Name            = "GeoGebra Online"
         Type            = "lnk"
-        Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-        Arguments       = "https://www.geogebra.org/graphing"
-        WorkingDir      = "C:\Program Files (x86)\Google\Chrome\Application"
+        Path            = "C:\Windows\explorer.exe"
+        Arguments       = "microsoft-edge:`"https://www.geogebra.org/graphing`""
+        WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\geogebra.ico"
         Description     = "GeoGebra Online"
         Mode            = "Install"
