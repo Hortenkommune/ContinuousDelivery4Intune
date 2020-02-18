@@ -33,37 +33,37 @@ $Printers = @(
         Name   = "2FL02588"
         School = "Borre"
         Server = "10.85.207.8"
-        Driver = "Canon Generic Plus UFR II"
+        Driver = "uniFLOW Universal PclXL Driver"
     },
     @{
         Name   = "2FL07038"
         School = "Borre"
         Server = "10.85.207.8"
-        Driver = "Canon Generic Plus UFR II"
+        Driver = "uniFLOW Universal PclXL Driver"
     },
     @{
         Name   = "QLC31644"
         School = "Holtan"
         Server = "10.85.207.8"
-        Driver = "Canon Generic Plus UFR II"
+        Driver = "uniFLOW Universal PclXL Driver"
     },
     @{
         Name   = "XVC08019"
         School = "Holtan"
         Server = "10.85.207.8"
-        Driver = "Canon Generic Plus UFR II"
+        Driver = "uniFLOW Universal PclXL Driver"
     },
     @{
         Name   = "XVF14345"
         School = "Oreronningen"
         Server = "10.85.207.8"
-        Driver = "Canon Generic Plus UFR II"
+        Driver = "uniFLOW Universal PclXL Driver"
     },
     @{
         Name   = "QNW11407"
         School = "Oreronningen"
         Server = "10.85.207.8"
-        Driver = "Canon Generic Plus UFR II"
+        Driver = "uniFLOW Universal PclXL Driver"
     }
 )
 
