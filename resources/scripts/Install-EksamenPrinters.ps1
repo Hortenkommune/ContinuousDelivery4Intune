@@ -10,7 +10,9 @@ function Add-LPRPrinter {
 }
 
 $Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
-$Username = $Username.Replace("SKOLE\", "")
+$Username = $Username.Replace("AzureAD\", "")
+
+Enable-WindowsOptionalFeature -Online -FeatureName "Printing-Foundation-LPRPortMonitor"
 
 $holtan = @()
 @(001..199) | ForEach-Object {
