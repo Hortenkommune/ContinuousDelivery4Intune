@@ -27,7 +27,7 @@ function Write-Log {
         Write-Warning -Message "Unable to append log entry to $FileName file. Error message: $($_.Exception.Message)"
     }
 }
-#NATIVE LOGGING FUNCTION ENDs
+#NATIVE LOGGING FUNCTION END
 
 #UPDATE CHECK
 if ($scriptversion -ne $runbook.Scriptversion) {
@@ -42,6 +42,9 @@ foreach ($action in $runbook.Actions) {
     $exec = $null
     foreach ($cfg in $action.Config) {
         [string]$exec += "Invoke-Command -ScriptBlock { $funcexecSB } -ArgumentList $($cfg.cfguri)`n"
+    }
+    if ($exec -eq $null) {
+        [string]$exec = "Invoke-Command -ScriptBlock { $funcexecSB }"
     }
     $execSB = [scriptblock]::Create($exec)
     $runSB = [scriptblock]::Create(

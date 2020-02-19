@@ -1,0 +1,99 @@
+#INITIATE FUNCTIONS AND VARIABLES
+function Add-LPRPrinter {
+    Param(
+        $Server,
+        $PrinterName,
+        $Driver
+    )
+    Add-PrinterPort -PrinterName $PrinterName -HostName $Server -ErrorAction SilentlyContinue
+    Add-Printer -DriverName $Driver -PortName ($Server + ":" + $PrinterName) -Name $PrinterName
+}
+
+$Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
+$Username = $Username.Replace("AzureAD\", "")
+
+$holtan = @()
+@(001..199) | ForEach-Object {
+    $_ = $_.ToString("000")
+    $holtan += "eksamenholtan" + $_
+}
+$borre = @()
+@(200..399) | ForEach-Object {
+    $_ = $_.ToString("000")
+    $borre += "eksamenborre" + $_
+}
+$oreronningen = @()
+@(400..599) | ForEach-Object {
+    $_ = $_.ToString("000")
+    $oreronningen += "eksamenore" + $_
+}
+
+$Printers = @(
+    @{
+        Name   = "2FL02588"
+        School = "Borre"
+        Server = "10.85.207.8"
+        Driver = "uniFLOW Universal PclXL Driver"
+    },
+    @{
+        Name   = "2FL07038"
+        School = "Borre"
+        Server = "10.85.207.8"
+        Driver = "uniFLOW Universal PclXL Driver"
+    },
+    @{
+        Name   = "QLC31644"
+        School = "Holtan"
+        Server = "10.85.207.8"
+        Driver = "uniFLOW Universal PclXL Driver"
+    },
+    @{
+        Name   = "XVC08019"
+        School = "Holtan"
+        Server = "10.85.207.8"
+        Driver = "uniFLOW Universal PclXL Driver"
+    },
+    @{
+        Name   = "XVF14345"
+        School = "Oreronningen"
+        Server = "10.85.207.8"
+        Driver = "uniFLOW Universal PclXL Driver"
+    },
+    @{
+        Name   = "QNW11407"
+        School = "Oreronningen"
+        Server = "10.85.207.8"
+        Driver = "uniFLOW Universal PclXL Driver"
+    }
+)
+
+#INITIATE INTIAL CLEAN UP CREW
+foreach ($Printer in $Printers) {
+    Invoke-Command -Scriptblock { RUNDLL32 PRINTUI.DLL, PrintUIEntry /gd /n\\$($Printer.Server+"\"+$Printer.Name) /q }
+    Remove-Printer $Printer.Name
+    Remove-PrinterPort $Printer.Name
+}
+
+#INITIATE PRINTINSTALLS
+if ($holtan -contains $Username) {
+    $Printer = $Printers | Where-Object { $_.School -eq 'Holtan' }
+    foreach ($p in $Printer) {
+        Add-LPRPrinter -Server $p.Server -PrinterName $p.Name -Driver $p.Driver
+    }
+}
+
+elseif ($borre -contains $Username) {
+    $Printer = $Printers | Where-Object { $_.School -eq 'Borre' }
+    foreach ($p in $Printer) {
+        Add-LPRPrinter -Server $p.Server -PrinterName $p.Name -Driver $p.Driver
+    }
+}
+
+elseif ($oreronningen -contains $Username) {
+    $Printer = $Printers | Where-Object { $_.School -eq 'Oreronningen' }
+    foreach ($p in $Printer) {
+        Add-LPRPrinter -Server $p.Server -PrinterName $p.Name -Driver $p.Driver
+    }
+}
+
+Restart-Service Spooler

@@ -9,13 +9,25 @@ $runbooks = @(
         Scriptversion = "v2sfbeta"
         Actions       = @(
             @{
-                Function = "Install-Chocolatey"
-                URI      = $config.functionsUri + "/Install-Chocolatey.json"
+                Function = "Resolve-Service"
+                URI      = $config.functionsUri + "/Resolve-Service.json"
                 Config   = @(
                     @{
-                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Chocolatey/settings.json"
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Services/all/config.json"
                     }
                 )
+            },
+            @{
+                Function = "New-ComputerName"
+                URI      = $config.functionsUri + "/New-ComputerName.json"
+            },
+            @{
+                Function = "Invoke-WindowsActivation"
+                URI      = $config.functionsUri + "/Invoke-WindowsActivation.json"
+            },
+            @{
+                Function = "Install-Chocolatey"
+                URI      = $config.functionsUri + "/Install-Chocolatey.json"
             },
             @{
                 Function = "Register-ChocoSource"
@@ -29,15 +41,39 @@ $runbooks = @(
             @{
                 Function = "Invoke-Chocolatey"
                 URI      = $config.functionsUri + "/Invoke-Chocolatey.json"
-                Config   = @(
-                    @{
-                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Chocolatey/chrome/config.json"
-                    }, 
+                Config   = @( 
                     @{
                         cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Chocolatey/usandbs/config.json"
                     },
                     @{
                         cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Chocolatey/system/config.json"
+                    }
+                )
+            },
+            @{
+                Function = "Invoke-PowerShell"
+                URI      = $config.functionsUri + "/Invoke-PowerShell.json"
+                Config   = @( 
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/PowerShell/base/config.json"
+                    }
+                )            
+            },
+            @{
+                Function = "Invoke-Sequence"
+                URI      = $config.functionsUri + "/Invoke-Sequence.json"
+                Config   = @( 
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Sequence/base/config.json"
+                    }
+                )
+            },
+            @{
+                Function = "Install-Icon"
+                URI      = $config.functionsUri + "/Install-Icon.json"
+                Config   = @( 
+                    @{
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Icons/base/config.json"
                     }
                 )
             },
@@ -60,13 +96,13 @@ $runbooks = @(
                 )
             },
             @{
-                Function = "Resolve-Service"
-                URI      = $config.functionsUri + "/Resolve-Service.json"
+                Function = "Install-RegFile"
+                URI      = $config.functionsUri + "/Install-RegFile.json"
                 Config   = @(
                     @{
-                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Services/all/config.json"
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Regedit/base/config.json"
                     }
-                )
+                )          
             }
         )
     },
