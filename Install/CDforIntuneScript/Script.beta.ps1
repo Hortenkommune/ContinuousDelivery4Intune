@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.12"
+$Version = "1.0.13"
 
 
 function Write-Log {
@@ -388,3 +388,5 @@ ForEach ($regfile in $regfiles) {
         Write-Log -Value "Regedit settings is detected, aborting install; $($regfile.URL)" -Severity 1 -Component "Regedit"
     }
 }
+
+Enable-WindowsOptionalFeature -Online -FeatureName "Printing-Foundation-LPRPortMonitor" -NoRestart
