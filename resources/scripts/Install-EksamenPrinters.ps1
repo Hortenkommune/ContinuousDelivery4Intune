@@ -17,17 +17,17 @@ Enable-WindowsOptionalFeature -Online -FeatureName "Printing-Foundation-LPRPortM
 $holtan = @()
 @(001..199) | ForEach-Object {
     $_ = $_.ToString("000")
-    $holtan += "eksamen" + $_
+    $holtan += "eksamenholtan" + $_
 }
 $borre = @()
 @(200..399) | ForEach-Object {
     $_ = $_.ToString("000")
-    $borre += "eksamen" + $_
+    $borre += "eksamenborre" + $_
 }
 $oreronningen = @()
 @(400..599) | ForEach-Object {
     $_ = $_.ToString("000")
-    $oreronningen += "eksamen" + $_
+    $oreronningen += "eksamenore" + $_
 }
 
 $Printers = @(
