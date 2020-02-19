@@ -392,13 +392,13 @@ New-SkyFunction -Name "Resolve-Service" -Function {
     if ($DesiredState -eq "Run") {
         if ($gSvc.Status -ne "Running") {
             Write-Log -Value "Service $Name is not running; starting" -Severity 2 -Component "Services"
-            Start-Service $svc.Name
+            Start-Service $Name
         }
     }
     else {
         if ($gSvc.Status -eq "Running") {
             Write-Log -Value "Service $Name is running; stopping" -Severity 2 -Component "Services"
-            Stop-Service $svc.Name
+            Stop-Service $Name
         }
     }
 } -Execute {
