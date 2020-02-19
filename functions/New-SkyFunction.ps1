@@ -386,19 +386,19 @@ New-SkyFunction -Name "Resolve-Service" -Function {
             $Name,
             $DesiredState
         )
-    }
-    $gSvc = Get-Service $Name
-    Write-Log -Value "Checking if service $Name is set to $DesiredState" -Severity 1 -Component "Services"
-    if ($DesiredState -eq "Run") {
-        if ($gSvc.Status -ne "Running") {
-            Write-Log -Value "Service $Name is not running; starting" -Severity 2 -Component "Services"
-            Start-Service $Name
+        $gSvc = Get-Service $Name
+        Write-Log -Value "Checking if service $Name is set to $DesiredState" -Severity 1 -Component "Services"
+        if ($DesiredState -eq "Run") {
+            if ($gSvc.Status -ne "Running") {
+                Write-Log -Value "Service $Name is not running; starting" -Severity 2 -Component "Services"
+                Start-Service $Name
+            }
         }
-    }
-    else {
-        if ($gSvc.Status -eq "Running") {
-            Write-Log -Value "Service $Name is running; stopping" -Severity 2 -Component "Services"
-            Stop-Service $Name
+        else {
+            if ($gSvc.Status -eq "Running") {
+                Write-Log -Value "Service $Name is running; stopping" -Severity 2 -Component "Services"
+                Stop-Service $Name
+            }
         }
     }
 } -Execute {
