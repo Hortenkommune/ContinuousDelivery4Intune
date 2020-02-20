@@ -92,7 +92,7 @@
         )
     },
     @{
-        Name           = "Set up eksamen printers"
+        Name           = "Eksamen Printer Mgmt"
         FilesToDownload = @(
             @{
                 FileName = "Install-EksamenPrinters.ps1"
