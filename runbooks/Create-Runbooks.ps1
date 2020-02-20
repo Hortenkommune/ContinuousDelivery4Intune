@@ -82,16 +82,7 @@ $runbooks = @(
                 URI      = $config.functionsUri + "/Install-SC.json"
                 Config   = @(
                     @{
-                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/O365/config.json"
-                    },
-                    @{
-                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/all/config.json"
-                    },
-                    @{
-                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/usandbs/config.json"
-                    },
-                    @{
-                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/geogebra/config.json"
+                        cfguri = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/SkyFunctions/configs/Shortcuts/base/config.json"
                     }
                 )
             },

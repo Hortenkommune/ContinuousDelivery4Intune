@@ -289,7 +289,7 @@ New-SkyFunction -Name "Install-Icon" -Function {
     if ($cfguri -ne $null) {
         $cfg = Invoke-RestMethod $cfguri -UseBasicParsing
         foreach ($i in $cfg) {
-            Install-Icon -Name $i.Name -ExtLocation $i.ExtLocation
+            Install-Icon -Name $i.Name -ExtLocation $i.URI
         }
     }
 }
