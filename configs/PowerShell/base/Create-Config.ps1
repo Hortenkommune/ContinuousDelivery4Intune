@@ -27,12 +27,12 @@
     @{
         Name      = "Remove Internet Exploder"
         Command   = "Disable-WindowsOptionalFeature -FeatureName Internet-Explorer-Optional-amd64 -Online -NoRestart" 
-        Detection = "[bool]((Get-WindowsOptionalFeature -Online | Where-Object {`$_.FeatureName -eq 'Internet-Explorer-Optional-amd64'}).State -eq 'Disabled')"
+        Detection = "[bool]((Get-WindowsOptionalFeature -Online -FeatureName `"Internet-Explorer-Optional-amd64`").State -eq 'Disabled')"
     },
     @{
         Name      = "Enable Printing-Foundation-LPRPortMonitor"
         Command   = "Enable-WindowsOptionalFeature -Online -FeatureName `"Printing-Foundation-LPRPortMonitor`" -NoRestart" 
-        Detection = "[bool](!(Get-WindowsOptionalFeature -Online | Where-Object {`$_.FeatureName -eq 'Printing-Foundation-LPRPortMonitor'}).State -eq 'Disabled')"
+        Detection = "[bool](!((Get-WindowsOptionalFeature -Online -FeatureName `"Printing-Foundation-LPRPortMonitor`").State -eq 'Disabled'))"
     }
 )
 $PowerShell | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
