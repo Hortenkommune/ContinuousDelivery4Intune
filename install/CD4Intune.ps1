@@ -40,11 +40,13 @@ foreach ($action in $runbook.Actions) {
     $function = Invoke-RestMethod -Uri $action.URI -UseBasicParsing
     $funcexecSB = [scriptblock]::Create($function.Execute)
     $exec = $null
-    foreach ($cfg in $action.Config) {
-        [string]$exec += "Invoke-Command -ScriptBlock { $funcexecSB } -ArgumentList $($cfg.cfguri)`n"
-    }
-    if ($exec -eq $null) {
+    if (!$action.Config) {
         [string]$exec = "Invoke-Command -ScriptBlock { $funcexecSB }"
+    }
+    else {
+        foreach ($cfg in $action.Config) {
+            [string]$exec += "Invoke-Command -ScriptBlock { $funcexecSB } -ArgumentList $($cfg.cfguri)`n"
+        }
     }
     $execSB = [scriptblock]::Create($exec)
     $runSB = [scriptblock]::Create(
