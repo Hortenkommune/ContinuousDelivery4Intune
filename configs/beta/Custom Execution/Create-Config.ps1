@@ -137,7 +137,7 @@
         )
         Detection       = @(
             @{
-                Rule = "[bool](!(Get-PrinterDriver -Name `"Canon Generic Plus UFR II`"))"
+                Rule = "[bool](Get-PrinterDriver -Name `"Canon Generic Plus UFR II`")"
             }
         )
     }
