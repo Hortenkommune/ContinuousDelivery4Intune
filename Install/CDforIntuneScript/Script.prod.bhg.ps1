@@ -1,5 +1,5 @@
 ﻿$BranchName = "prod.bhg"
-$Version = "1.0.13"
+$Version = "1.0.13.1"
 
 
 function Write-Log {
@@ -107,19 +107,19 @@ Write-Log -Value "Ensuring Windows 10 retail activation" -Severity 1 -Component 
 
 $20DA = [bool](Get-WmiObject -Query "select * from win32_computersystem where model like '20DA%'")
 if ($20DA -eq $true) {
-    Write-Log -Value "Reactivating Windows 10 on 20DA" -Severity 1 -Component "slmgr"
-    try {
-        $ClientKey = "NW6C2-QMPVW-D7KKK-3GKT6-VCFB2"
-        $KMSHost = "10.82.17.21"
-        $SLS = Get-WmiObject -Class "SoftwareLicensingService"
-        $SLS.InstallProductKey($ClientKey)
-        $SLS.SetKeyManagementServiceMachine($KMSHost)
-        $SLS.RefreshLicenseStatus()
-        Write-Log -Value "Windows 10 has been reactivated" -Severity 1 -Component "slmgr"
-    }
-    catch {
-        Write-Log -Value "Windows 10 failed to reactivate" -Severity 3 -Component "slmgr"
-    }
+    #Write-Log -Value "Reactivating Windows 10 on 20DA" -Severity 1 -Component "slmgr"
+    #try {
+    #    $ClientKey = "NW6C2-QMPVW-D7KKK-3GKT6-VCFB2"
+    #    $KMSHost = "10.82.17.21"
+    #    $SLS = Get-WmiObject -Class "SoftwareLicensingService"
+    #    $SLS.InstallProductKey($ClientKey)
+    #    $SLS.SetKeyManagementServiceMachine($KMSHost)
+    #    $SLS.RefreshLicenseStatus()
+    #    Write-Log -Value "Windows 10 has been reactivated" -Severity 1 -Component "slmgr"
+    #}
+    #catch {
+    #    Write-Log -Value "Windows 10 failed to reactivate" -Severity 3 -Component "slmgr"
+    #}
 }
 else {
     $SLP = Get-WmiObject -Class "SoftwareLicensingProduct" -Filter "KeyManagementServiceMachine = '10.85.16.21' OR DiscoveredKeyManagementServiceMachineIpAddress = '10.85.16.21'"
