@@ -1,7 +1,8 @@
 $profiles = Get-ChildItem -Path "C:\Users" -Directory
 
 foreach ($profile in $profiles) {
-    if (Test-Path (Join-Path -Path $profile.Fullname -ChildPath "AppData\Local\Microsoft\Teams\current\teams.exe")) {
+    $TeamsExecutable = Join-Path -Path $profile.Fullname -ChildPath "AppData\Local\Microsoft\Teams\current\teams.exe"
+    if (Test-Path $TeamsExecutable) {
         $firewallRuleName = "Teams.exe - $($profile.Name)"
         $ruleExist = Get-NetFirewallRule -DisplayName $firewallRuleName -ErrorAction SilentlyContinue
         if ($ruleExist) {
