@@ -9,8 +9,8 @@ foreach ($profile in $profiles) {
             Set-NetFirewallRule -DisplayName $firewallRuleName -Profile Any -Action Allow
         }
         else {
-            New-NetfirewallRule -DisplayName $firewallRuleName -Direction Inbound -Protocol TCP -Profile Any -Program $TeamsDir -Action Allow
-            New-NetfirewallRule -DisplayName $firewallRuleName -Direction Inbound -Protocol UDP -Profile Any -Program $TeamsDir -Action Allow
+            New-NetfirewallRule -DisplayName $firewallRuleName -Direction Inbound -Protocol TCP -Profile Any -Program $TeamsExecutable -Action Allow
+            New-NetfirewallRule -DisplayName $firewallRuleName -Direction Inbound -Protocol UDP -Profile Any -Program $TeamsExecutable -Action Allow
         }
     }
 }
