@@ -27,7 +27,7 @@
         WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\Teams.ico"
         Description     = "Microsoft Teams Nettleser"
-        Mode            = "Install"
+        Mode            = "Uninstall"
     },
     @{
         Name            = "Microsoft Teams"
