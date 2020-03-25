@@ -1,0 +1,1 @@
+Start-Process "devconx64.exe" -ArgumentList "update C:\windows\inf\hdaudio.inf `"HDAUDIO\FUNC_01&VEN_10EC&DEV_0283`""
