@@ -49,27 +49,27 @@
     #        }
     #    )
     #},
-    @{
-        Name           = "Set Generic MS AudioDriver"
-        wrkDir         = "C:\Windows\Temp"
-        FilesToDwnload = @(
-            @{
-                FileName = "Set-GenericMSAudioDriver.ps1"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Set-GenericMSAudioDriver.ps1"
-            }
-        )
-        Execution      = @(
-            @{
-                Execute   = "powershell.exe"
-                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Set-GenericMSAudioDriver.ps1"
-            }
-        )
-        Detection      = @(
-            @{
-                Rule = "[bool](!(Get-WmiObject -Query `"select * from win32_computersystem where model like '20DA%'`")) -or ((Get-PnpDevice `"HDAUDIO\FUNC_01&VEN_10EC&DEV_0283*`").FriendlyName -like `"High Definition*`")"
-            }
-        )
-    },
+    #@{
+    #    Name           = "Set Generic MS AudioDriver"
+    #    wrkDir         = "C:\Windows\Temp"
+    #    FilesToDwnload = @(
+    #        @{
+    #            FileName = "Set-GenericMSAudioDriver.ps1"
+    #            URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Set-GenericMSAudioDriver.ps1"
+    #        }
+    #    )
+    #    Execution      = @(
+    #        @{
+    #            Execute   = "powershell.exe"
+    #            Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Set-GenericMSAudioDriver.ps1"
+    #        }
+    #    )
+    #    Detection      = @(
+    #        @{
+    #            Rule = "[bool](!(Get-WmiObject -Query `"select * from win32_computersystem where model like '20DA%'`")) -or ((Get-PnpDevice `"HDAUDIO\FUNC_01&VEN_10EC&DEV_0283*`").FriendlyName -like `"High Definition*`")"
+    #        }
+    #    )
+    #},
     @{
         Name           = "Upgrade Graphics Driver on Acer BR118-RN"
         wrkDir         = "C:\Windows\Temp"
