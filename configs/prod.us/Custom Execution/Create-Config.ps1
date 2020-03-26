@@ -25,31 +25,6 @@
         )
     },
     @{
-        Name           = "Fix 20DA Microphone"
-        wrkDir         = "C:\Windows\Temp"
-        FilesToDwnload = @(
-            @{
-                FileName = "Install-MIC20DAFix.ps1"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-MIC20DAFix.ps1"
-            },
-            @{
-                FileName = "20DAMicDrv.zip"
-                URL      = "http://horten.kommune.no:83/filer/20DAMicDrv.zip"
-            }
-        )
-        Execution      = @(
-            @{
-                Execute   = "powershell.exe"
-                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-MIC20DAFix.ps1"
-            }
-        )
-        Detection      = @(
-            @{
-                Rule = "[bool](!(Get-WmiObject -Query `"select * from win32_computersystem where model like '20DA%'`")) -or (Get-WmiObject -Query `"select * from win32_PnPSignedDriver where DeviceName like 'Realtek High Definition Audio' and DriverVersion like '6.0.1.8186'`")"
-            }
-        )
-    },
-    @{
         Name           = "Upgrade Graphics Driver on Acer BR118-RN"
         wrkDir         = "C:\Windows\Temp"
         FilesToDwnload = @(
