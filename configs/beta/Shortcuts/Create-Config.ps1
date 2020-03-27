@@ -42,9 +42,9 @@
     @{
         Name            = "Word"
         Type            = "lnk"
-        Path            = "C:\Program Files (x86)\Microsoft Office\root\Office16\winword.exe"
-        WorkingDir      = "C:\Program Files (x86)\Microsoft Office\root\Office16\"
-        IconFileandType = "C:\Program Files (x86)\Microsoft Office\root\Office16\winword.exe, 0"
+        Path            = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Word.lnk"
+        WorkingDir      = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\"
+        IconFileandType = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Word.lnk, 0"
         Description     = "Word"
         Mode            = "Install"
     },
