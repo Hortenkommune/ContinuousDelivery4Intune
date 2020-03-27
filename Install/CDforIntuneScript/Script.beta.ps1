@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.13.1"
+$Version = "1.0.13.2"
 
 
 function Write-Log {
@@ -289,7 +289,7 @@ ForEach ($SC in $SCConf) {
         $LocalShortcutPath = ($env:PUBLIC + "\Desktop\$($SC.Name).$($SC.Type)")
         $ShellObj = New-Object -ComObject ("WScript.Shell")
         $Shortcut = $ShellObj.CreateShortcut($LocalShortcutPath)
-        If (($Shortcut.Arguments -ne $SC.Arguments) -or ($Shortcut.WorkingDirectory -ne $SC.WorkingDir) -or ($Shortcut.Description -ne $SC.Description) -or ($Shortcut.TargetPath -ne $SC.Path)) {
+        If (($Shortcut.Arguments -ne $SC.Arguments) -or ($Shortcut.WorkingDirectory -ne $SC.WorkingDir) -or ($Shortcut.Description -ne $SC.Description) -or ($Shortcut.TargetPath -ne $SC.Path) -or (($Shortcut.IconLocation -split ",")[0]) -eq ($SC.IconFileandType -split ",")[0]) {
             If ($SC.Type -eq "lnk") {
                 $verPath = $SC.WorkingDir + "\" + $SC.Path
                 $Detection = Test-Path $verPath
