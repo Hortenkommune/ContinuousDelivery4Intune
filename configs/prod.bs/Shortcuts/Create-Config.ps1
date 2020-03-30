@@ -42,28 +42,28 @@
     @{
         Name            = "Word"
         Type            = "lnk"
-        Path            = "C:\Program Files (x86)\Microsoft Office\root\Office16\winword.exe"
-        WorkingDir      = "C:\Program Files (x86)\Microsoft Office\root\Office16\"
-        IconFileandType = "C:\Program Files (x86)\Microsoft Office\root\Office16\winword.exe, 0"
-        Description     = "Word 2016"
+        Path            = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Word.lnk"
+        WorkingDir      = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\"
+        IconFileandType = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Word.lnk, 0"
+        Description     = "Word"
         Mode            = "Install"
     },
     @{
         Name            = "Excel"
         Type            = "lnk"
-        Path            = "C:\Program Files (x86)\Microsoft Office\root\Office16\excel.exe"
-        WorkingDir      = "C:\Program Files (x86)\Microsoft Office\root\Office16\"
-        IconFileandType = "C:\Program Files (x86)\Microsoft Office\root\Office16\excel.exe, 0"
-        Description     = "Excel 2016"
+        Path            = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk"
+        WorkingDir      = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\"
+        IconFileandType = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk, 0"
+        Description     = "Excel"
         Mode            = "Install"
     },
     @{
         Name            = "PowerPoint"
         Type            = "lnk"
-        Path            = "C:\Program Files (x86)\Microsoft Office\root\Office16\powerpnt.exe"
-        WorkingDir      = "C:\Program Files (x86)\Microsoft Office\root\Office16\"
-        IconFileandType = "C:\Program Files (x86)\Microsoft Office\root\Office16\powerpnt.exe, 0"
-        Description     = "PowerPoint 2016"
+        Path            = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk"
+        WorkingDir      = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\"
+        IconFileandType = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk, 0"
+        Description     = "PowerPoint"
         Mode            = "Install"
     },
     @{
