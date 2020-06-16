@@ -25,6 +25,31 @@
         )
     },
     @{
+        Name           = "Fix camdriver for 20DA v2004"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Install-CAM20DAFix.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-CAM20DAFix.ps1"
+            },
+            @{
+                FileName = "20dacam.zip"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/bin/20dacam.zip"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-CAM20DAFix.ps1"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = "[bool](!(Get-WmiObject -Query `"select * from win32_computersystem where model like '20DA%'`")) -or ((Get-WmiObject -Query `"select * from win32_PnPSignedDriver where DeviceName like 'Integrated Camera'`") | where {`$_.driverversion -eq '3.4.7.37'})"
+            }
+        )
+    },
+    @{
         Name           = "Upgrade Graphics Driver on Acer BR118-RN"
         wrkDir         = "C:\Windows\Temp"
         FilesToDwnload = @(
