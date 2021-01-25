@@ -14,6 +14,10 @@
     @{
         Name = "audacity"
         Mode = "install"
+    },
+    @{
+        Name = "dotnet"
+        Mode = "install"
     }
 )
 $ChocoPkgs | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
