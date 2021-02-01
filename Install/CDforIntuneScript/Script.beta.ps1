@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.13.3"
+$Version = "1.0.13.4"
 
 
 function Write-Log {
@@ -140,7 +140,12 @@ else {
         }
     }
     else {
-        Write-Log -Value "No action needed; skipping" -Severity 1 -Component "slmgr"
+        #Write-Log -Value "No action needed; skipping" -Severity 1 -Component "slmgr"
+        $SLS = Get-WmiObject -Class "SoftwareLicensingService"
+        $SLS.ClearProductKeyFromRegistry()
+        Write-Log -Value "KMS key uninstalled; installing fetched OEM key" -Severity 1 -Component "slmgr"
+        Start-Process "changepk.exe" -ArgumentList "/ProductKey $($SLS.OA3xOriginalProductKey)"
+        Write-Log -Value "Converted to Windows 10 retail activation" -Severity 1 -Component "slmgr"
     }
 }
 
