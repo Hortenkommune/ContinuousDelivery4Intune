@@ -8,7 +8,23 @@
         Mode = "install"
     },
     @{
-        Name = "audacity"
+        Name = "audacity --version=3.0.0"
+        Mode = "uninstall"
+    },
+    @{
+        Name = "audacity --version=3.0.1"
+        Mode = "uninstall"
+    },
+    @{
+        Name = "audacity --version=3.0.2"
+        Mode = "uninstall"
+    },
+    @{
+        Name = "audacity --version=3.0.3"
+        Mode = "uninstall"
+    },
+    @{
+        Name = "audacity --version=2.4.2 --allow-downgrade"
         Mode = "install"
     },
     @{
