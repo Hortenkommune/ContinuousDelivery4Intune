@@ -41,7 +41,7 @@
     },
     @{
         Name = "Pin Audacity to 2.4.2"
-        Command = "choco pin add -n=audacity"
+        Command = "choco pin add -n=audacity --version 2.4.2"
         Detection = "`$false"
     }
 )
