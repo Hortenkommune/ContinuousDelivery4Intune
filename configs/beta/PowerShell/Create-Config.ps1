@@ -38,6 +38,11 @@
         Name      = "Run DevCon64"
         Command   = "Start-Process `"devcon64`" -ArgumentList `"update`",`"C:\windows\inf\hdaudio.inf`",'\`"`"HDAUDIO\FUNC_01&VEN_10EC&DEV_0283\`"`"'"
         Detection = "[bool](!(Get-WmiObject -Query `"select * from win32_computersystem where model like '20DA%'`")) -or ((Get-PnpDevice `"HDAUDIO\FUNC_01&VEN_10EC&DEV_0283*`").FriendlyName -like `"High Definition*`")"
+    },
+    @{
+        Name = "Pin Audacity to 2.4.2"
+        Command = "choco pin add -n=audacity"
+        Detection = "`$false"
     }
 )
 $PowerShell | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default

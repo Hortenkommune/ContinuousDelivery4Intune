@@ -8,7 +8,7 @@
         Mode = "install"
     },
     @{
-        Name = "audacity"
+        Name = "audacity --version=2.4.2 --allow-downgrade"
         Mode = "install"
     },
     @{
