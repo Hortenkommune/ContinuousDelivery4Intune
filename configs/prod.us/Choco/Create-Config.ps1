@@ -4,6 +4,10 @@
         Mode = "install"
     },
     @{
+        Name = "microsoft-teams.install"
+        Mode = "install"
+    },
+    @{
         Name = "gimp"
         Mode = "install"
     },

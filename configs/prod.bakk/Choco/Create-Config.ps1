@@ -4,6 +4,14 @@
         Mode = "install"
     },
     @{
+        Name = "microsoft-teams.install"
+        Mode = "install"
+    },
+    @{
+        Name = "microsoft-teams.install"
+        Mode = "install"
+    },
+    @{
         Name = "sccmtoolkit"
         Mode = "install"
     },

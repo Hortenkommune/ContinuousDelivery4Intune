@@ -2,6 +2,10 @@
     @{
         Name = "sccmtoolkit"
         Mode = "install"
+    },    
+    @{
+        Name = "microsoft-teams.install"
+        Mode = "install"
     },
     @{
         Name = "googlechrome"
