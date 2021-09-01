@@ -204,7 +204,7 @@
         )
         Detection      = @(
             @{
-                Rule = "[bool](Get-ItemPropertyValue -Path `"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\NetBT\Parameters\Interfaces `"-Name NetbiosOptions`")"
+                Rule = "[bool](!(Get-ItemProperty `"HKLM:\SYSTEM\CurrentControlSet\services\NetBT\Parameters\Interfaces\tcpip*`" -Name NetbiosOptions | Where-Object { `$_.NetbiosOptions -ne 2 }))"
             }
         )
     }
