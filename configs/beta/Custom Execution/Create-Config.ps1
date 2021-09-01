@@ -186,6 +186,27 @@
                 Rule = "`$false"
             }
         )
+    },
+    @{
+        Name           = "Disable NBT-NS"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Disable-NBT-NS.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Disable-NBT-NS.ps1"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Disable-NBT-NS.ps1"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = "[bool](Get-ItemPropertyValue -Path `"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\NetBT\Parameters\Interfaces `"-Name NetbiosOptions`")"
+            }
+        )
     }
 )
 

@@ -1,0 +1,6 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\Software\policies\Microsoft\Windows NT\DNSClient]
+"EnableMulticast"=dword:00000000
+"DisableSmartNameResolution"=dword:00000001
+"DisableSmartProtocolReordering"=dword:00000001
