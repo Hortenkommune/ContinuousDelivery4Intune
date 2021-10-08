@@ -9,7 +9,7 @@
     },
     @{
         Name = "googlechrome"
-        Mode = "install"
+        Mode = "uninstall"
     },
     @{
         Name = "gimp"

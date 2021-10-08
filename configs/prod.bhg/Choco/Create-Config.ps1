@@ -1,7 +1,7 @@
 ﻿$ChocoPkgs = @(
     @{
         Name = "googlechrome"
-        Mode = "install"
+        Mode = "uninstall"
     },
     @{
         Name = "paint.net"
