@@ -68,6 +68,11 @@
         URL = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/DisableLLMNR.reg"
         detection = "[bool]((Get-ItemPropertyValue -Path `"HKEY_LOCAL_MACHINE\Software\policies\Microsoft\Windows NT\DNSClient`" -Name EnableMulticast) -eq 0)"
         Type = "HKLM"
+    },
+    @{
+        URL = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/RevertESBaseline.reg"
+        detection = "[bool]((Get-ItemPropertyValue -Path `"HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer`" -Name AlwaysInstallElevated) -eq 1)"
+        Type = "HKLM"
     }
 )
 $regfiles | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
