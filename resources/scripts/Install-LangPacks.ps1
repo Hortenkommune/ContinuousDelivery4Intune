@@ -1,4 +1,4 @@
-$LanguagesToInstall = "en-US", "en-GB"
+﻿$LanguagesToInstall = "en-US", "en-GB"
 
 foreach ($language in $LanguagesToInstall) {
     Get-WindowsCapability -Online | Where-Object Name -ilike "Language.*~~~$($language)~*" | ForEach-Object {
