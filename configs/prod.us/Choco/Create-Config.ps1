@@ -8,10 +8,6 @@
         Mode = "install"
     },
     @{
-        Name = "gimp"
-        Mode = "install"
-    },
-    @{
         Name = "audacity --version=3.0.0"
         Mode = "uninstall"
     },
