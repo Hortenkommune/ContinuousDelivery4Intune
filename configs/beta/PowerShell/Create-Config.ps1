@@ -4,10 +4,15 @@
         Command   = "Remove-Item -Path 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\TightVNC' -Recurse -Force"
         Detection = "[bool](!(Test-Path -Path `"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\TightVNC`"))"
     },
+    #@{
+    #    Name      = "Add Restart-Computer every night"
+    #    Command   = "Register-ScheduledTask -Action (New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument '-Command Restart-Computer -Force') -Trigger (New-ScheduledTaskTrigger -Daily -At 09:00pm) -User 'SYSTEM' -RunLevel Highest -Settings (New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd -WakeToRun) -TaskName 'Nightly Reboot' -Description 'Restart Computer nightly'"
+    #    Detection = "[bool](Get-ScheduledTask -TaskName 'Nightly Reboot')"
+    #},
     @{
-        Name      = "Add Restart-Computer every night"
-        Command   = "Register-ScheduledTask -Action (New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument '-Command Restart-Computer -Force') -Trigger (New-ScheduledTaskTrigger -Daily -At 09:00pm) -User 'SYSTEM' -RunLevel Highest -Settings (New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd -WakeToRun) -TaskName 'Nightly Reboot' -Description 'Restart Computer nightly'"
-        Detection = "[bool](Get-ScheduledTask -TaskName 'Nightly Reboot')"
+        Name      = "Disable Restart-Computer every night"
+        Command   = "Get-ScheduledTask -TaskName 'Nightly Reboot' | Disable-ScheduledTask"
+        Detection = "[bool](Get-ScheduledTask -TaskName 'Nightly Reboot' | Where-Object {`$_.State -eq 'Disabled'})"
     },
     @{
         Name      = "Remove desktop.ini from OneDrive"
@@ -40,13 +45,13 @@
         Detection = "[bool](!(Get-WmiObject -Query `"select * from win32_computersystem where model like '20DA%'`")) -or ((Get-PnpDevice `"HDAUDIO\FUNC_01&VEN_10EC&DEV_0283*`").FriendlyName -like `"High Definition*`")"
     },
     @{
-        Name = "Pin Audacity to 2.4.2"
-        Command = "choco pin add -n=audacity --version 2.4.2"
+        Name      = "Pin Audacity to 2.4.2"
+        Command   = "choco pin add -n=audacity --version 2.4.2"
         Detection = "`$false"
     },
     @{
-        Name = "Disable Acer Quick Access"
-        Command = "Get-ScheduledTask -TaskName 'Software Update Application' | Disable-ScheduledTask"
+        Name      = "Disable Acer Quick Access"
+        Command   = "Get-ScheduledTask -TaskName 'Software Update Application' | Disable-ScheduledTask"
         Detection = "[bool](Get-ScheduledTask -TaskName 'Software Update Application' | Where-Object {`$_.State -eq 'Disabled'})"
     }
 )
