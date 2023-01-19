@@ -19,7 +19,7 @@
         Description     = "Office 365"
         Mode            = "Install"
     },
-    @{
+<#     @{
         Name            = "Microsoft Teams Nettleser"
         Type            = "lnk"
         Path            = "C:\Windows\explorer.exe"
@@ -38,7 +38,7 @@
         IconFileandType = "C:\Windows\ICO\Teams.ico"
         Description     = "Microsoft Teams"
         Mode            = "Uninstall"
-    },
+    }, #>
     @{
         Name            = "Word"
         Type            = "lnk"

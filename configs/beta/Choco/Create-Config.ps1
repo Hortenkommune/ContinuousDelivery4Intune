@@ -1,8 +1,8 @@
 ﻿$ChocoPkgs = @(
-    @{
-        Name = "googlechrome"
-        Mode = "uninstall"
-    },
+    # @{
+    #     Name = "googlechrome"
+    #     Mode = "uninstall"
+    # },
     @{
         Name = "microsoft-teams.install"
         Mode = "install"
@@ -31,14 +31,14 @@
         Name = "sccmtoolkit"
         Mode = "install"
     },
-    @{
-        Name = "dotnet3.5"
-        Mode = "install"
-    },
-    @{
-        Name = "devcon.portable"
-        Mode = "install"
-    },
+    # @{
+    #     Name = "dotnet3.5"
+    #     Mode = "install"
+    # },
+    # @{
+    #     Name = "devcon.portable"
+    #     Mode = "install"
+    # },
     @{
         Name = "dotnet"
         Mode = "install"
