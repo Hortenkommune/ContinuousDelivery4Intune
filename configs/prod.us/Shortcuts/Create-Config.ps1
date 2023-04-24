@@ -100,6 +100,16 @@
         Name            = "GeoGebra Online"
         Type            = "lnk"
         Path            = "C:\Windows\explorer.exe"
+        Arguments       = "microsoft-edge:`"https://www.geogebra.org/graphing`""
+        WorkingDir      = ""
+        IconFileandType = "C:\Windows\ICO\geogebra.ico"
+        Description     = "GeoGebra Online"
+        Mode            = "Uninstall"
+    },
+    @{
+        Name            = "GeoGebra Klassisk Online"
+        Type            = "lnk"
+        Path            = "C:\Windows\explorer.exe"
         Arguments       = "microsoft-edge:`"https://www.geogebra.org/classic?lang=nb`""
         WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\geogebra.ico"

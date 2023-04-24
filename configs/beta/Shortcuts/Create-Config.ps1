@@ -107,7 +107,7 @@
         Mode            = "Uninstall"
     },
     @{
-        Name            = "GeoGebra Online"
+        Name            = "GeoGebra Klassisk Online"
         Type            = "lnk"
         Path            = "C:\Windows\explorer.exe"
         Arguments       = "microsoft-edge:`"https://www.geogebra.org/classic?lang=nb`""
