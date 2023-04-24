@@ -100,7 +100,7 @@
         Name            = "GeoGebra Online"
         Type            = "lnk"
         Path            = "C:\Windows\explorer.exe"
-        Arguments       = "microsoft-edge:`"https://www.geogebra.org/graphing`""
+        Arguments       = "microsoft-edge:`"https://www.geogebra.org/classic?lang=nb`""
         WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\geogebra.ico"
         Description     = "GeoGebra Online"
