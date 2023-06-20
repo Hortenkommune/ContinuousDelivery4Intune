@@ -207,28 +207,28 @@
                 Rule = "[bool](!(Get-ItemProperty `"HKLM:\SYSTEM\CurrentControlSet\services\NetBT\Parameters\Interfaces\tcpip*`" -Name NetbiosOptions | Where-Object { `$_.NetbiosOptions -ne 2 }))"
             }
         )
-    },
-    @{
-        Name           = "Install Language Capabilities"
-        wrkDir         = "C:\Windows\Temp"
-        FilesToDwnload = @(
-            @{
-                FileName = "Install-LangPacks.ps1"
-                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-LangPacks.ps1"
-            }
-        )
-        Execution      = @(
-            @{
-                Execute   = "powershell.exe"
-                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-LangPacks.ps1"
-            }
-        )
-        Detection      = @(
-            @{
-                Rule = "`$false"
-            }
-        )
     }
+    # @{
+    #     Name           = "Install Language Capabilities"
+    #     wrkDir         = "C:\Windows\Temp"
+    #     FilesToDwnload = @(
+    #         @{
+    #             FileName = "Install-LangPacks.ps1"
+    #             URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Install-LangPacks.ps1"
+    #         }
+    #     )
+    #     Execution      = @(
+    #         @{
+    #             Execute   = "powershell.exe"
+    #             Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Install-LangPacks.ps1"
+    #         }
+    #     )
+    #     Detection      = @(
+    #         @{
+    #             Rule = "`$false"
+    #         }
+    #     )
+    # }
 )
 
 $CustomExec | ConvertTo-Json -Depth 4 -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
