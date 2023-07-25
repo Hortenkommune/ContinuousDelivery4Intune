@@ -20,16 +20,6 @@
         Mode            = "Install"
     },
     @{
-        Name            = "Microsoft Teams"
-        Type            = "lnk"
-        Path            = "C:\Windows\explorer.exe"
-        Arguments       = "microsoft-edge:`"https://teams.microsoft.com`""
-        WorkingDir      = ""
-        IconFileandType = "C:\Windows\ICO\Teams.ico"
-        Description     = "Microsoft Teams"
-        Mode            = "Install"
-    },
-    @{
         Name            = "Word"
         Type            = "lnk"
         Path            = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Word.lnk"

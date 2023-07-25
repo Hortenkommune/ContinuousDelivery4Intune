@@ -20,26 +20,6 @@
         Mode            = "Install"
     },
     @{
-        Name            = "Microsoft Teams Nettleser"
-        Type            = "lnk"
-        Path            = "C:\Windows\explorer.exe"
-        Arguments       = "microsoft-edge:`"https://teams.microsoft.com`""
-        WorkingDir      = ""
-        IconFileandType = "C:\Windows\ICO\Teams.ico"
-        Description     = "Microsoft Teams Nettleser"
-        Mode            = "Uninstall"
-    },
-    @{
-        Name            = "Microsoft Teams"
-        Type            = "lnk"
-        Path            = "C:\Windows\explorer.exe"
-        Arguments       = "microsoft-edge:`"https://teams.microsoft.com`""
-        WorkingDir      = ""
-        IconFileandType = "C:\Windows\ICO\Teams.ico"
-        Description     = "Microsoft Teams"
-        Mode            = "Uninstall"
-    },
-    @{
         Name            = "Word"
         Type            = "lnk"
         Path            = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Word.lnk"
@@ -95,16 +75,6 @@
         IconFileandType = "C:\Windows\ICO\digres.ico"
         Description     = "Digitale Ressurser"
         Mode            = "Install"
-    },
-    @{
-        Name            = "GeoGebra Online"
-        Type            = "lnk"
-        Path            = "C:\Windows\explorer.exe"
-        Arguments       = "microsoft-edge:`"https://www.geogebra.org/graphing`""
-        WorkingDir      = ""
-        IconFileandType = "C:\Windows\ICO\geogebra.ico"
-        Description     = "GeoGebra Online"
-        Mode            = "Uninstall"
     },
     @{
         Name            = "GeoGebra Klassisk Online"
