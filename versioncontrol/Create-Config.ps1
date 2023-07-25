@@ -1,23 +1,23 @@
 ﻿$Versions = @(
     @{
         Name    = "prod.bs"
-        Version = "1.0.13.5"
+        Version = "1.0.13.6"
     },
     @{
         Name    = "prod.us"
-        Version = "1.0.13.5"
+        Version = "1.0.13.6"
     },
     @{
         Name    = "prod.hovos"
-        Version = "1.0.13.5"
+        Version = "1.0.13.6"
     },
     @{
         Name    = "prod.bhg"
-        Version = "1.0.13.5"
+        Version = "1.0.13.6"
     },
     @{
         Name    = "prod.bakk"
-        Version = "1.0.13.5"
+        Version = "1.0.13.6"
     },
     @{
         Name    = "beta"
