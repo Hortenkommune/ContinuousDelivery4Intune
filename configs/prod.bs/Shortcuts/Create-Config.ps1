@@ -82,7 +82,7 @@
         Path            = "C:\Windows\explorer.exe"
         Arguments       = "shell:AppsFolder\Microsoft.CompanyPortal_8wekyb3d8bbwe!App"
         WorkingDir      = ""
-        IconFileandType = "C:\Windows\ICO\CompanyPortalApp.ico"
+        IconFileandType = "C:\Windows\ICO\cmp.ico"
         Description     = "Firmaportal"
         Mode            = "Install"
     }
