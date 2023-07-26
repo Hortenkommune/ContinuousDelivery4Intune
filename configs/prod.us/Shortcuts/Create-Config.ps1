@@ -85,6 +85,16 @@
         IconFileandType = "C:\Windows\ICO\geogebra.ico"
         Description     = "GeoGebra Online"
         Mode            = "Install"
+    },
+    @{
+        Name            = "Firmaportal"
+        Type            = "lnk"
+        Path            = "C:\Windows\explorer.exe"
+        Arguments       = "shell:AppsFolder\Microsoft.CompanyPortal_8wekyb3d8bbwe!App"
+        WorkingDir      = ""
+        IconFileandType = "C:\Windows\ICO\cmp.ico"
+        Description     = "Firmaportal"
+        Mode            = "Install"
     }
 )
 $Shortcuts | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
