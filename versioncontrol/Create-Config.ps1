@@ -17,11 +17,11 @@
     },
     @{
         Name    = "prod.bakk"
-        Version = "1.0.13.6"
+        Version = "1.0.13.7"
     },
     @{
         Name    = "beta"
-        Version = "1.0.13.6"
+        Version = "1.0.13.7"
     }
 )
 $Versions | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
