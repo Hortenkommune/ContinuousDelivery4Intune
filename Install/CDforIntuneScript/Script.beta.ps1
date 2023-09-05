@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.13.6"
+$Version = "1.0.13.7"
 
 
 function Write-Log {
@@ -101,6 +101,16 @@ Else {
 $CurrentName = $env:COMPUTERNAME
 If (!($CurrentName -eq $NewName)) {
     Rename-Computer -ComputerName $CurrentName -NewName $NewName
+}
+
+Write-Log -Value "Ensuring Windows 10 retail activation" -Severity 1 -Component "slmgr"
+
+$SLP = Get-WmiObject -Class "SoftwareLicensingProduct" -Filter "Description = 'Windows(R) Operating System, VOLUME_KMSCLIENT channel' AND Name = 'Windows(R), Education edition'"
+if ($SLP.KeyManagementServicePort -eq "1688") {
+    $SLS = Get-WmiObject -Class "SoftwareLicensingService"
+    Write-Log -Value "Installing OEM key" -Severity 1 -Component "slmgr"
+    Start-Process "changepk.exe" -ArgumentList "/ProductKey $($SLS.OA3xOriginalProductKey)"
+    Write-Log -Value "Converted to Windows 10 retail activation" -Severity 1 -Component "slmgr"
 }
 
 # Write-Log -Value "Ensuring Windows 10 retail activation" -Severity 1 -Component "slmgr"
