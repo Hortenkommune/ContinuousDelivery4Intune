@@ -11,7 +11,7 @@
     #},
     @{
         Name      = "Add Teams Shortcut"
-        Command   = "New-Variable Username -Value (Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username); Set-Variable Username -Value (`$Username -replace 'SKOLE\\', ''); Copy-Item -Path ('C:\Users\' + $Username + '\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams (work or school).lnk') -Destination ('C:\Users\' + $Username + '\Desktop')"
+        Command   = "New-Variable Username -Value (Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username); Set-Variable Username -Value (`$Username -replace 'SKOLE\\', ''); Copy-Item -Path ('C:\Users\' + `$Username + '\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams (work or school).lnk') -Destination ('C:\Users\' + $Username + '\Desktop')"
         Detection = "`$Username = (Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username); `$Username = `$Username -replace `"SKOLE\\`",`"`";[bool]((Test-Path `"C:\Users\`$Username\Desktop\Microsoft Teams (work or school).lnk`"))"
     },
     @{
