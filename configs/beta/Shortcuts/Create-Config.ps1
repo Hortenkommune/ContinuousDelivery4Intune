@@ -1,5 +1,14 @@
 ﻿$Shortcuts = @(
     @{
+        Name            = "Microsoft Teams"
+        Type            = "lnk"
+        Path            = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Microsoft Teams (work or school).lnk"
+        WorkingDir      = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\"
+        IconFileandType = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Microsoft Teams (work or school).lnk, 0"
+        Description     = "Microsoft Teams"
+        Mode            = "Install"
+    },
+    @{
         Name            = "Google Earth"
         Type            = "lnk"
         Path            = "C:\Windows\explorer.exe"
