@@ -6,8 +6,8 @@
     },
     @{
         Name      = "Add Teams Shortcut"
-        Command   = "New-Variable Username -Value (Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username); Set-Variable Username -Value (`$Username -replace 'AzureAD\\', ''); Copy-Item -Path ('C:\Users\' + `$Username + '\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams (work or school).lnk') -Destination ('C:\Users\' + `$Username + '\Desktop')"
-        Detection = "`$Username = (Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username); `$Username = `$Username -replace `"AzureAD\\`",`"`";[bool]((Test-Path `"C:\Users\`$Username\Desktop\Microsoft Teams (work or school).lnk`"))"
+        Command   = "New-Variable Username -Value (Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username); Set-Variable Username -Value (`$Username -replace 'AzureAD\\', ''); Set-Variable Username -Value (`$Username -replace 'Skole\\', ''); Copy-Item -Path ('C:\Users\' + `$Username + '\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Microsoft Teams (work or school).lnk') -Destination ('C:\Users\' + `$Username + '\Desktop')"
+        Detection = "`$Username = (Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username); `$Username = `$Username -replace `"AzureAD\\`",`"`"; `$Username = `$Username -replace `"Skole\\`",`"`";[bool]((Test-Path `"C:\Users\`$Username\Desktop\Microsoft Teams (work or school).lnk`"))"
     },
     @{
         Name      = "Intune Sync"
