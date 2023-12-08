@@ -63,8 +63,8 @@
         Path            = "C:\Windows\explorer.exe"
         Arguments       = "shell:AppsFolder\MSTeams_8wekyb3d8bbwe!MSTeams"
         WorkingDir      = ""
-        IconFileandType = "C:\Windows\ICO\cmp.ico"
-        Description     = "Firmaportal"
+        IconFileandType = "C:\Windows\ICO\Teams.ico"
+        Description     = "Microsoft Teams"
         Mode            = "Install"
     },
     @{
