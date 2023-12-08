@@ -40,6 +40,24 @@
         Mode            = "Uninstall"
     }, #>
     @{
+        Name            = "Microsoft Teams (work or school)"
+        Type            = "lnk"
+        Path            = "C:\Users\%username%\AppData\Local\Microsoft\Teams"
+        WorkingDir      = "C:\Users\%username%\AppData\Local\Microsoft\Teams"
+        IconFileandType = "C:\Windows\ICO\Teams.ico"
+        Description     = "Microsoft Teams (work or school)"
+        Mode            = "Uninstall"
+    },
+    @{
+        Name            = "Microsoft Teams (work or school)"
+        Type            = "lnk"
+        Path            = "C:\Users\%username%\AppData\Local\Microsoft\WindowsApps\MSTeams_8wekyb3d8bbwe\ms-teams.exe"
+        WorkingDir      = "C:\Users\%username%\AppData\Local\Microsoft\WindowsApps\MSTeams_8wekyb3d8bbwe"
+        IconFileandType = "C:\Windows\ICO\Teams.ico"
+        Description     = "Microsoft Teams (work or school)"
+        Mode            = "Install"
+    },
+    @{
         Name            = "Word"
         Type            = "lnk"
         Path            = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Word.lnk"
