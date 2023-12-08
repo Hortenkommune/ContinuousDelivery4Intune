@@ -46,7 +46,7 @@
         WorkingDir      = "C:\Users\%username%\AppData\Local\Microsoft\Teams"
         IconFileandType = "C:\Windows\ICO\Teams.ico"
         Description     = "Microsoft Teams (work or school)"
-        Mode            = "Uninstall"
+        Mode            = "Install"
     },
     # @{
     #     Name            = "Microsoft Teams (work or school)"
@@ -61,7 +61,7 @@
         Name            = "Microsoft Teams"
         Type            = "lnk"
         Path            = "C:\Windows\explorer.exe"
-        Arguments       = "shell:AppsFolder\MSTeams_8wekyb3d8bbwe!App"
+        Arguments       = "shell:AppsFolder\MSTeams_8wekyb3d8bbwe!MSTeams"
         WorkingDir      = ""
         IconFileandType = "C:\Windows\ICO\cmp.ico"
         Description     = "Firmaportal"
