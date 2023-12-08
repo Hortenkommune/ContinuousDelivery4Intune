@@ -42,7 +42,7 @@
     @{
         Name            = "Microsoft Teams (work or school)"
         Type            = "lnk"
-        Path            = "C:\Users\%username%\AppData\Local\Microsoft\Teams"
+        Path            = "C:\Users\%username%\AppData\Local\Microsoft\Teams\Update.exe --processStart `"Teams.exe`""
         WorkingDir      = "C:\Users\%username%\AppData\Local\Microsoft\Teams"
         IconFileandType = "C:\Windows\ICO\Teams.ico"
         Description     = "Microsoft Teams (work or school)"
@@ -57,6 +57,16 @@
         Description     = "Microsoft Teams (work or school)"
         Mode            = "Install"
     },
+    @{
+        Name            = "Microsoft Teams"
+        Type            = "lnk"
+        Path            = "C:\Windows\explorer.exe"
+        Arguments       = "shell:AppsFolder\MSTeams_8wekyb3d8bbwe!App"
+        WorkingDir      = ""
+        IconFileandType = "C:\Windows\ICO\cmp.ico"
+        Description     = "Firmaportal"
+        Mode            = "Install"
+    }
     @{
         Name            = "Word"
         Type            = "lnk"
