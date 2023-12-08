@@ -188,6 +188,27 @@
         )
     },
     @{
+        Name           = "Delete Microsoft Teams leagcy icon"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Delete-TeamsIcon.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Delete-TeamsIcon.ps1"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Delete-TeamsIcon.ps1"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = "`$false"
+            }
+        )
+    },
+    @{
         Name           = "Disable NBT-NS"
         wrkDir         = "C:\Windows\Temp"
         FilesToDwnload = @(

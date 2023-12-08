@@ -40,7 +40,7 @@
         Mode            = "Uninstall"
     }, #>
     @{
-        Name            = "Microsoft Teams (work or school)"
+        Name            = "Microsoft Teams `(work or school`)"
         Type            = "lnk"
         Path            = "C:\Users\%username%\AppData\Local\Microsoft\Teams\Update.exe --processStart `"Teams.exe`""
         WorkingDir      = "C:\Users\%username%\AppData\Local\Microsoft\Teams"
