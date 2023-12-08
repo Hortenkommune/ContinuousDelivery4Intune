@@ -66,7 +66,17 @@
         IconFileandType = "C:\Windows\ICO\cmp.ico"
         Description     = "Firmaportal"
         Mode            = "Install"
-    }
+    },
+    @{
+        Name            = "Firmaportal"
+        Type            = "lnk"
+        Path            = "C:\Windows\explorer.exe"
+        Arguments       = "shell:AppsFolder\Microsoft.CompanyPortal_8wekyb3d8bbwe!App"
+        WorkingDir      = ""
+        IconFileandType = "C:\Windows\ICO\cmp.ico"
+        Description     = "Firmaportal"
+        Mode            = "Install"
+    },
     @{
         Name            = "Word"
         Type            = "lnk"
