@@ -19,51 +19,13 @@
         Description     = "Office 365"
         Mode            = "Install"
     },
-<#     @{
-        Name            = "Microsoft Teams Nettleser"
-        Type            = "lnk"
-        Path            = "C:\Windows\explorer.exe"
-        Arguments       = "microsoft-edge:`"https://teams.microsoft.com`""
-        WorkingDir      = ""
-        IconFileandType = "C:\Windows\ICO\Teams.ico"
-        Description     = "Microsoft Teams Nettleser"
-        Mode            = "Uninstall"
-    },
-    @{
-        Name            = "Microsoft Teams"
-        Type            = "lnk"
-        Path            = "C:\Windows\explorer.exe"
-        Arguments       = "microsoft-edge:`"https://teams.microsoft.com`""
-        WorkingDir      = ""
-        IconFileandType = "C:\Windows\ICO\Teams.ico"
-        Description     = "Microsoft Teams"
-        Mode            = "Uninstall"
-    }, #>
-    @{
-        Name            = "Microsoft Teams `(work or school`)"
-        Type            = "lnk"
-        Path            = "C:\Users\%username%\AppData\Local\Microsoft\Teams\Update.exe --processStart `"Teams.exe`""
-        WorkingDir      = "C:\Users\%username%\AppData\Local\Microsoft\Teams"
-        IconFileandType = "C:\Windows\ICO\Teams.ico"
-        Description     = "Microsoft Teams (work or school)"
-        Mode            = "Install"
-    },
-    # @{
-    #     Name            = "Microsoft Teams (work or school)"
-    #     Type            = "lnk"
-    #     Path            = "C:\Users\%username%\AppData\Local\Microsoft\WindowsApps\MSTeams_8wekyb3d8bbwe\ms-teams.exe"
-    #     WorkingDir      = "C:\Users\%username%\AppData\Local\Microsoft\WindowsApps\MSTeams_8wekyb3d8bbwe"
-    #     IconFileandType = "C:\Windows\ICO\Teams.ico"
-    #     Description     = "Microsoft Teams (work or school)"
-    #     Mode            = "Install"
-    # },
     @{
         Name            = "Microsoft Teams"
         Type            = "lnk"
         Path            = "C:\Windows\explorer.exe"
         Arguments       = "shell:AppsFolder\MSTeams_8wekyb3d8bbwe!MSTeams"
         WorkingDir      = ""
-        IconFileandType = "C:\Windows\ICO\Teams.ico"
+        IconFileandType = "C:\Windows\ICO\new_teams.ico"
         Description     = "Microsoft Teams"
         Mode            = "Install"
     },
