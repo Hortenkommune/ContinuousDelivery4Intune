@@ -75,6 +75,16 @@
         IconFileandType = "C:\Windows\ICO\cmp.ico"
         Description     = "Firmaportal"
         Mode            = "Install"
+    },
+    @{
+        Name            = "Microsoft Teams"
+        Type            = "lnk"
+        Path            = "C:\Windows\explorer.exe"
+        Arguments       = "shell:AppsFolder\MSTeams_8wekyb3d8bbwe!MSTeams"
+        WorkingDir      = ""
+        IconFileandType = "C:\Windows\ICO\new_teams.ico"
+        Description     = "Microsoft Teams"
+        Mode            = "Install"
     }
 )
 $Shortcuts | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
