@@ -5,7 +5,7 @@
         Mode = "Install"
     },
     @{
-        URI  = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/ico/teams.ico"
+        URI  = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/ico/new_teams.ico"
         Name = "new_teams.ico"
         Mode = "Install"
     },
@@ -27,6 +27,11 @@
     @{
         URI  = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/ico/geogebra.ico"
         Name = "geogebra.ico"
+        Mode = "Install"
+    },
+    @{
+        URI  = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/ico/cmp.ico"
+        Name = "cmp.ico"
         Mode = "Install"
     }
 )
