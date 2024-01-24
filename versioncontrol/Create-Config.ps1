@@ -5,15 +5,15 @@
     },
     @{
         Name    = "prod.us"
-        Version = "1.0.13.6"
+        Version = "1.0.13.7"
     },
     @{
         Name    = "prod.hovos"
-        Version = "1.0.13.6"
+        Version = "1.0.13.7"
     },
     @{
         Name    = "prod.bhg"
-        Version = "1.0.13.6"
+        Version = "1.0.13.5"
     },
     @{
         Name    = "prod.bakk"
@@ -21,7 +21,7 @@
     },
     @{
         Name    = "beta"
-        Version = "1.0.13.7"
+        Version = "1.0.13.8"
     }
 )
 $Versions | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default

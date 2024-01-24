@@ -151,7 +151,7 @@ If (!($CurrentName -eq $NewName)) {
 Write-Log -Value "Check if client is OEM activated"
 $SLP = [bool](Get-WmiObject -Class "SoftwareLicensingProduct" -Filter "PartialProductKey = 'VCFB2'")
 if ($SLP -eq $true) {
-    Write-Log -Value "Activating OEM Client OS"
+    Write-Log -Value "Client is not Activated!!! Activating OEM Client OS"
     $SLS = (Get-WmiObject SoftwareLicensingService).OA3xOriginalProductKey | ForEach-Object { if ( $null -ne $_ ){ Write-Host "Installing"$_;changepk.exe /Productkey $_ } }
 }
 

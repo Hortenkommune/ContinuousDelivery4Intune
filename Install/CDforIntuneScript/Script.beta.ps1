@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.13.7"
+$Version = "1.0.13.8"
 
 
 function Write-Log {
@@ -158,6 +158,12 @@ if ($SLP.KeyManagementServicePort -eq "1688") {
 #         Write-Log -Value "Converted to Windows 10 retail activation" -Severity 1 -Component "slmgr"
 #     }
 # }
+Write-Log -Value "Check if client is OEM activated"
+$SLP = [bool](Get-WmiObject -Class "SoftwareLicensingProduct" -Filter "PartialProductKey = 'VCFB2'")
+if ($SLP -eq $true) {
+    Write-Log -Value "Client is not Activated!!! Activating OEM Client OS"
+    $SLS = (Get-WmiObject SoftwareLicensingService).OA3xOriginalProductKey | ForEach-Object { if ( $null -ne $_ ){ Write-Host "Installing"$_;changepk.exe /Productkey $_ } }
+}
 
 # $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
 
