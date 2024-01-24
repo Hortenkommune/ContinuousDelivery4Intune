@@ -1,7 +1,7 @@
 ﻿$Versions = @(
     @{
         Name    = "prod.bs"
-        Version = "1.0.13.6"
+        Version = "1.0.13.7"
     },
     @{
         Name    = "prod.us"
