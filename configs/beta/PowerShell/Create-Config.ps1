@@ -68,6 +68,11 @@
         Name      = "Disable Acer Quick Access"
         Command   = "Get-ScheduledTask -TaskName 'Software Update Application' | Disable-ScheduledTask"
         Detection = "[bool](Get-ScheduledTask -TaskName 'Software Update Application' | Where-Object {`$_.State -eq 'Disabled'})"
+    },
+    @{
+        Name      = "Set PowerCfg MinProcState"
+        Command   = "Start-Process -FilePath `"powercfg.exe`" -ArgumentList '/SETDCVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_PROCESSOR PROCTHROTTLEMIN 100' -Wait"
+        Detection = "[bool]`$false"
     }
 )
 $PowerShell | ConvertTo-Json -Compress -EscapeHandling EscapeHtml | Out-File "$PSScriptRoot\config.json" -Encoding default
