@@ -228,6 +228,27 @@
                 Rule = "[bool](!(Get-ItemProperty `"HKLM:\SYSTEM\CurrentControlSet\services\NetBT\Parameters\Interfaces\tcpip*`" -Name NetbiosOptions | Where-Object { `$_.NetbiosOptions -ne 2 }))"
             }
         )
+    },
+    @{
+        Name           = "Enable High Performance Mode"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Run-PwrcfgWakeTimers.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Set-HighPerfmode.ps1"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Set-HighPerfmode.ps1"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = "[bool](`$False)"              
+            }
+        )
     }
     # @{
     #     Name           = "Install Language Capabilities"
