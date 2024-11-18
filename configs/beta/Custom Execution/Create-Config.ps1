@@ -234,7 +234,7 @@
         wrkDir         = "C:\Windows\Temp"
         FilesToDwnload = @(
             @{
-                FileName = "Run-PwrcfgWakeTimers.ps1"
+                FileName = "Set-HighPerfmode.ps1"
                 URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Set-HighPerfmode.ps1"
             }
         )
