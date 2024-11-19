@@ -246,7 +246,7 @@
         )
         Detection      = @(
             @{
-                Rule = "[bool](`$False)"              
+                Rule = "[bool](!(Test-Path -Path `"C:\Program Files\Lingdys4\lingx.exe`"))"              
             }
         )
     }

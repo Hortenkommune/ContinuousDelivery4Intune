@@ -22,3 +22,6 @@ foreach ($Property in $Properties) {
         Write-Host "Registry key '$($Property.Name)' added with value '$($Property.Value)' in path '$RegistryPath'."
     }
 }
+
+Start-Process -FilePath "powercfg.exe" -ArgumentList '/SETDCVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_PROCESSOR PROCTHROTTLEMIN 100' -Wait
+Start-Process -FilePath "powercfg.exe" -ArgumentList '/SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e SUB_PROCESSOR PROCTHROTTLEMIN 100' -Wait
