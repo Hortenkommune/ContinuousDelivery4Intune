@@ -65,6 +65,27 @@
                 Rule = "[bool](Get-WmiObject -Query `"select * from win32_printer where name like '%Rom 120 - HOVOS%'`")"
             }
         )
+    },
+    @{
+        Name           = "Enable High Performance Mode"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Set-HighPerfmode.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Set-HighPerfmode.ps1"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Set-HighPerfmode.ps1"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = "[bool](!(Test-Path -Path `"C:\Program Files\Lingdys4\lingx.exe`"))"              
+            }
+        )
     }
     # @{
     #     Name           = "Install Language Capabilities"
