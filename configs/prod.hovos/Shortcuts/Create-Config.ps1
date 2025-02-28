@@ -85,6 +85,16 @@
         IconFileandType = "C:\Windows\ICO\new_teams.ico"
         Description     = "Microsoft Teams"
         Mode            = "Install"
+    },
+    @{
+        Name            = "Adapt-IT"
+        Type            = "lnk"
+        Path            = "C:\Windows\explorer.exe"
+        Arguments       = "microsoft-edge:`"https://adaptit.enovate.no/adapt-it/Login`""
+        WorkingDir      = ""
+        IconFileandType = "C:\Windows\ICO\adaptit.ico"
+        Description     = "Adapt-IT"
+        Mode            = "Install"
     }
 )
 $Shortcuts | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
