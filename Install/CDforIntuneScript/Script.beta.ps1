@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.14.1"
+$Version = "1.0.14.2"
 
 
 function Write-Log {
@@ -70,7 +70,7 @@ if ($Username -like "*eksamen*") {
 
     # Replace HKEY_CURRENT_USER with the user's hive SID
     $regfile = Get-Content $TempHKCUFile
-    $newregfile = $regfile -replace "HKEY_CURRENT_USER", [Regex]::Escape($hive)
+    $newregfile = $regfile -replace "HKEY_CURRENT_USER", $hive
     Set-Content -Path $TempHKCUFile -Value $newregfile
 
     # Apply the reg file silently
