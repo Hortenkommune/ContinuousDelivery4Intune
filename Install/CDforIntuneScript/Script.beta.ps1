@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.14.0"
+$Version = "1.0.14.1"
 
 
 function Write-Log {
@@ -37,6 +37,9 @@ else {
     Start-Process "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$env:TEMP\Install-CDforIntune.ps1`" -BranchName $BranchName -WaitFor $PID -CleanUp $true" -WindowStyle Hidden
     break
 }
+
+# Get the currently logged-in username
+$Username = Get-WMIObject -Class Win32_ComputerSystem | Select-Object -ExpandProperty Username
 
 if ($Username -like "*eksamen*") {
     Write-Log -Value "Restricted user `"$Username`" detected; Enabling restricted mode" -Severity 1 -Component "Eksamen"
