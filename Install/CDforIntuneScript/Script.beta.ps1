@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.13.9"
+$Version = "1.0.14.0"
 
 
 function Write-Log {
@@ -38,29 +38,42 @@ else {
     break
 }
 
-$Username = Get-WMIObject -class Win32_ComputerSystem | Select-Object -ExpandProperty Username
-If ($Username -like "*eksamen*") {
+if ($Username -like "*eksamen*") {
     Write-Log -Value "Restricted user `"$Username`" detected; Enabling restricted mode" -Severity 1 -Component "Eksamen"
-    $Username = $Username -split "\\"
-    $objUser = New-Object System.Security.Principal.NTAccount("$($Username[0])", "$($Username[1])")
+    
+    $UsernameParts = $Username -split "\\"
+    $objUser = New-Object System.Security.Principal.NTAccount($UsernameParts[0], $UsernameParts[1])
     $strSID = $objUser.Translate([System.Security.Principal.SecurityIdentifier])
     $SID = $strSID.Value
+    $hive = Get-ChildItem -Path REGISTRY::HKEY_USERS | Where-Object { $_.Name -like "*$SID" } | Select-Object -ExpandProperty Name
 
-    $hive = Get-ChildItem -Path REGISTRY::HKEY_USERS | Select-Object -ExpandProperty Name | Where-Object { $_ -like "*$SID" }
     Write-Log -Value "Writing restricted settings to hive: $hive" -Severity 1 -Component "Eksamen"
 
-    $TempHKCUFile = $env:TEMP + "\TempHKCU.reg"
+    # Define the array of reg file URLs
+    $regFiles = @(
+        "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/EksamenRegSettings1.reg",
+        "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/EksamenRegSettings2.reg"
+    )
+
+    # Randomly select one reg file
+    $rand = Get-Random -Minimum 0 -Maximum $regFiles.Count
+    $selectedRegFile = $regFiles[$rand]
+
+    $TempHKCUFile = Join-Path $env:TEMP "TempHKCU.reg"
     Remove-Item $TempHKCUFile -Force -ErrorAction Ignore
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/EksamenRegSettings.reg" -OutFile $TempHKCUFile
 
+    # Download selected reg file
+    Invoke-WebRequest -Uri $selectedRegFile -OutFile $TempHKCUFile
+
+    # Replace HKEY_CURRENT_USER with the user's hive SID
     $regfile = Get-Content $TempHKCUFile
-    $newregfile = $regfile -replace "HKEY_CURRENT_USER", $hive
-
+    $newregfile = $regfile -replace "HKEY_CURRENT_USER", [Regex]::Escape($hive)
     Set-Content -Path $TempHKCUFile -Value $newregfile
-    $Arguments = "/s $TempHKCUFile"
 
-    Start-Process "regedit.exe" -ArgumentList $Arguments -Wait
-    Write-Log -Value "Device is in restricted mode" -Severity 1 -Component "Eksamen"
+    # Apply the reg file silently
+    Start-Process "regedit.exe" -ArgumentList "/s `"$TempHKCUFile`"" -Wait
+
+    Write-Log -Value "Device is in restricted mode with proxy settings from $selectedRegFile" -Severity 1 -Component "Eksamen"
 }
 else {
     Write-Log -Value "User `"$Username`" is not a restricted user; Continuing launch" -Severity 1 -Component "Eksamen"
