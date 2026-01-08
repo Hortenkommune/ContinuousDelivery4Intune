@@ -21,7 +21,7 @@ If (!(Test-Path "C:\Windows\Scripts")) {
 
 $ScriptLocURI = "https://raw.githubusercontent.com/Hortenkommune/ContinousDelivery4Intune/master/Install/CDforIntuneScript/Script.$($cfg.Name).ps1"
 
-Invoke-WebRequest -Uri $ScriptLocURI -OutFile "C:\Windows\Scripts\Start-ContinuousDelivery.ps1"
+Invoke-WebRequest -Uri $ScriptLocURI -OutFile "C:\Windows\Scripts\Start-ContinuousDelivery.ps1" -UseBasicParsing
 
 $ScheduledTaskName = "Continuous delivery for Intune"
 $ScheduledTaskVersion = "$($cfg.Name) $($cfg.Version)"
