@@ -1,5 +1,5 @@
 ﻿$BranchName = "prod.bs"
-$Version = "1.0.13.7"
+$Version = "1.0.13.8"
 
 
 function Write-Log {
@@ -32,7 +32,7 @@ else {
     Write-Log -Value "Newer version found, upgrading" -Severity 1 -Component "Update"
 
     $ScriptLocURI = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/Install/Install-CDforIntune/Install-CDforIntune.ps1"
-    Invoke-WebRequest -Uri $ScriptLocURI -OutFile "$env:TEMP\Install-CDforIntune.ps1"
+    Invoke-WebRequest -Uri $ScriptLocURI -OutFile "$env:TEMP\Install-CDforIntune.ps1" -UseBasicParsing
 
     Start-Process "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$env:TEMP\Install-CDforIntune.ps1`" -BranchName $BranchName -WaitFor $PID -CleanUp $true" -WindowStyle Hidden
     break
@@ -51,7 +51,7 @@ If ($Username -like "*eksamen*") {
 
     $TempHKCUFile = $env:TEMP + "\TempHKCU.reg"
     Remove-Item $TempHKCUFile -Force -ErrorAction Ignore
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/EksamenRegSettings.reg" -OutFile $TempHKCUFile
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/regfiles/EksamenRegSettings.reg" -OutFile $TempHKCUFile -UseBasicParsing
 
     $regfile = Get-Content $TempHKCUFile
     $newregfile = $regfile -replace "HKEY_CURRENT_USER", $hive
@@ -199,7 +199,7 @@ foreach ($ico in $Icons) {
     if ($ico.Mode -eq "Install") {
         if (!$exist) {
             Write-Log -Value "$($ico.Name) does not exist; Installing" -Severity 1 -Component "IconsCfg"
-            Invoke-WebRequest -Uri $ico.URI -OutFile $IconPath
+            Invoke-WebRequest -Uri $ico.URI -OutFile $IconPath -UseBasicParsing
         }
         else {
             Write-Log -Value "$($ico.Name) is already installed" -Severity 1 -Component "IconsCfg"
@@ -245,7 +245,7 @@ foreach ($AdvInst in $AdvInstallers) {
             $URL = $dwnload | Select-Object -ExpandProperty URL
             $FileName = $dwnload | Select-Object -ExpandProperty FileName
             Write-Log -Value "Downloading $URL" -Severity 1 -Component "AdvancedApplication"
-            Invoke-WebRequest -Uri $URL -OutFile $wrkDir\$FileName
+            Invoke-WebRequest -Uri $URL -OutFile $wrkDir\$FileName -UseBasicParsing
             Write-Log -Value "$URL downloaded" -Severity 1 -Component "AdvancedApplication"
         }
         foreach ($Execute in $Execution) {
@@ -367,7 +367,7 @@ ForEach ($regfile in $regfiles) {
             Write-Log -Value "Regedit settings is HKLM; $($regfile.URL)" -Severity 1 -Component "Regedit"
             $TempHKLMFile = $env:TEMP + "\TempHKLM.reg"
             Remove-Item $TempHKLMFile -Force -ErrorAction Ignore
-            Invoke-WebRequest -Uri $($regfile.URL) -OutFile $TempHKLMFile
+            Invoke-WebRequest -Uri $($regfile.URL) -OutFile $TempHKLMFile -UseBasicParsing
             $Arguments = "/s $TempHKLMFile"
             Start-Process "regedit.exe" -ArgumentList $Arguments -Wait
             Remove-Item $TempHKLMFile -Force
@@ -377,7 +377,7 @@ ForEach ($regfile in $regfiles) {
             Write-Log -Value "Regedit settings is HKCU; $($regfile.URL)" -Severity 1 -Component "Regedit"
             $TempHKCUFile = $env:TEMP + "\TempHKCU.reg"
             Remove-Item $TempHKCUFile -Force -ErrorAction Ignore
-            Invoke-WebRequest -Uri $($regfile.URL) -OutFile $TempHKCUFile
+            Invoke-WebRequest -Uri $($regfile.URL) -OutFile $TempHKCUFile -UseBasicParsing
             $regfile = Get-Content $TempHKCUFile
             $hives = Get-ChildItem -Path REGISTRY::HKEY_USERS | Select-Object -ExpandProperty Name
             foreach ($hive in $hives) {

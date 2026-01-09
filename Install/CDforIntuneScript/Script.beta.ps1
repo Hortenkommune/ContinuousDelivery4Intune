@@ -1,5 +1,5 @@
 ﻿$BranchName = "beta"
-$Version = "1.0.14.2"
+$Version = "1.0.14.3"
 
 
 function Write-Log {
