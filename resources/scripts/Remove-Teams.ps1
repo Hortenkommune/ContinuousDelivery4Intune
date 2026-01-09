@@ -15,4 +15,4 @@ if (!(Test-Path "C:\Windows\ico")) {
     New-Item -Path "C:\Windows\ico" -ItemType Directory
 }
 
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/ico/teams.ico" -OutFile "C:\Windows\ico\teams.ico"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/ico/teams.ico" -OutFile "C:\Windows\ico\teams.ico" -UseBasicParsing
