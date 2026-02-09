@@ -1,5 +1,5 @@
 ﻿$BranchName = "prod.us"
-$Version = "1.0.13.7"
+$Version = "1.0.13.8"
 
 
 function Write-Log {
