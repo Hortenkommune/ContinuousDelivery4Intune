@@ -1,0 +1,47 @@
+name: Sync generated files
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Create-Scripts.ps1
+        shell: pwsh
+        run: ./Install/Create-Scripts.ps1
+
+      - name: Detect drift
+        id: drift
+        run: |
+          if git diff --quiet; then
+            echo "drifted=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "drifted=true" >> "$GITHUB_OUTPUT"
+            echo "Files out of sync with versioncontrol/config.json:"
+            git diff --stat
+          fi
+
+      - name: Fail PR if drift detected
+        if: github.event_name == 'pull_request' && steps.drift.outputs.drifted == 'true'
+        run: |
+          echo "::error::Per-branch installers or Script.<branch>.ps1 \$Version fields are out of sync with versioncontrol/config.json. Run 'pwsh ./Install/Create-Scripts.ps1' locally and commit the result."
+          exit 1
+
+      - name: Auto-commit drift on master
+        if: github.event_name == 'push' && steps.drift.outputs.drifted == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Install/Install-CDforIntune Install/CDforIntuneScript
+          git commit -m "auto: sync per-branch installers and runtime \$Version from config.json"
+          git push
