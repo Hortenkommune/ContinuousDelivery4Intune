@@ -50,7 +50,7 @@
         Name            = "Printkode"
         Type            = "lnk"
         Path            = "C:\Windows\explorer.exe"
-        Arguments       = "microsoft-edge:`"https://hortenprint.intern.i-sone.no/mom/Auth/UsernamePasswordLogin`""
+        Arguments       = "microsoft-edge:`"https://elevpin.intern.i-sone.no`""
         WorkingDir      = ""
         IconFileandType = "C:\Windows\System32\imageres.dll, 46"
         Description     = "Printkode"
