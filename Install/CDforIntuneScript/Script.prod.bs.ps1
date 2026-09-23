@@ -1,5 +1,6 @@
 ﻿$BranchName = "prod.bs"
-$Version = "1.0.14.0"
+$Version = "1.0.14.1"
+$ProgressPreference = 'SilentlyContinue'  # avoid PS5.1 per-chunk progress records that dominate large IWR downloads
 
 
 function Write-Log {
