@@ -132,6 +132,27 @@
                 Rule = "[bool](!(Test-Path -Path `"C:\Program Files\Lingdys4\lingx.exe`"))"              
             }
         )
+    },
+    @{
+        Name           = "Update Intel Wi-Fi driver on Dell Pro 15 Essential PV15255"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "WiFi-24.70.0-Driver64-Win10-Win11.exe"
+                URL      = "https://files.horten.kommune.no/cd4intune/WiFi-24.70.0-Driver64-Win10-Win11.exe"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "C:\Windows\Temp\WiFi-24.70.0-Driver64-Win10-Win11.exe"
+                Arguments = "-s -l C:\Windows\Logs\IntelWiFi-24.70.0.log"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = "`$m = Get-WmiObject -Query `"select * from win32_computersystem where model like 'Dell Pro 15 Essential PV15255%'`";`$d = Get-WmiObject -Query `"select * from win32_PnPSignedDriver where DeviceClass='NET' and DeviceName like 'Intel(R) Wi-Fi%'`";[bool]((!`$m) -or (`$d | Where-Object { (`$_.DriverVersion -as [version]) -ge [version]'24.70.0.3' }))"
+            }
+        )
     }
 )
 $CustomExec | ConvertTo-Json -Depth 4 -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
