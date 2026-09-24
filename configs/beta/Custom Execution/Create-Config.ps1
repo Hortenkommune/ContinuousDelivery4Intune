@@ -277,7 +277,7 @@
         FilesToDwnload = @(
             @{
                 FileName = "Remove-McAfee.ps1"
-                URL      = "https://files.horten.kommune.no/cd4intune/Remove-McAfee.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Remove-McAfee.ps1"
             }
         )
         Execution      = @(
