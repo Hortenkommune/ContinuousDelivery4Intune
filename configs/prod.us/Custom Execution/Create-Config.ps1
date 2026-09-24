@@ -153,6 +153,27 @@
                 Rule = "`$m = Get-WmiObject -Query `"select * from win32_computersystem where model like 'Dell Pro 15 Essential PV15255%'`";`$d = Get-WmiObject -Query `"select * from win32_PnPSignedDriver where DeviceClass='NET' and DeviceName like 'Intel(R) Wi-Fi%'`";[bool]((!`$m) -or (`$d | Where-Object { (`$_.DriverVersion -as [version]) -ge [version]'24.70.0.3' }))"
             }
         )
+    },
+    @{
+        Name           = "Remove OEM McAfee on Dell Pro 15 Essential PV15255"
+        wrkDir         = "C:\Windows\Temp"
+        FilesToDwnload = @(
+            @{
+                FileName = "Remove-McAfee.ps1"
+                URL      = "https://raw.githubusercontent.com/Hortenkommune/ContinuousDelivery4Intune/master/resources/scripts/Remove-McAfee.ps1"
+            }
+        )
+        Execution      = @(
+            @{
+                Execute   = "powershell.exe"
+                Arguments = "-ExecutionPolicy Bypass -File C:\Windows\Temp\Remove-McAfee.ps1"
+            }
+        )
+        Detection      = @(
+            @{
+                Rule = "`$m = Get-WmiObject -Query `"select * from win32_computersystem where model like 'Dell Pro 15 Essential PV15255%'`";`$clean = (!(Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\McAfee.wps')) -and (!(Get-Service mc-fw-host -ErrorAction SilentlyContinue)) -and (!(Get-WmiObject Win32_SystemDriver -Filter `"Name='mfesec'`")) -and (!(Test-Path 'HKLM:\SOFTWARE\McAfee'));[bool]((!`$m) -or `$clean)"
+            }
+        )
     }
 )
 $CustomExec | ConvertTo-Json -Depth 4 -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
